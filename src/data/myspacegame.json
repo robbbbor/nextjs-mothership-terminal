@@ -1,0 +1,80 @@
+{
+    "config": {
+        "name": "USS Horizon Bridge Terminal",
+        "author": "Your Name"
+    },
+    "screens": [
+        {
+            "id": "main",
+            "type": "screen",
+            "content": [
+                "USS HORIZON - BRIDGE TERMINAL",
+                "STARDATE: 2387.4",
+                "",
+                "SYSTEM STATUS: NOMINAL",
+                "",
+                "SELECT OPTION:",
+                {
+                    "type": "link",
+                    "target": "navigation",
+                    "text": "> NAVIGATION SYSTEMS"
+                },
+                {
+                    "type": "link",
+                    "target": [
+                        {
+                            "target": "commsOffline",
+                            "type": "dialog",
+                            "shiftKey": false
+                        }
+                    ],
+                    "text": "> COMMUNICATIONS"
+                },
+                {
+                    "type": "link",
+                    "target": "security",
+                    "text": "> SECURITY PROTOCOLS"
+                }
+            ]
+        },
+        {
+            "id": "navigation",
+            "type": "screen",
+            "content": [
+                "NAVIGATION SYSTEMS",
+                "",
+                "CURRENT COURSE: SECTOR 31-A",
+                "DESTINATION: ALPHA CENTAURI",
+                "ETA: 3.4 DAYS",
+                "",
+                {
+                    "type": "link",
+                    "target": "main",
+                    "text": "> RETURN TO MAIN MENU"
+                }
+            ]
+        }
+    ],
+    "dialogs": [
+        {
+            "id": "securityAlert",
+            "type": "alert",
+            "content": [
+                "SECURITY ALERT",
+                "Unauthorized access detected in cargo bay 3.",
+                "Security team dispatched.",
+                "Press <enter> or click to acknowledge."
+            ]
+        },
+        {
+            "id": "commsOffline",
+            "type": "alert",
+            "content": [
+                "COMMUNICATIONS SYSTEM ERROR",
+                "Status: OFFLINE",
+                "",
+                "Press <enter> or click to acknowledge."
+            ]
+        }
+    ]
+}

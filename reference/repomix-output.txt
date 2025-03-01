@@ -1,0 +1,3543 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+================================================================
+File Summary
+================================================================
+
+Purpose:
+--------
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+
+File Format:
+------------
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Multiple file entries, each consisting of:
+  a. A separator line (================)
+  b. The file path (File: path/to/file)
+  c. Another separator line
+  d. The full contents of the file
+  e. A blank line
+
+Usage Guidelines:
+-----------------
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+
+Notes:
+------
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+
+Additional Info:
+----------------
+
+================================================================
+Directory Structure
+================================================================
+.gitignore
+LICENSE
+package.json
+public/index.html
+public/manifest.json
+public/robots.txt
+README.md
+src/assets/sass/_colors.scss
+src/assets/sass/_fonts.scss
+src/assets/sass/_progressbar.scss
+src/components/Bitmap/index.tsx
+src/components/Bitmap/style.scss
+src/components/Link/index.tsx
+src/components/Link/style.scss
+src/components/Modal/index.tsx
+src/components/Modal/style.scss
+src/components/Phosphor/index.tsx
+src/components/Phosphor/style.scss
+src/components/Prompt/index.tsx
+src/components/Prompt/style.scss
+src/components/Scanlines/index.tsx
+src/components/Scanlines/style.scss
+src/components/Static/index.tsx
+src/components/Static/style.scss
+src/components/Teletype/index.tsx
+src/components/Teletype/style.scss
+src/components/Text/index.tsx
+src/components/Toggle/index.tsx
+src/components/Toggle/style.scss
+src/data/myspacegame.json
+src/data/sample.json
+src/data/ypsilon14.json
+src/index.tsx
+src/react-app-env.d.ts
+src/serviceWorker.ts
+src/setupTests.ts
+tsconfig.json
+
+================================================================
+Files
+================================================================
+
+================
+File: .gitignore
+================
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+================
+File: LICENSE
+================
+MIT License
+
+Copyright (c) 2021 Breon Halling
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================
+File: package.json
+================
+{
+  "name": "phosphor",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "nanoid": "^3.1.31",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "5.0.1",
+    "sass": "^1.49.7",
+    "typescript": "~3.7.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "homepage": "."
+}
+
+================
+File: public/index.html
+================
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="A retro terminal simulator for tabletop role-playing games" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Phosphor</title>
+</head>
+
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+</body>
+
+</html>
+
+================
+File: public/manifest.json
+================
+{
+    "short_name": "Phosphor",
+    "name": "Phosphor Terminal Simulator",
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "logo192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "logo512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
+}
+
+================
+File: public/robots.txt
+================
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+
+================
+File: README.md
+================
+> [!WARNING]
+> This project is based on the now-defunct [Create React App framework](https://github.com/facebook/create-react-app) and is woefully out of date, meaning vulnerable packages have not necessarily been updated. **_USE AT YOUR OWN RISK_**.
+
+# PHOSPHOR
+### A retro terminal simulator for tabletop role-playing games
+
+[Click here to skip the preamble and jump straight to Getting Started](#getting-started).
+
+## Inspiration
+The inspiration for this little app was [Quadra's post](https://www.traaa.sh/the-ypsilon-14-terminal) about an ersatz terminal for [The Haunting of Ypsilon 14](https://www.mothershiprpg.com/pamphlet-adventures/#The_Haunting_Of_Ypsilon_14), a module written by D G Chapman for [the Mothership tabletop roleplaying game](https://www.mothershiprpg.com/).
+
+Because of that (and because I was asked on [the Mothership Discord](https://discord.gg/uuvxG29)), I've made the JSON content that I used when I ran the module available in this repo. To use it, just load `ypsilon14.json` instead of `sample.json` at the top of `src/components/Phosphor/index.tsx` (line 22 as of this writing).
+
+Or you can skip doing it yourself and instead just check out [the Ypsilon 14 terminal in action](https://redhg.com/ypsilon14/).
+
+## An important note about this project
+
+ I will not be accepting pull requests, nor will I be paying attention to the issues. I suggest you fork this repo if you want to make any public changes. It's all just for fun; noodling around without a particular goal.
+
+That being said, I'd love to see what *you* can do with my garabge project, so send me an email at **phosphor {at} redhg {dot} com** to let me know how you've expanded it!
+
+Suggested features:
+* Sound effects;
+* Autoscrolling or auto-pause/press space to continue at end of screen;
+* Asset preloader;
+* JSON uploading & parsing;
+* Routing support;
+* Dynamic themes -- I've added some colour values in `_colors.scss` but they don't work yet;
+* Links, Prompts, Images, and Teletype support *within* Dialogs.
+
+---
+
+## Getting Started
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+To install this project, open a terminal window and `cd` into the repo's directory, then run
+### `npm install`.
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `yarn start`
+
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
+
+### `yarn test`
+
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+**Note:** as of June 11, 2022, there are absolutely no tests in this project and that's unlikely to change.
+
+### `yarn build`
+
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+================
+File: src/assets/sass/_colors.scss
+================
+// default: black bg, blue/white fg
+
+// TODO: add theme mixins
+// blue/white
+$foreground: rgb(212, 249, 250);
+$background: rgb(0, 12, 12);
+$alert: rgb(255, 60, 0);
+
+// amber
+// $foreground: rgb(224, 125, 11);
+// $background: rgb(8, 4, 0);
+// $alert: rgb(255, 60, 0);
+
+// green
+// $foreground: rgb(36, 161, 20);
+// $background: rgb(0, 2, 0);
+// $alert: rgb(255, 60, 0);
+
+// white
+// $foreground: rgb(218, 218, 218);
+// $background: rgb(2, 2, 2);
+// $alert: rgb(255, 60, 0);
+
+$scanlines-foreground: rgba($foreground, 0.1);
+$scanlines-background: rgba($background, 0.5);
+
+$foreground-glow: 0 0 5px rgba($foreground, 0.5);
+$background-glow: 0 0 2px rgba($background, 0.5);
+$alert-glow: 0 0 5px rgba($alert, 0.5);
+
+$background-gradient: radial-gradient(rgba($foreground, 0.15), rgba($background, 1) 100%)
+
+================
+File: src/assets/sass/_fonts.scss
+================
+@font-face {
+    font-family: "Vga";
+    src: url("../fonts/vga.woff") format("woff"),
+        url("../fonts/vga.woff2") format("woff2"),
+        url("../fonts/vga.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+// TODO: add theme mixins
+$font-family: "Vga", Menlo, Monaco, Consolas, "Courier New", monospace;
+
+$scalefactor: 2.0;
+// the following values are font-dependant
+
+$fontsize: 24px * $scalefactor;
+$lineheight: 19px * $scalefactor;
+
+================
+File: src/assets/sass/_progressbar.scss
+================
+@keyframes loadingdots {
+    0% {
+        content: "";
+    }
+
+    10% {
+        content: ".";
+    }
+
+    20% {
+        content: "..";
+    }
+
+    30% {
+        content: "...";
+    }
+
+    40% {
+        content: "....";
+    }
+
+    50% {
+        content: ".....";
+    }
+
+    60% {
+        content: "......";
+    }
+
+    70% {
+        content: ".......";
+    }
+
+    80% {
+        content: "........";
+    }
+
+    90% {
+        content: ".........";
+    }
+
+    100% {
+        content: "";
+    }
+}
+
+================
+File: src/components/Bitmap/index.tsx
+================
+import React, { Component, RefObject, ReactElement, } from "react";
+import "./style.scss";
+
+export interface BitmapProps {
+    src: string;
+    className?: string;
+    alt?: string;
+    autocomplete?: boolean;
+    onComplete: () => void; // event called on completion
+}
+
+interface BitmapState {
+    loading: boolean;
+    image: HTMLImageElement;
+}
+
+const TICK = 150;
+// ersatz Fibonacci sequence
+const STEPS = [
+    0.01,
+    0.02,
+    0.03,
+    0.05,
+    0.08,
+    0.13,
+    0.21,
+    0.34,
+    0.55,
+    0.89,
+    1.00,
+];
+
+class Bitmap extends Component<BitmapProps, BitmapState> {
+    private _canvasRef: RefObject<HTMLCanvasElement> = null;
+    private _animateTimerId: number = null;
+    private _currentStep = 0;
+
+    constructor(props: BitmapProps) {
+        super(props);
+
+        this._canvasRef = React.createRef<HTMLCanvasElement>();
+        const loading = !this.props.autocomplete;
+
+        this.state = {
+            loading,
+            image: new Image(),
+        };
+    }
+
+    public render(): ReactElement {
+        const { className } = this.props;
+        const { loading } = this.state;
+        const css = ["__image__", className ? className : null].join(" ").trim();
+
+        return (
+            <div className={css}>
+                {loading && <div className="progressbar" />}
+                <canvas ref={this._canvasRef} />
+            </div>
+        );
+    }
+
+    public componentDidMount(): void {
+        this._loadImage();
+    }
+
+    private _resampleImage(resolution: number): void {
+        const { image, } = this.state;
+        const canvas = this._canvasRef.current;
+        const ctx = canvas.getContext("2d");
+
+        const w = image.width;
+        const h = image.height;
+
+        const dw = w * resolution;
+        const dh = h * resolution;
+
+        // trun off smoothing to ensure it's pixelated
+        ctx.imageSmoothingEnabled = false;
+        // shrink the image
+        ctx.drawImage(image, 0, 0, dw, dh);
+        // then draw the above bitmap at then expected image size without resampling
+        ctx.drawImage(canvas, 0, 0, dw, dh, 0, 0, w, h);
+    }
+
+    private _clearAnimationTimer = () => {
+        if (this._animateTimerId) {
+            window.clearInterval(this._animateTimerId);
+            this._animateTimerId = null;
+        }
+    };
+
+    private _animate(): void {
+        const { onComplete, } = this.props;
+
+        this._clearAnimationTimer();
+        this._animateTimerId = window.setInterval(() => {
+            if (this._currentStep < STEPS.length) {
+                this._resampleImage(STEPS[this._currentStep]);
+                this._currentStep++;
+            } else {
+                this._clearAnimationTimer();
+                onComplete && onComplete();
+            }
+        }, TICK);
+    }
+
+    private _loadImage(): void {
+        const { autocomplete, onComplete, src, } = this.props;
+        const { image } = this.state;
+        const canvas = this._canvasRef.current;
+        const ctx = canvas.getContext("2d");
+
+        if (ctx && image) {
+            image.onload = () => {
+                // resize the canvas element
+                const w = image.width;
+                const h = image.height;
+
+                // todo: max dimensions
+                // make sure width is no larger than container width
+                canvas.width = w;
+                canvas.height = h;
+
+                if (!autocomplete) {
+                    this.setState({
+                        loading: false,
+                    }, () => this._animate());
+                } else {
+                    ctx.drawImage(image, 0, 0);
+                    onComplete && onComplete();
+                }
+            };
+            image.src = src;
+        }
+    }
+}
+
+export default Bitmap;
+
+================
+File: src/components/Bitmap/style.scss
+================
+@import "../../assets/sass/progressbar";
+
+.__image__ {
+    .progressbar {
+        &::after {
+            content: "";
+            animation: loadingdots 1.5s ease-in infinite;
+        }
+    }
+
+    canvas {
+        max-width: 100%;
+    }
+
+    &.monochrome {
+        mix-blend-mode: luminosity;
+    }
+
+    &.luminosity {
+        mix-blend-mode: luminosity;
+    }
+
+    &.lighten {
+        mix-blend-mode: lighten;
+    }
+
+    &.multiply {
+        mix-blend-mode: multiply;
+    }
+
+    &.screen {
+        mix-blend-mode: screen;
+    }
+
+    &.overlay {
+        mix-blend-mode: overlay;
+    }
+
+    &.darken {
+        mix-blend-mode: darken;
+    }
+
+    &.color-dodge {
+        mix-blend-mode: color-dodge;
+    }
+
+    &.color-burn {
+        mix-blend-mode: color-burn;
+    }
+
+    &.hard-light {
+        mix-blend-mode: hard-light;
+    }
+
+    &.soft-light {
+        mix-blend-mode: soft-light;
+    }
+
+    &.difference {
+        mix-blend-mode: difference;
+    }
+
+    &.exclusion {
+        mix-blend-mode: exclusion;
+    }
+
+    &.hue {
+        mix-blend-mode: hue;
+    }
+
+    &.saturation {
+        mix-blend-mode: saturation;
+    }
+
+    &.color {
+        mix-blend-mode: color;
+    }
+}
+
+================
+File: src/components/Link/index.tsx
+================
+import React, { FC, useEffect } from "react";
+
+import "./style.scss";
+
+// enum LinkTargetType {
+//     Unknown = 0,
+//     Screen,
+//     Dialog,
+// }
+
+interface LinkTarget {
+    target: string;
+    type: any;
+}
+
+export interface LinkProps {
+    text: string;
+    target: string | LinkTarget[];
+    className?: string;
+
+    onClick?: (target: string | LinkTarget[], shiftKey: boolean) => void;
+    onRendered?: () => void;
+}
+
+const Link: FC<LinkProps> = (props) => {
+    const { text, target, className, onClick, onRendered } = props;
+    const css = ["__link__", className ? className : null].join(" ").trim();
+
+    let touches = 0;
+    const handleTouchStart = (e: React.TouchEvent<HTMLSpanElement>) => {
+        touches = e.touches.length;
+    };
+    const handleTouchEnd = (e: React.TouchEvent<HTMLSpanElement>) => {
+        e.preventDefault(); // prevents the click event firing
+        console.log("handleTouchEnd");
+        onClick && onClick(target, touches > 1);
+        touches = 0;
+    };
+
+    const handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
+        e.preventDefault();
+        console.log("click");
+        onClick && onClick(target, e.shiftKey);
+    };
+    const handleRendered = () => (onRendered && onRendered());
+
+    // this should fire on mount/update
+    useEffect(() => handleRendered());
+
+    return (
+        <span
+            className={css}
+            onClick={handleClick}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+        >
+            {text}
+        </span>
+    );
+};
+
+export default Link;
+
+================
+File: src/components/Link/style.scss
+================
+@import "../../assets/sass/fonts";
+@import "../../assets/sass/colors";
+
+.__link__ {
+    & {
+        cursor: pointer;
+        display: block;
+    }
+    &:hover,
+    &:active {
+        color: $background;
+        background: $foreground;
+        text-shadow: $background-glow;
+        box-shadow: $foreground-glow;
+        transition:  background 50ms, foreground 150ms;
+    }
+
+    &:hover {
+        opacity: 1;
+        transition: background 50ms, foreground 150ms;
+    }
+
+    &:active {
+        opacity: 0.5;
+        transition: opacity 50ms;
+    }
+
+    // alert class
+    &.alert:hover,
+    &.alert:active {
+        color: $background;
+        background: $alert;
+        text-shadow: $background-glow;
+        box-shadow: $alert-glow;
+        transition:  background 50ms, foreground 150ms;
+    }
+}
+
+================
+File: src/components/Modal/index.tsx
+================
+import React, { SFC, useEffect, useCallback } from "react";
+
+import "./style.scss";
+
+export interface ModalProps {
+    text: string | string[];
+    className?: string;
+    onClose: () => void;
+}
+
+const Modal: SFC<ModalProps> = (props) => {
+    const { text, className, onClose } = props;
+    const css = [
+        "__modal__",
+        className ? className : null,
+    ].join(" ").trim();
+
+    const renderContent = () => {
+        const content = (typeof text === "string") ? [text] : text;
+        return content.map((element, index) => <p key={index}>{element}</p>);
+    }
+
+    // add a keyhandler
+    const handleKeyDown = useCallback((e: KeyboardEvent) => {
+        e.preventDefault();
+
+        const key = e.key.toLowerCase();
+
+        switch (key) {
+            case "enter":
+            case "escape":
+                onClose && onClose();
+                break;
+
+            default:
+                break;
+        }
+    }, [onClose]);
+
+    useEffect(() => {
+        // mount
+        document.body.classList.add("static");
+        document.addEventListener("keydown", handleKeyDown);
+
+        // unmount
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+            document.body.classList.remove("static");
+        };
+    });
+
+    return (
+        <section className={css} onClick={onClose}>
+            <div className="content">
+                {renderContent()}
+            </div>
+        </section>
+    );
+};
+
+export default Modal;
+
+================
+File: src/components/Modal/style.scss
+================
+@import "../../assets/sass/fonts";
+@import "../../assets/sass/colors";
+
+.__modal__ {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background: rgba($background, 0.8);
+    color: $foreground;
+
+    .content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        padding: $lineheight * 0.5;
+        transform: translate(-50%, -50%);
+        background: $foreground;
+        color: $background;
+        text-shadow: $background-glow;
+
+        p {
+            margin: 0;
+        }
+    }
+}
+
+body.static {
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+================
+File: src/components/Phosphor/index.tsx
+================
+import React, { Component, ReactElement } from "react";
+
+// css
+import "./style.scss";
+
+// modules
+import { nanoid } from "nanoid";
+
+// components
+import Teletype from "../Teletype";
+import Link from "../Link";
+import Text from "../Text";
+import Bitmap from "../Bitmap";
+import Prompt, { PROMPT_DEFAULT } from "../Prompt";
+import Toggle from "../Toggle";
+
+import Modal from "../Modal";
+import Scanlines from "../Scanlines";
+
+// for different content, edit sample.json, or,
+// preferrably, create a new JSON and load it here
+import json from "../../data/myspacegame.json";
+
+interface AppState {
+    screens: Screen[];
+    dialogs: any[];
+    activeScreenId: string;
+    activeElementId: string; // which element, if any, is active
+    activeDialogId: string; // which element, if any, is active
+    loadingQueue: any[];
+    status: AppStatus;
+
+    renderScanlines: boolean; // should scanlines be enabled?
+}
+
+enum DialogType {
+    Unknown = 0,
+    Alert, // simple message box
+    Confirm, // yes/no box; currently unsupported
+    Dialog, // has arbitrary content; currently unsupported
+}
+
+interface Dialog {
+    id: string;
+    type: DialogType;
+
+    [key: string]: any; // arbitrary members
+}
+
+enum ScreenType {
+    Unknown = 0,
+    Screen,
+    Static,
+}
+
+enum ScreenDataType {
+    Unknown = 0,
+    Text,
+    Link,
+    Bitmap,
+    Prompt,
+    Toggle,
+}
+
+enum ScreenDataState {
+    Unloaded = 0,
+    Ready,
+    Active,
+    Done,
+}
+
+interface ScreenData {
+    id: string;
+    type: ScreenDataType;
+    state: ScreenDataState;
+
+    [key: string]: any; // arbitrary members
+}
+
+interface Screen {
+    id: string;
+    type: ScreenType;
+    content: ScreenData[];
+}
+
+enum AppStatus {
+    Unset = 0,
+    Ready,
+    Active,
+    Done,
+}
+
+class Phosphor extends Component<any, AppState> {
+    private _containerRef: React.RefObject<HTMLElement>;
+    private _lineheight: number = null;
+    private _colwidth: number = null;
+
+    constructor(props: any) {
+        super(props);
+
+        this._containerRef = React.createRef<HTMLElement>();
+
+        this.state = {
+            screens: [],
+            dialogs: [],
+            activeScreenId: null,
+            activeElementId: null,
+            activeDialogId: null,
+            loadingQueue: [],
+            status: AppStatus.Unset,
+            renderScanlines: true, // TODO: support option to disable this effect
+        };
+
+        this._changeScreen = this._changeScreen.bind(this);
+        this._setElementState = this._setElementState.bind(this);
+        this._handlePromptCommand = this._handlePromptCommand.bind(this);
+        this._handleTeletypeNewLine = this._handleTeletypeNewLine.bind(this);
+        this._handleLinkClick = this._handleLinkClick.bind(this);
+    }
+
+    public render(): ReactElement {
+        const {
+            activeScreenId,
+            activeDialogId,
+            renderScanlines,
+        } = this.state;
+
+        return (
+            <div className="phosphor">
+                <section className={"__main__"} ref={this._containerRef}>
+                    {activeScreenId && this._renderScreen()}
+                </section>
+
+                {activeDialogId && this._renderDialog()}
+
+                {/* scanlines should be the last child */}
+                {renderScanlines && <Scanlines />}
+            </div>
+
+        );
+    }
+
+    // public react events
+    public componentDidMount(): void {
+        // parse the data & prep the screens
+        this._parseScreens();
+        this._parseDialogs();
+    }
+
+    // private methods
+    private _parseScreens(): void {
+        const screens = json.screens.map((element) => {
+            return this._buildScreen(element);
+        });
+
+        if (!screens.length) {
+            return;
+        }
+
+        // todo: support config option to set starting screen
+        const activeScreen = 0;
+        this.setState({
+            screens,
+        }, () => this._setActiveScreen(activeScreen));
+    }
+
+    private _parseDialogs(): void {
+        const dialogs = json.dialogs.map((element) => {
+            return this._buildDialog(element);
+        });
+
+        if (!dialogs.length) {
+            return;
+        }
+
+        this.setState({
+            dialogs,
+        });
+    }
+
+    private _buildDialog(src: any): Dialog {
+        const id = src.id || null;
+        const type = this._getDialogType(src.type);
+
+        // TODO: support other dialog types
+        let content: any [] = null;
+        if (type === DialogType.Alert) {
+            content = src.content;
+        }
+
+        return {
+            id,
+            type,
+            content,
+        };
+    }
+
+    private _getDialogType(type: string): DialogType {
+        switch (type.toLowerCase()) {
+            case "alert":
+                return DialogType.Alert;
+
+            case "confirm":
+                return DialogType.Confirm;
+
+            case "dialog":
+                return DialogType.Dialog;
+
+            default:
+                return DialogType.Unknown;
+        }
+    }
+
+    private _setActiveScreen(index: number): void {
+        const { screens, } = this.state;
+        const activeScreen = screens[index].id
+        this.setState({
+            activeScreenId: activeScreen,
+        }, () => this._activateScreen());
+    }
+
+    // we're off to the races!
+    private _activateScreen(): void {
+        const screen = this._getScreen(this.state.activeScreenId);
+
+        // update the app status
+        const status = AppStatus.Active;
+
+        // depending on the screen type, we perform different actions here
+        switch (screen.type) {
+            case ScreenType.Static:
+                this.setState({
+                    status,
+                });
+                break;
+
+            case ScreenType.Screen:
+                screen.content[0].state = ScreenDataState.Active;
+
+                this.setState({
+                    status,
+                    activeElementId: screen.content[0].id,
+                });
+                break;
+
+            default: // do nothing
+                break;
+        }
+    }
+
+    private _buildScreen(src: any): Screen {
+        // try to parse & build the screen
+        const id = src.id || null;
+        const type = this._getScreenType(src.type);
+        const content = this._parseScreenContent(src.content).flat(); // flatten to one dimension
+
+        // if this screen is invalid for any reason, skip it
+        if (!id || !type) {
+            return;
+        }
+
+        return {
+            id,
+            type,
+            content,
+        };
+    }
+
+    private _getScreenType(type: string): ScreenType {
+        switch (type.toLowerCase()) {
+            case "screen":
+                return ScreenType.Screen;
+
+            case "static":
+                return ScreenType.Static;
+
+            default:
+                return ScreenType.Unknown;
+        }
+    }
+
+    private _renderScreen(): ReactElement[] {
+        // get the active screen
+        const screen = this._getScreen(this.state.activeScreenId);
+        if (!screen) {
+            return;
+        }
+
+        // loop through the screen contents & render each element
+        return screen.content.map((element, index) => {
+            // wrap a div around the element based on its state
+
+            // if it's ready, do nothing
+            if (element.state === ScreenDataState.Ready) {
+                return null;
+            }
+
+            // if it's active, render it animated
+            if (element.state === ScreenDataState.Active) {
+                return (
+                    <div className="active" key={index}>
+                        {this._renderActiveElement(element, index)}
+                    </div>
+                );
+            }
+
+            // if it's done, render it static
+            if (element.state === ScreenDataState.Done) {
+                return (
+                    <div className="rendered" key={index}>
+                        {this._renderStaticElement(element, index)}
+                    </div>
+                );
+            }
+
+            // unknown
+            return null;
+        });
+    }
+
+    private _getScreen(id: string): Screen {
+        return this.state.screens.find(element => element.id === id);
+    }
+
+    private _parseScreenContent(content: any[]): ScreenData[] {
+        if (!content) {
+            return [];
+        }
+
+        const parsed = content.map(element => this._parseScreenContentElement(element)).flat();
+        return parsed.map(element => this._generateScreenData(element));
+    }
+
+    private _generateScreenData(element: any): ScreenData {
+        // TODO: build the data object based on the element type
+        // e.g. typeof element === "string" --> create a new ScreenData Text object
+        const id = nanoid();
+
+        // if an element has "load" property, its requires more work
+        // to prepare so it's can't yet be considered "ready".
+        const onLoad = element.onLoad || null;
+        // if an element requires more loading, we'll shove its id in the queue
+        if (onLoad) {
+            const loadingQueue = [...this.state.loadingQueue];
+            loadingQueue.push(element.id);
+            this.setState({
+                loadingQueue
+            });
+        }
+        const state = onLoad ? ScreenDataState.Unloaded : ScreenDataState.Ready;
+
+        // text-only elements can be added as strings in the JSON data; they don't need any object wrappers
+        if (typeof element === "string") {
+            return {
+                id,
+                type: ScreenDataType.Text,
+                text: element,
+                state,
+                onLoad,
+            }
+        }
+
+        // everything else requires a wrapper containing a "type" attribute, so we'll need to parse those here
+        if (!element.type) {
+            return;
+        }
+
+        switch (element.type.toLowerCase()) {
+            case "text":
+                return {
+                    id,
+                    type: ScreenDataType.Text,
+                    text: element.text,
+                    className: element.className,
+                    state,
+                    onLoad,
+                }
+
+            case "link":
+                return {
+                    id,
+                    type: ScreenDataType.Link,
+                    target: element.target,
+                    className: element.className,
+                    text: element.text,
+                    state,
+                    onLoad,
+                };
+
+            case "image":
+            case "bitmap":
+                return {
+                    id,
+                    type: ScreenDataType.Bitmap,
+                    src: element.src,
+                    alt: element.alt,
+                    className: element.className,
+                    state,
+                    onLoad,
+                };
+
+            case "prompt":
+                return {
+                    id,
+                    type: ScreenDataType.Prompt,
+                    prompt: element.prompt || PROMPT_DEFAULT,
+                    className: element.className,
+                    commands: element.commands,
+                    state,
+                    onLoad,
+                };
+
+            case "toggle":
+                return {
+                    id,
+                    type: ScreenDataType.Toggle,
+                    states: element.states,
+                    state,
+                };
+
+            default:
+                return;
+        }
+    }
+
+    private _parseScreenContentElement(element: any): any {
+        // if the element is a string, we'll want to
+        // split it into chunks based on the new line character
+        if (typeof element === "string") {
+            return element.split("\n");
+        }
+
+        // otherwise, just return the element
+        return element;
+    }
+
+    // based on the current active ScreenData, render the corresponding active element
+    private _renderActiveElement(element: any, key: number): ReactElement {
+        const type = element.type;
+
+        // if the element is text-based, like text or Link, render instead a
+        // teletype component
+        if (type === ScreenDataType.Text || type === ScreenDataType.Link || type === ScreenDataType.Prompt
+        ) {
+            const text = type === ScreenDataType.Prompt ? element.prompt : element.text;
+            const handleRendered = () => this._activateNextScreenData();
+            return (
+                <Teletype
+                    key={key}
+                    text={text}
+                    onComplete={handleRendered}
+                    onNewLine={this._handleTeletypeNewLine}
+                    autocomplete={false}
+                    className={element.className}
+                />
+            );
+        }
+
+        // the toggle gets its text from the states array
+        if (type === ScreenDataType.Toggle) {
+            const text = element.states.find((item: any) => item.active === true).text;
+            const handleRendered = () => this._activateNextScreenData();
+            return (
+                <Teletype
+                    key={key}
+                    text={text}
+                    onComplete={handleRendered}
+                    onNewLine={this._handleTeletypeNewLine}
+                    autocomplete={false}
+                    className={element.className}
+                />
+            );
+        }
+
+        if (type === ScreenDataType.Bitmap) {
+            const handleRendered = () => this._activateNextScreenData();
+            return (
+                <Bitmap
+                    key={key}
+                    className={element.className}
+                    src={element.src}
+                    alt={element.alt}
+                    onComplete={handleRendered}
+                />
+            );
+        }
+
+        // otherwise, just activate the next element
+        this._activateNextScreenData();
+        return null;
+    }
+
+    // renders the final, interactive element to the screen
+    private _renderStaticElement(element: any, key: number): ReactElement {
+        const className = element.className || "";
+        const handleRendered = () => {
+            this._setElementState(element.id, ScreenDataState.Done);
+        };
+
+        if (element.type === ScreenDataType.Text) {
+            // \0 is the ASCII null character to ensure empty lines aren't collapsed
+            // https://en.wikipedia.org/wiki/Null_character
+            const text = element.text.length ? element.text : "\0";
+            return (
+                <Text
+                    key={key}
+                    className={className}
+                    text={text}
+                    onRendered={handleRendered}
+                />
+            );
+        }
+
+        // link
+        if (element.type === ScreenDataType.Link) {
+            return (
+                <Link
+                    key={key}
+                    text={element.text}
+                    target={element.target}
+                    className={className}
+                    onClick={this._handleLinkClick}
+                    onRendered={handleRendered}
+                />
+            );
+        }
+
+        // bitmap
+        if (element.type === ScreenDataType.Bitmap) {
+            const onComplete = () => {
+                // this._activateNextScreenData();
+                this._setElementState(element.id, ScreenDataState.Done);
+            };
+            return (
+                <Bitmap
+                    key={key}
+                    className={className}
+                    src={element.src}
+                    alt={element.alt}
+                    onComplete={onComplete}
+                    autocomplete={true}
+                />
+            );
+        }
+
+        // prompt
+        if (element.type === ScreenDataType.Prompt) {
+            return (
+                <Prompt
+                    key={key}
+                    className={className}
+                    disabled={!!this.state.activeDialogId}
+                    prompt={element.prompt}
+                    commands={element.commands}
+                    onCommand={this._handlePromptCommand}
+                />
+            );
+        }
+
+        // prompt
+        if (element.type === ScreenDataType.Toggle) {
+            return (
+                <Toggle
+                    key={key}
+                    className={className}
+                    states={element.states}
+                />
+            );
+        }
+
+        return null;
+    }
+
+    private _changeScreen(targetScreen: string): void {
+        // todo: handle missing screen
+        // unload the current screen first
+        this._unloadScreen();
+
+        // active the first element in the screen's content collection
+        const screen = this._getScreen(targetScreen);
+        const activeElement = screen.content[0];
+        activeElement.state = ScreenDataState.Active;
+
+        this.setState({
+            activeScreenId: targetScreen,
+            activeElementId: activeElement.id,
+            status: AppStatus.Active,
+        });
+    }
+
+    private _setElementState(id: string, state: ScreenDataState): void {
+        const screen = this._getScreen(this.state.activeScreenId);
+        const content = screen.content.find(element => element.id === id);
+
+        // only change the state if we need to
+        if (content && (content.state !== state)) {
+            content.state = state;
+        }
+;   }
+
+    private _unloadScreen(): void {
+        // go through the current screen elements, setting
+        // their states to ScreenDataState.Ready
+        const screen = this._getScreen(this.state.activeScreenId);
+        screen.content.forEach(element => {
+            element.state = ScreenDataState.Unloaded;
+        });
+    }
+
+    private _getScreenDataById(id: string): any {
+        const screen = this._getScreen(this.state.activeScreenId);
+        return screen.content.find(element => element.id === id);
+    }
+
+    // find the currently active element and, if possible, activate it
+    private _activateNextScreenData(): void {
+        const screen = this._getScreen(this.state.activeScreenId);
+        const activeIndex = screen.content.findIndex(element => element.state === ScreenDataState.Active);
+
+        // nothing is active
+        if (activeIndex === -1) {
+            return;
+        }
+
+        // we're done with this element now
+        screen.content[activeIndex].state = ScreenDataState.Done;
+
+        // we're at the end of the array so there is no next
+        if (activeIndex === screen.content.length - 1) {
+            // todo: indicate everything's done
+            this.setState({
+                activeElementId: null,
+                status: AppStatus.Done,
+            });
+
+            return;
+        }
+
+        // otherwise, activate the next one
+        screen.content[activeIndex + 1].state = ScreenDataState.Active;
+
+        // todo: indicate everything's done
+        this.setState({
+            activeElementId: screen.content[activeIndex + 1].id,
+        });
+    }
+
+    private _getActiveScreenData(): ScreenData {
+        const screen = this._getScreen(this.state.activeScreenId);
+        const activeIndex = screen.content.findIndex(element => element.state === ScreenDataState.Active);
+
+        // is something active?
+        if (activeIndex > -1) {
+            return screen.content[activeIndex];
+        }
+
+        // otherwise set & return the first element
+        const firstData = screen.content[0];
+
+        // unless that element is already done or not yet loaded
+        if (firstData.state === ScreenDataState.Done || firstData.state === ScreenDataState.Unloaded) {
+            return null;
+        }
+
+
+        firstData.state = ScreenDataState.Active;
+        return firstData;
+    }
+
+    private _setActiveScreenDataByIndex(index: number): void {
+        const screen = this._getScreen(this.state.activeScreenId);
+        screen.content[index].state = ScreenDataState.Active;
+    }
+
+    private _toggleDialog(dialogId?: string): void {
+        // TODO: check if targetDialog is a valid dialog
+        this.setState({
+            activeDialogId: dialogId || null,
+        });
+    }
+
+    private _handlePromptCommand(command: string, args?: any) {
+        // handle the various commands
+        if (!args || !args.type) {
+            // display an error message
+            return;
+        }
+
+        switch (args.type) {
+            case "link":
+                // fire the change screen event
+                args.target && this._changeScreen(args.target);
+                break;
+
+            case "dialog":
+                args.target && this._toggleDialog(args.target);
+                break;
+
+            case "console":
+                console.log(command, args);
+                break;
+
+            default:
+                // throw an error message
+                break;
+        }
+    }
+
+    private _renderDialog(): ReactElement {
+        const { activeDialogId, dialogs, } = this.state;
+
+        if (!activeDialogId) {
+            return null;
+        }
+
+        const dialog = dialogs.find(element => element.id === activeDialogId);
+        if (!dialog) {
+            return null;
+        }
+
+        const handleClose = () => this._toggleDialog();
+
+        return (
+            <Modal
+                text={dialog.content}
+                onClose={handleClose}
+            />
+        );
+    }
+
+    private _handleTeletypeNewLine(): void {
+        // TODO: handle lineheight/scrolling
+        // const ref = this._containerRef;
+        void 0;
+        // console.log("scrolling!", ref);
+        // const lineheight = this.props.measurements.lineHeight;
+        // if (ref) {
+        //     ref.current.scrollTop += lineheight;
+        // }
+    }
+
+    private _handleLinkClick(target: string | any[], shiftKey: boolean): void {
+        // if it's a string, it's a screen
+        if (typeof target === "string") {
+            this._changeScreen(target);
+            return;
+        }
+
+        // otherwise, it's a LinkTarget array
+        const linkTarget = (target as any[]).find(element => element.shiftKey === shiftKey);
+        if (linkTarget) {
+            // perform the appropriate action based on type
+            // TODO: type-check the object
+            if (linkTarget.type === "dialog") {
+                this._toggleDialog(linkTarget.target);
+                return;
+            }
+
+            if (linkTarget.type === "link") {
+                this._changeScreen(linkTarget.target);
+                return;
+            }
+        }
+    }
+}
+
+export default Phosphor;
+
+================
+File: src/components/Phosphor/style.scss
+================
+@import "../../assets/sass/fonts";
+@import "../../assets/sass/colors";
+
+html, body {
+    font-family: $font-family;
+    font-size: $fontsize;
+    line-height: $lineheight;
+    color: $foreground;
+
+    user-select: none;
+    text-shadow: $foreground-glow;
+
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    background: $background;
+    background-image: $background-gradient;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+.phosphor {
+    padding: $lineheight;
+}
+
+.alert {
+    color: $alert;
+    text-shadow: $alert-glow;
+
+    & > span.cursor {
+        color: $alert;
+        background-color: rgba($alert, 0.75);
+    }
+}
+
+================
+File: src/components/Prompt/index.tsx
+================
+import React, { SFC, useEffect, useRef, RefObject, useState, } from "react";
+
+// css
+import "./style.scss";
+
+export interface PromptProps {
+    prompt?: string;
+    commands?: any[];
+    className?: string;
+    disabled?: boolean;
+
+    onCommand?: (command: string, action: string) => void;
+    onEscape?: () => void;
+    onRendered?: () => void;
+}
+
+export const PROMPT_DEFAULT = "$> ";
+
+const Prompt: SFC<PromptProps> = (props) => {
+    const { disabled, prompt, className, commands, onCommand, onRendered, } = props;
+    const ref: RefObject<HTMLSpanElement> = useRef();
+    const css = [
+        "__prompt__",
+        disabled ? "disabled" : null,
+        className ? className : null,
+    ].join(" ").trim();
+
+    const [value, setValue] = useState("");
+
+    // events
+    const handleFocus = () => ref.current.focus();
+
+    const handleCommand = () => {
+        if (!onCommand) {
+            return;
+        }
+
+        const command = commands.find(element => element.command === value);
+        setValue("");
+
+        if (command) {
+            onCommand(value, command.action);
+        }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (disabled) {
+            setValue("");
+            return;
+        }
+
+        e.preventDefault();
+
+        const key = e.key.toLowerCase();
+        switch (key) {
+            case "backspace":
+                value.length && setValue(value.slice(0, -1));
+                break;
+
+            case "enter":
+                handleCommand();
+                break;
+
+            default:
+                // support alphanumeric, space, and limited puntuation only
+                const re = /[a-z0-9,.<>/?[\]{}'";:*&^%$#@!~]/
+                if (key.length === 1 && key.match(re)) {
+                    setValue(value + key);
+                }
+                break;
+        }
+    };
+
+    // render effects
+    useEffect(() => {
+        // mount
+        onRendered && onRendered();
+        document.addEventListener("keydown", handleKeyDown);
+
+        // unmount
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    });
+
+    return (
+        <div className={css} onClick={handleFocus}>
+            {prompt && <span className={"prompt"}>{prompt}</span>}
+            <span className={"input"} ref={ref}>{value}</span>
+        </div>
+    );
+};
+
+export default Prompt;
+
+================
+File: src/components/Prompt/style.scss
+================
+@import "../../assets/sass/colors";
+
+.__prompt__ {
+    &.cursor::after {
+        content: "|";
+        background-color: $foreground;
+        color: $foreground;
+        animation: blink 1s steps(5, start) infinite;
+    }
+
+    .input {
+        text-transform: uppercase;
+    }
+}
+
+@keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+  @-webkit-keyframes blink-animation {
+    to {
+      visibility: hidden;
+    }
+  }
+
+================
+File: src/components/Scanlines/index.tsx
+================
+import React, { FC } from "react";
+import "./style.scss";
+
+const Scanlines: FC = () => <section className="__scanlines__" />;
+
+export default Scanlines;
+
+================
+File: src/components/Scanlines/style.scss
+================
+@import "../../assets/sass/colors";
+
+.__scanlines__ {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+}
+
+/* REGULAR SCANLINES SETTINGS */
+
+    // width of 1 scanline (min.: 1px)
+    $scan-width: 1px;
+
+    // emulates a damage-your-eyes bad pre-2000 CRT screen ♥ (true, false)
+    $scan-crt: false;
+
+    // frames-per-second (should be > 1), only applies if $scan-crt: true;
+    $scan-fps: 60;
+
+    // scanline-color (rgba)
+    $scan-color: $scanlines-foreground;
+    $scan-background: $scanlines-background;
+
+    // set z-index on 2147483648 or more to enable scanlines on Chrome fullscreen (doesn't work in Firefox or IE);
+    $scan-z-index: 2147483648;
+
+/* MOVING SCANLINE SETTINGS */
+
+    // moving scanline (true, false)
+    $scan-moving-line: true;
+
+    // opacity of the moving scanline
+    $scan-opacity: 1;
+
+/* MIXINS */
+
+    // apply CRT animation: @include scan-crt($scan-crt);
+    @mixin scan-crt($scan-crt) {
+        @if $scan-crt == true {
+            animation: scanlines 1s steps($scan-fps) infinite;
+        }
+        @else { animation: none; }
+    }
+
+    // apply CRT animation: @include scan-crt($scan-crt);
+    @mixin scan-moving($scan-moving-line) {
+        @if $scan-moving-line == true {
+            animation: scanline 6s linear infinite;
+        }
+        @else { animation: none; }
+    }
+
+/* CSS .scanlines CLASS */
+
+    .__scanlines__ {
+        overflow: hidden; // only to animate the unique scanline
+
+        &:before,
+        &:after {
+            display: block;
+            pointer-events: none;
+            content: '';
+            position: absolute;
+        }
+
+        // unique scanline travelling on the screen
+        &:before {
+            // position: absolute;
+            // bottom: 100%;
+            width: 100%;
+            height: $scan-width * 1;
+            z-index: $scan-z-index + 1;
+            background: $foreground;
+            opacity: 0.2;
+            // animation: scanline 6s linear infinite;
+            @include scan-moving($scan-moving-line);
+        }
+
+        // the scanlines, so!
+        &:after {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: $scan-z-index;
+            background: linear-gradient(
+                to bottom,
+                $scan-background 50%,
+                $scan-color 51%
+            );
+            background-size: 100% $scan-width*2;
+            @include scan-crt($scan-crt);
+        }
+    }
+
+/* ANIMATE UNIQUE SCANLINE */
+    @keyframes scanline {
+        0% {
+            transform: translate3d(0,200000%,0);
+            // bottom: 0%; // to have a continuous scanline move, use this line (here in 0% step) instead of transform and write, in &:before, { position: absolute; bottom: 100%; }
+        }
+    }
+
+    @keyframes scanlines {
+        0% {
+            background-position: 0 50%;
+            // bottom: 0%; // to have a continuous scanline move, use this line (here in 0% step) instead of transform and write, in &:before, { position: absolute; bottom: 100%; }
+        }
+    }
+
+================
+File: src/components/Static/index.tsx
+================
+import React, { FC, useCallback, useEffect, useRef, } from "react";
+import "./style.scss";
+
+export interface StaticProps {
+    lifespan?: number; // how long shoudl the static last, in ms; default 1000
+    className?: string;
+    onRendered?: () => void;
+    onClose?: () => void;
+}
+
+const TICK = 1000;
+const LIFESPAN_DEFAULT = 1000;
+
+const Static: FC<StaticProps> = (props) => {
+    let ref: React.RefObject<HTMLCanvasElement> = useRef();
+    let time = 0;
+    let animateTimerId: number = null;
+    let lifespanTimerId: number = null;
+
+    const { className, onRendered, onClose, } = props;
+    const css = [
+        "__static__",
+        className ? className : null,
+    ].join(" ").trim();
+
+    // add a keyhandler
+    const handleKeyDown = useCallback((e: KeyboardEvent) => {
+        e.preventDefault();
+
+        const key = e.key.toLowerCase();
+
+        switch (key) {
+            case "enter":
+            case "escape":
+                onClose && onClose();
+                break;
+
+            default:
+                break;
+        }
+    }, [onClose]);
+
+    // animation routines
+    const clearAnimationTimer = () => {
+        if (animateTimerId) {
+            window.clearInterval(animateTimerId);
+            animateTimerId = null;
+        }
+    };
+    const animate = () => {
+        clearAnimationTimer();
+        noise();
+        animateTimerId = window.setInterval(noise, TICK);
+    };
+
+    const noise = () => {
+        if (!ref) {
+            return;
+        }
+
+        const canvas = ref.current;
+        const context = canvas.getContext("2d");
+
+        const img = context.createImageData(canvas.width, canvas.height);
+        const pix = img.data;
+
+        for (let i = 0, n = pix.length; i < n; i += 4) {
+            pix[i] = pix[i + 1] = pix[i + 2] =  Math.random() * 200;
+            pix[i + 3] = 255; // 100% opaque
+        }
+
+        context.putImageData(img, 0, 0);
+        time = (time + 1) % canvas.height;
+    };
+
+    // mount & unmount
+    useEffect(() => {
+        // mount
+        document.addEventListener("keydown", handleKeyDown);
+        animate();
+
+        // unmount
+        return () => {
+            clearAnimationTimer();
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    });
+
+    return (
+        <section className={css}>
+            <canvas width="320" height="240" ref={ref} />
+        </section>
+    );
+};
+
+export default Static;
+
+================
+File: src/components/Static/style.scss
+================
+.__static__ {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-crisp-edges;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+    }
+}
+
+================
+File: src/components/Teletype/index.tsx
+================
+import React, { Component, ReactElement } from "react";
+
+// css
+import "./style.scss";
+
+interface TeletypeProps {
+    text: string; // text to animate
+    className?: string; // css class
+    autostart?: boolean; // start animating immediately? default = true
+    autocomplete?: boolean; // skip animating and instead fully render? default = false
+    speed?: number; // optional animation speed in ms; default = 5
+
+    onComplete: () => void; // event called on completion
+    onNewLine?: () => void; // event called when the cursor is moved to a new line
+}
+
+interface TeletypeState {
+    index: number;
+    char: number;
+    active: boolean;
+    done: boolean;
+    paused: boolean;
+}
+
+class Teletype extends Component<TeletypeProps, TeletypeState> {
+    private _cursorInterval = 5;
+    private _animateTimerId: number = null;
+    private _cursorRef: React.RefObject<HTMLElement> = null;
+    private _cursorY: number = null;
+
+    constructor(props: TeletypeProps) {
+        super(props);
+
+        this._cursorRef = React.createRef<HTMLElement>();
+        this._cursorY = 0;
+
+        const done = !!props.autocomplete;
+        const paused = props.autostart === false;
+
+        this._cursorInterval = props.speed || this._cursorInterval;
+
+        this.state = {
+            index: 0,
+            char: 0,
+            active: false,
+            done,
+            paused,
+        };
+
+        this._animate = this._animate.bind(this);
+        this._updateState = this._updateState.bind(this);
+    }
+
+    public render(): ReactElement {
+        const { text, className } = this.props;
+        const { char, done, active, } = this.state;
+
+        const visible = text.substr(0, char); // already rendered
+        const cursor = text.substr(char, 1) || " "; // " " ensures the curosr is briefly visible for line breaks
+        const hidden = text.substr(char + 1); // to be rendered
+
+        if (!active || done) {
+            return null;
+        }
+
+        const css = ["__teletype__", className ? className : null].join(" ").trim();
+
+        return (
+            <div className={css}>
+                <span className="visible">{visible}</span>
+                <span className="cursor" ref={this._cursorRef}>{cursor}</span>
+                <span className="hidden">{hidden}</span>
+            </div>
+        );
+    }
+
+    public componentDidMount(): void {
+        const { paused, done } = this.state;
+
+        // if autocomplete is on, we can skip to the end
+        if (done) {
+            this._onComplete();
+            return;
+        }
+
+        // ready to go
+        if (!paused) {
+            this.setState({
+                active: true,
+            }, () => this._animate());
+        }
+    }
+
+    public componentDidUpdate(prevProps: TeletypeProps, prevState: TeletypeState): void {
+        if (!prevState.done && this.state.done) {
+            this._onComplete();
+        }
+
+
+        if (this.state.done) {
+            return;
+        }
+
+        this._animate();
+    }
+
+    public componentWillUnmount(): void {
+        if (this._animateTimerId !== null) {
+            clearTimeout(this._animateTimerId);
+            this._animateTimerId = null;
+        }
+    }
+
+    private _animate(): void {
+        this._clearAnimateTimer();
+
+        if (this.state.paused) {
+            return;
+        }
+
+        // track the current active line
+        this._getCursorPosition();
+
+        // setTimeout is preferred over requestAnimationFrame so the interval
+        // can be specified -- we can control how janky it looked; requestAnimationFrame
+        // results in animation that's much to smooth for our purposes.
+        this._animateTimerId = window.setTimeout(this._updateState, this._cursorInterval);
+    }
+
+    private _getCursorPosition(): void {
+        const { onNewLine } = this.props;
+        // get the cursorRef
+        const ref = this._cursorRef;
+        let y = this._cursorY;
+
+        if (ref && ref.current) {
+            const node = ref.current;
+            const top = node.offsetTop;
+            if (y !== top) {
+                // new line
+                this._cursorY = top;
+                onNewLine && onNewLine();
+            }
+        }
+    }
+
+    private _clearAnimateTimer(): void {
+        if (this._animateTimerId !== null) {
+            window.clearTimeout(this._animateTimerId);
+            this._animateTimerId = null;
+        }
+    }
+
+    private _updateState(): void {
+        const { text, } = this.props;
+        const {
+            char,
+            active,
+            done,
+            paused,
+        } = this.state;
+
+        if (done) {
+            return;
+        }
+
+        // let nextIndex = index;
+        let nextChar = char;
+        let nextActive = active;
+        let nextDone = done;
+        let nextPaused = paused;
+
+        // if we're not active, we are now!
+        if (!nextActive) {
+            nextActive = true;
+        }
+
+        // if char is less that the current string, increment it
+        if (char < text.length) {
+            nextChar = char + 1;
+        } else {
+            nextActive = false;
+            nextDone = true;
+        }
+
+        // update state
+        this.setState({
+            // index: nextIndex,
+            char: nextChar,
+            active: nextActive,
+            done: nextDone,
+            paused: nextPaused,
+        });
+    }
+
+    private _onComplete(): void {
+        const { onComplete, } = this.props;
+        onComplete && onComplete();
+    }
+}
+
+export default Teletype;
+
+================
+File: src/components/Teletype/style.scss
+================
+@import "../../assets/sass/colors";
+
+.__teletype__ {
+    .cursor {
+        color: rgba($background, 0.2);
+        background: $foreground;
+    }
+
+    .hidden {
+        visibility: hidden;
+    }
+}
+
+================
+File: src/components/Text/index.tsx
+================
+import React, { SFC, useEffect } from "react";
+
+export interface TextProps {
+    text: string;
+    className?: string;
+    onRendered?: () => void;
+}
+
+const Text: SFC<TextProps> = (props) => {
+    const { text, className, onRendered } = props;
+    const css = [
+        "__text__",
+        className ? className : null,
+    ].join(" ").trim();
+
+    // events
+    const handleRendered = () => (onRendered && onRendered());
+
+    // this should fire on mount/update
+    useEffect(() => handleRendered());
+
+    return <div className={css}>{text}</div>;
+};
+
+export default Text;
+
+================
+File: src/components/Toggle/index.tsx
+================
+import React, { SFC, useCallback, useEffect, useState } from "react";
+
+import "./style.scss";
+
+export interface ToggleState {
+    text: string;
+    active?: boolean;
+}
+
+export interface ToggleProps {
+    states: ToggleState[];
+    className?: string;
+    onRendered?: () => void;
+    onClick?: () => void;
+}
+
+const Toggle: SFC<ToggleProps> = (props) => {
+    const { className, states, onRendered } = props;
+    const css = [
+        "__toggle__",
+        className ? className : null,
+    ].join(" ").trim();
+
+    // find the active state
+    const state = states.find(element => element.active === true);
+    const text = (state && state.text) || "";
+
+    // set the new active one
+    const [active, setActive] = useState(state);
+
+    // events
+    const handleRendered = () => (onRendered && onRendered());
+    const handleClick = useCallback(() => {
+        if (active) {
+            // get the active index;
+            const index = states.findIndex(element => element === active);
+            // unset everything
+            states.forEach(element => element.active = false);
+            // set the next active element
+            const next = states[index + 1 === states.length ? 0 : index + 1];
+            next.active = true;
+            setActive(next);
+        }
+    }, [states, active, setActive]);
+
+    // this should fire on mount/update
+    useEffect(() => handleRendered());
+
+    return <div className={css} onClick={handleClick}>{text}</div>;
+};
+
+export default Toggle;
+
+================
+File: src/components/Toggle/style.scss
+================
+@import "../../assets/sass/fonts";
+@import "../../assets/sass/colors";
+
+.__toggle__ {
+    & {
+        cursor: pointer;
+        display: block;
+    }
+    &:hover,
+    &:active {
+        color: $background;
+        background: $foreground;
+        text-shadow: $background-glow;
+        box-shadow: $foreground-glow;
+        transition:  background 50ms, foreground 150ms;
+    }
+
+    &:hover {
+        opacity: 1;
+        transition: background 50ms, foreground 150ms;
+    }
+
+    &:active {
+        opacity: 0.5;
+        transition: opacity 50ms;
+    }
+}
+
+================
+File: src/data/myspacegame.json
+================
+{
+    "config": {
+        "name": "USS Horizon Bridge Terminal",
+        "author": "Your Name"
+    },
+    "screens": [
+        {
+            "id": "main",
+            "type": "screen",
+            "content": [
+                "USS HORIZON - BRIDGE TERMINAL",
+                "STARDATE: 2387.4",
+                "",
+                "SYSTEM STATUS: NOMINAL",
+                "",
+                "SELECT OPTION:",
+                {
+                    "type": "link",
+                    "target": "navigation",
+                    "text": "> NAVIGATION SYSTEMS"
+                },
+                {
+                    "type": "link",
+                    "target": [
+                        {
+                            "target": "commsOffline",
+                            "type": "dialog",
+                            "shiftKey": false
+                        }
+                    ],
+                    "text": "> COMMUNICATIONS"
+                },
+                {
+                    "type": "link",
+                    "target": "security",
+                    "text": "> SECURITY PROTOCOLS"
+                }
+            ]
+        },
+        {
+            "id": "navigation",
+            "type": "screen",
+            "content": [
+                "NAVIGATION SYSTEMS",
+                "",
+                "CURRENT COURSE: SECTOR 31-A",
+                "DESTINATION: ALPHA CENTAURI",
+                "ETA: 3.4 DAYS",
+                "",
+                {
+                    "type": "link",
+                    "target": "main",
+                    "text": "> RETURN TO MAIN MENU"
+                }
+            ]
+        }
+    ],
+    "dialogs": [
+        {
+            "id": "securityAlert",
+            "type": "alert",
+            "content": [
+                "SECURITY ALERT",
+                "Unauthorized access detected in cargo bay 3.",
+                "Security team dispatched.",
+                "Press <enter> or click to acknowledge."
+            ]
+        },
+        {
+            "id": "commsOffline",
+            "type": "alert",
+            "content": [
+                "COMMUNICATIONS SYSTEM ERROR",
+                "Status: OFFLINE",
+                "",
+                "Press <enter> or click to acknowledge."
+            ]
+        }
+    ]
+}
+
+================
+File: src/data/sample.json
+================
+{
+    "config": {
+        "name": "Sample JSON data",
+        "author": "@redhg"
+    },
+    "screens": [
+        {
+            "id": "screen0",
+            "type": "screen",
+            "content": [
+                "Screen content can be a string. And that string can contain\n\nlinebreaks.",
+                "",
+                "Or it can be an empty string like the above entry.",
+                { "type": "text", "text": "Or it can be an Object with an specific CSS 'className' property, like 'alert', currently the only one.", "className": "alert" },
+                "",
+                "Links to other Screens can be rendered, too. Linking to the current screen's ID will cause it to redraw. Like this:",
+                {
+                    "type": "link",
+                    "target": "screen0",
+                    "text": "> CLICK TO RELOAD THIS SCREEN"
+                },
+                "",
+                "Linking instead to a different screen's ID will, naturally, render that screen's content.",
+                {
+                    "type": "link",
+                    "target": "screen1",
+                    "text": "> NEXT"
+                }
+            ]
+        },
+        {
+            "id": "screen1",
+            "type": "screen",
+            "content": [
+                "Text is great an all, but what about toggle buttons? Toggle buttons cycle through their states, starting with whichever has 'active: true'.",
+                "You can click the following button several times to cycle through its available states",
+                "",
+                {
+                    "type": "toggle",
+                    "states": [
+                        {
+                            "active": true,
+                            "text": "> Hello."
+                        },
+                        {
+                            "active": false,
+                            "text": "> How are you?"
+                        },
+                        {
+                            "active": false,
+                            "text": "> I am fine, thanks."
+                        }
+                    ]
+                },
+                "",
+                "Links can be configured to behave differently when <shift> is held down. Clicking the following link normally will show an alert dialog, but holding <shift> and clicking will navigate back to the first screen. (This doesn't work on touch-only devices, obviously.)",
+                "",
+                {
+                    "text": "> LOCKED LINK. Shift+click to unlock",
+                    "type": "link",
+                    "target": [
+                        {
+                            "target": "lockedDialog",
+                            "type": "dialog",
+                            "shiftKey": false
+                        },
+                        {
+                            "target": "screen0",
+                            "type": "link",
+                            "shiftKey": true
+                        }
+                    ]
+                },
+                "",
+                "There's also a module that accepts user input. It's very particular, and it uses a document-wide event listener which is pretty hacky. See what happens when you type the following commands:\n\n",
+                "BACK",
+                "DIALOG",
+                "IMAGE",
+                {
+                    "type": "prompt",
+                    "prompt": "Enter command: ",
+                    "className": "cursor",
+                    "commands": [
+                        {
+                            "command": "back",
+                            "action": {
+                                "type": "link",
+                                "target": "screen0"
+                            }
+                        },
+                        {
+                            "command": "dialog",
+                            "action": {
+                                "type": "dialog",
+                                "target": "dialog1"
+                            }
+                        },
+                        {
+                            "command": "image",
+                            "action": {
+                                "type": "link",
+                                "target": "screen2"
+                            }
+                        }
+                    ]
+                },
+                "\n",
+                {
+                    "type": "link",
+                    "target": "screen2",
+                    "text": "> IMAGE LOADING"
+                },
+                {
+                    "type": "link",
+                    "target": "screen1",
+                    "text": "> CLICK HERE TO RETURN TO THE FIRST SCREEN"
+                }
+            ]
+        },
+        {
+            "id": "screen2",
+            "type": "screen",
+            "content": [
+                "We can load images, too. Create an object of type \"bitmap\" with a src pointing to a URL and add an optional image effect className, such as \"luminosity\" or \"lighten\". See Bitmap/style.scss for a list of supported modes.",
+                {
+                    "type": "bitmap",
+                    "src": "https://i.imgur.com/rDjphNY.jpg"
+                },
+                {
+                    "type": "bitmap",
+                    "src": "https://i.imgur.com/rDjphNY.jpg",
+                    "className": "lighten"
+                },
+                {
+                    "type": "bitmap",
+                    "src": "https://i.imgur.com/rDjphNY.jpg",
+                    "className": "luminosity"
+                },
+                "\n",
+                "Note that as of 2020-06-12, the above blend-modes appear broken in Chrome, but work just fine in Firefox & Safari of all things.",
+                "",
+                {
+                    "type": "link",
+                    "target": "screen1",
+                    "text": "> BACK"
+                }
+            ]
+        }
+    ],
+    "dialogs": [
+        {
+            "id": "dialog1",
+            "type": "alert",
+            "content": [
+                "This is the first line in the dialog.",
+                "And this is the second line.",
+                "Press <enter>, <esc>, or click anywhere to close this dialog."
+            ]
+        },
+        {
+            "id": "lockedDialog",
+            "type": "alert",
+            "content": [
+                "This is a locked link. You'll need to <shift>+click to activate it.",
+                "Press <enter>, <esc>, or click anywhere to close this dialog."
+            ]
+        }
+    ]
+}
+
+================
+File: src/data/ypsilon14.json
+================
+{
+    "config": {
+        "name": "The Haunting of Ypsilon-14 JSON data",
+        "author": "@redhg",
+        "comment": "Phosphor content file for the 'Haunting of Ypsilon-14' module for the Mothership tabletop roleplaying game. Visit https://redhg.com/ypsilon14/ to see the compiled application."
+    },
+    "screens": [
+        {
+            "id": "screen0",
+            "type": "screen",
+            "content": [
+                "YPSILON-14",
+                "==========",
+                "",
+                "Welcome to the Ypsilon-14 Mining Station, a property of ISHIYAMA DYNAMICS (c), where innovation is our top priority (tm).",
+                "==========",
+                "",
+                {
+                    "text": "> ACCEPT EULA & LOG IN",
+                    "type": "link",
+                    "target": "menu"
+                }
+            ]
+        },
+        {
+            "id": "menu",
+            "type": "screen",
+            "content": [
+                "Main Menu",
+                "=========",
+                "",
+                {
+                    "text": "> STATION MAP",
+                    "type": "link",
+                    "target": "map"
+                },
+                {
+                    "text": "> DIAGNOSTICS",
+                    "type": "link",
+                    "target": "diagnostics"
+                },
+                {
+                    "text": "> SCHEDULE",
+                    "type": "link",
+                    "target": "schedule"
+                },
+                {
+                    "text": "> ROSTER",
+                    "type": "link",
+                    "target": "roster"
+                },
+                {
+                    "text": "> COMMS",
+                    "type": "link",
+                    "target": "comms"
+                },
+                {
+                    "text": "> CONTROLS",
+                    "type": "link",
+                    "target": "controls"
+                }
+            ]
+        },
+        {
+            "id": "map",
+            "type": "screen",
+            "content": [
+                "Station Map",
+                "===========",
+                "",
+                {
+                    "type": "bitmap",
+                    "src": "https://i.imgur.com/htHuumj.png",
+                    "className": "lighten"
+                },
+                "",
+                "A copy of the map is now available via data tablet.",
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "menu",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "diagnostics",
+            "type": "screen",
+            "content": [
+                "Diagnostics",
+                "===========",
+                "",
+                "Checking life support.............. Done.",
+                "Checking main systems.............. Done.",
+                "",
+                {
+                    "text": "WARNING: Airflow 82.4%. Check crew quarters vents for blockage.",
+                    "className": "alert",
+                    "type": "text"
+                },
+                {
+                    "text": "WARNING: Shower #5 non-functional as of 1 day(s).",
+                    "className": "alert",
+                    "type": "text"
+                },
+                "",
+                "NOTICE: Air filters replaced 455 day(s) ago.",
+                "NOTICE: Mineshaft lift maintained 455 day(s) ago.",
+                "",
+                "===========",
+                "",
+                "SUMMARY:",
+                "All systems operating within acceptible parameters.",
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "menu",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "schedule",
+            "type": "screen",
+            "content": [
+                "Schedule",
+                "========",
+                "",
+                "Docking bay activity (past 6 months):",
+                "",
+                "2366-06-12.0633 - Bay 2 : Arrive :: Tempest",
+                "2366-04-29.0834 - Bay 1 : Arrive :: Heracles",
+                "2366-03-02.1223 - Bay 2 : Depart :: Key Largo",
+                "2366-02-20.1604 - Bay 2 : Arrive :: Key Largo",
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "menu",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "roster",
+            "type": "screen",
+            "content": [
+                "Roster",
+                "======",
+                "",
+                "01. VERHOEVEN, Sonya     :: Admin",
+                "02. SINGH, Ashraf        :: Breaker",
+                "03. DE BEERS, Dana       :: Lead drill",
+                "04. CHATZKEL, Jerome     :: Asst. drill",
+                "05. TOBIN, Rosa          :: Engineer",
+                "06. RADIMIR, Mikhail     :: Lead Engineer",
+                "07. KANTARO, Kenji       :: Loader",
+                "08. BOWE, Morgan         :: Loader",
+                "09. NEKTARIOS, Ri        :: Loader",
+                "10. n/a",
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "menu",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "comms",
+            "type": "screen",
+            "content": [
+                "COMMS",
+                "=====",
+                "",
+                "2 vessels detected in proximity.",
+                "",
+                {
+                    "text": "> HAIL TEMPEST",
+                    "target": "hailtempest",
+                    "type": "link"
+                },
+                {
+                    "text": "> HAIL HERECLES",
+                    "target": "hailherecles",
+                    "type": "link"
+                },
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "menu",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "hailtempest",
+            "type": "screen",
+            "content": [
+                "Transmitting",
+                "============",
+                "",
+                "..........................................",
+                "..........................................",
+                "",
+                "COMMUNICATION CHANNEL OPENED",
+                "",
+                "======",
+                "",
+                {
+                    "text": "< CLOSE CHANNEL",
+                    "target": "comms",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "hailherecles",
+            "type": "screen",
+            "content": [
+                "Transmitting",
+                "============",
+                "",
+                "..........................................",
+                "..........................................",
+                "..........................................",
+                "..........................................",
+                "",
+                {
+                    "type": "text",
+                    "className": "alert",
+                    "text": "NO RESPONSE"
+                },
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "comms",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "controls",
+            "type": "screen",
+            "content": [
+                "Controls",
+                "========",
+                "",
+                "[A] :: Administrator access only",
+                "",
+                {
+                    "text": "> SHOWERS",
+                    "target": "showers",
+                    "type": "link"
+                },
+                {
+                    "text": "> HYDROPONICS LAB",
+                    "target": "greenhouse",
+                    "type": "link"
+                },
+                {
+                    "text": "> AIRLOCKS [A]",
+                    "type": "link",
+                    "target": [
+                        {
+                            "target": "lockedDialog",
+                            "type": "dialog",
+                            "shiftKey": false
+                        },
+                        {
+                            "target": "airlocks",
+                            "type": "link",
+                            "shiftKey": true
+                        }
+                    ]
+                },
+                {
+                    "text": "> SYSTEM [A]",
+                    "type": "link",
+                    "target": [
+                        {
+                            "target": "lockedDialog",
+                            "type": "dialog",
+                            "shiftKey": false
+                        },
+                        {
+                            "target": "system",
+                            "type": "link",
+                            "shiftKey": true
+                        }
+                    ]
+                },
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "menu",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "airlocks",
+            "type": "screen",
+            "content": [
+                "Airlocks",
+                "========",
+                "",
+                {
+                    "type": "link",
+                    "text": "> DOCKING BAY 1 :: LOCKED — ERROR",
+                    "className": "alert",
+                    "target": [
+                        {
+                            "target": "airlockError",
+                            "type": "dialog",
+                            "shiftKey": false
+                        }
+                    ]
+                },
+                {
+                    "type": "toggle",
+                    "states": [
+                        {
+                            "text": "> DOCKING BAY 2 :: UNLOCKED",
+                            "active": true
+                        },
+                        {
+                            "text": "> DOCKING BAY 2 :: LOCKED",
+                            "active": false
+                        }
+                    ]
+                },
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "controls",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "showers",
+            "type": "screen",
+            "content": [
+                "Showers",
+                "=======",
+                "",
+                {
+                    "type": "toggle",
+                    "states": [
+                        {
+                            "text": "> SHOWER 1 :: OFF",
+                            "active": true
+                        },
+                        {
+                            "text": "> SHOWER 1 :: ON",
+                            "active": false
+                        }
+                    ]
+                },
+                {
+                    "type": "toggle",
+                    "states": [
+                        {
+                            "text": "> SHOWER 2 :: OFF",
+                            "active": true
+                        },
+                        {
+                            "text": "> SHOWER 2 :: ON",
+                            "active": false
+                        }
+                    ]
+                },
+                {
+                    "type": "toggle",
+                    "states": [
+                        {
+                            "text": "> SHOWER 3 :: OFF",
+                            "active": true
+                        },
+                        {
+                            "text": "> SHOWER 3 :: ON",
+                            "active": false
+                        }
+                    ]
+                },
+                {
+                    "type": "toggle",
+                    "states": [
+                        {
+                            "text": "> SHOWER 4 :: OFF",
+                            "active": true
+                        },
+                        {
+                            "text": "> SHOWER 4 :: ON",
+                            "active": false
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "className": "alert",
+                    "text": "> SHOWER 5 :: MALFUNCTIONING"
+                },
+                {
+                    "type": "toggle",
+                    "states": [
+                        {
+                            "text": "> SHOWER 6 :: OFF",
+                            "active": true
+                        },
+                        {
+                            "text": "> SHOWER 6 :: ON",
+                            "active": false
+                        }
+                    ]
+                },
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "controls",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "greenhouse",
+            "type": "screen",
+            "content": [
+                "Hydroponics Lab",
+                "===============",
+                "",
+                {
+                    "type": "toggle",
+                    "states": [
+                        {
+                            "text": "> MIST HYDRATION SYSTEM :: OFF",
+                            "active": true
+                        },
+                        {
+                            "text": "> MIST HYDRATION SYSTEM :: ON",
+                            "active": false
+                        }
+                    ]
+                },
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "controls",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "system",
+            "type": "screen",
+            "content": [
+                "System",
+                "======",
+                "",
+                {
+                    "text": "> LIFE SUPPORT",
+                    "target": "lifesupport",
+                    "type": "link"
+                },
+                {
+                    "text": "> SELF-DESTRUCT",
+                    "target": "selfdestruct",
+                    "type": "link"
+                },
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "controls",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "lifesupport",
+            "type": "screen",
+            "content": [
+                "Life Support",
+                "============",
+                "",
+                {
+                    "type": "text",
+                    "className": "alert",
+                    "text": "WARNING: Disabling life support is a violation of company policy #2778-A. ISHIYAMA DYNAMICS assumes no responsibilities or liabilities resulting from the improper use of this feature."
+                },
+                "",
+                {
+                    "type": "toggle",
+                    "states": [
+                        {
+                            "text": "> LIFE SUPPORT :: ENABLED",
+                            "active": true
+                        },
+                        {
+                            "text": "> LIFE SUPPORT :: DISABLED",
+                            "active": false
+                        }
+                    ]
+                },
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "system",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "selfdestruct",
+            "type": "screen",
+            "content": [
+                "Self-Destruct",
+                "=============",
+                "",
+                {
+                    "type": "text",
+                    "className": "alert",
+                    "text": "WARNING: Destruction of corporate property is a violation of company policy #2778-B. ISHIYAMA DYNAMICS assumes no responsibilities or liabilities resulting from the improper use of this feature."
+                },
+                "",
+                {
+                    "text": "> ACTIVATE SELF-DESTRUCT",
+                    "target": "activateeslfdestruct",
+                    "type": "link"
+                },
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "system",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "activateeslfdestruct",
+            "type": "screen",
+            "content": [
+                "Activate Self-Destruct",
+                "======================",
+                "",
+                {
+                    "type": "text",
+                    "className": "alert",
+                    "text": "THIS WILL INITIATE A 10-MINUTE STATION SELF-DESTRUCT SEQUENCE."
+                },
+                "",
+                {
+                    "type": "text",
+                    "className": "alert",
+                    "text": "THIS CANNOT BE UNDONE."
+                },
+                "",
+                {
+                    "type": "prompt",
+                    "prompt":"TYPE 'OK' TO BEGIN COUNTDOWN: ",
+                    "className": "alert cursor",
+                    "commands": [
+                        {
+                            "command": "ok",
+                            "action": {
+                                "type": "link",
+                                "target": "evacuate"
+                            }
+                        }
+                    ]
+                },
+                "",
+                "======",
+                "",
+                {
+                    "text": "< BACK",
+                    "target": "selfdestruct",
+                    "type": "link"
+                }
+            ]
+        },
+        {
+            "id": "evacuate",
+            "type": "screen",
+            "content": [
+                {
+                    "type": "text",
+                    "className": "alert",
+                    "text": "SELF-DESTRUCT SEQUENCE INITIATED."
+                },
+                {
+                    "type": "text",
+                    "className": "alert",
+                    "text": "PLEASE EVACUATE AS SOON AS POSSIBLE."
+                }
+            ]
+        }
+    ],
+    "dialogs": [
+        {
+            "id": "lockedDialog",
+            "type": "alert",
+            "content": [
+                "Error! Authorization required."
+            ]
+        },
+        {
+            "id": "airlockError",
+            "type": "alert",
+            "content": [
+                "ERROR! Lock override in effect.",
+                "",
+                "Cannot unlock remotely. Manual intervention required."
+            ]
+        }
+    ]
+}
+
+================
+File: src/index.tsx
+================
+import React from "react";
+import ReactDOM from "react-dom";
+import Phosphor from "./components/Phosphor";
+
+import * as serviceWorker from "./serviceWorker";
+
+ReactDOM.render(
+    <React.StrictMode>
+        <Phosphor />
+    </React.StrictMode>,
+    document.getElementById("root")
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+
+================
+File: src/react-app-env.d.ts
+================
+/// <reference types="react-scripts" />
+
+================
+File: src/serviceWorker.ts
+================
+// This optional code is used to register a service worker.
+// register() is not called by default.
+
+// This lets the app load faster on subsequent visits in production, and gives
+// it offline capabilities. However, it also means that developers (and users)
+// will only see deployed updates on subsequent visits to a page, after all the
+// existing tabs open on the page have been closed, since previously cached
+// resources are updated in the background.
+
+// To learn more about the benefits of this model and instructions on how to
+// opt-in, read https://bit.ly/CRA-PWA
+
+const isLocalhost = Boolean(
+  window.location.hostname === 'localhost' ||
+    // [::1] is the IPv6 localhost address.
+    window.location.hostname === '[::1]' ||
+    // 127.0.0.0/8 are considered localhost for IPv4.
+    window.location.hostname.match(
+      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+    )
+);
+
+type Config = {
+  onSuccess?: (registration: ServiceWorkerRegistration) => void;
+  onUpdate?: (registration: ServiceWorkerRegistration) => void;
+};
+
+export function register(config?: Config) {
+  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    // The URL constructor is available in all browsers that support SW.
+    const publicUrl = new URL(
+      process.env.PUBLIC_URL,
+      window.location.href
+    );
+    if (publicUrl.origin !== window.location.origin) {
+      // Our service worker won't work if PUBLIC_URL is on a different origin
+      // from what our page is served on. This might happen if a CDN is used to
+      // serve assets; see https://github.com/facebook/create-react-app/issues/2374
+      return;
+    }
+
+    window.addEventListener('load', () => {
+      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+
+      if (isLocalhost) {
+        // This is running on localhost. Let's check if a service worker still exists or not.
+        checkValidServiceWorker(swUrl, config);
+
+        // Add some additional logging to localhost, pointing developers to the
+        // service worker/PWA documentation.
+        navigator.serviceWorker.ready.then(() => {
+          console.log(
+            'This web app is being served cache-first by a service ' +
+              'worker. To learn more, visit https://bit.ly/CRA-PWA'
+          );
+        });
+      } else {
+        // Is not localhost. Just register service worker
+        registerValidSW(swUrl, config);
+      }
+    });
+  }
+}
+
+function registerValidSW(swUrl: string, config?: Config) {
+  navigator.serviceWorker
+    .register(swUrl)
+    .then(registration => {
+      registration.onupdatefound = () => {
+        const installingWorker = registration.installing;
+        if (installingWorker == null) {
+          return;
+        }
+        installingWorker.onstatechange = () => {
+          if (installingWorker.state === 'installed') {
+            if (navigator.serviceWorker.controller) {
+              // At this point, the updated precached content has been fetched,
+              // but the previous service worker will still serve the older
+              // content until all client tabs are closed.
+              console.log(
+                'New content is available and will be used when all ' +
+                  'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
+              );
+
+              // Execute callback
+              if (config && config.onUpdate) {
+                config.onUpdate(registration);
+              }
+            } else {
+              // At this point, everything has been precached.
+              // It's the perfect time to display a
+              // "Content is cached for offline use." message.
+              console.log('Content is cached for offline use.');
+
+              // Execute callback
+              if (config && config.onSuccess) {
+                config.onSuccess(registration);
+              }
+            }
+          }
+        };
+      };
+    })
+    .catch(error => {
+      console.error('Error during service worker registration:', error);
+    });
+}
+
+function checkValidServiceWorker(swUrl: string, config?: Config) {
+  // Check if the service worker can be found. If it can't reload the page.
+  fetch(swUrl, {
+    headers: { 'Service-Worker': 'script' }
+  })
+    .then(response => {
+      // Ensure service worker exists, and that we really are getting a JS file.
+      const contentType = response.headers.get('content-type');
+      if (
+        response.status === 404 ||
+        (contentType != null && contentType.indexOf('javascript') === -1)
+      ) {
+        // No service worker found. Probably a different app. Reload the page.
+        navigator.serviceWorker.ready.then(registration => {
+          registration.unregister().then(() => {
+            window.location.reload();
+          });
+        });
+      } else {
+        // Service worker found. Proceed as normal.
+        registerValidSW(swUrl, config);
+      }
+    })
+    .catch(() => {
+      console.log(
+        'No internet connection found. App is running in offline mode.'
+      );
+    });
+}
+
+export function unregister() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready
+      .then(registration => {
+        registration.unregister();
+      })
+      .catch(error => {
+        console.error(error.message);
+      });
+  }
+}
+
+================
+File: src/setupTests.ts
+================
+// jest-dom adds custom jest matchers for asserting on DOM nodes.
+// allows you to do things like:
+// expect(element).toHaveTextContent(/react/i)
+// learn more: https://github.com/testing-library/jest-dom
+import '@testing-library/jest-dom/extend-expect';
+
+================
+File: tsconfig.json
+================
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react"
+  },
+  "include": [
+    "src"
+  ]
+}
+
+
+
+================================================================
+End of Codebase
+================================================================
