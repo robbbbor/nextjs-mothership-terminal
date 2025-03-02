@@ -277,6 +277,13 @@ main::before {
   opacity: 0.6;
 }
 
+.dashed-separator {
+  margin: 1rem 0;
+  opacity: 0.5;
+  font-size: 1.6rem;
+  letter-spacing: 0.1em;
+}
+
 .logout-button {
   color: #ff8c00 !important;
   text-shadow: 0 0 2px #ff8c00 !important;
@@ -329,4 +336,366 @@ main::before {
   pointer-events: none;
   z-index: 5;
   mix-blend-mode: screen;
+}
+
+/* Evil AI Glitch Effect - First appearance (200ms) */
+.evil-glitch-1 {
+  position: relative;
+  display: inline-block;
+  color: #ff0000;
+  text-shadow: 
+    2px 2px 0 #000,
+    -2px -2px 0 #000,
+    0 0 8px rgba(255, 0, 0, 0.8);
+  animation: shake 0.2s infinite, rgbSplit 0.2s infinite;
+}
+
+.evil-glitch-1::before,
+.evil-glitch-1::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  animation: glitchTop 0.2s infinite linear alternate-reverse;
+}
+
+.evil-glitch-1::after {
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  animation: glitchBottom 0.2s infinite linear alternate-reverse;
+}
+
+/* Evil AI Glitch Effect - Second appearance (100ms) */
+.evil-glitch-2 {
+  position: relative;
+  display: inline-block;
+  color: #ff0000;
+  text-shadow: 
+    2px 2px 0 #000,
+    -2px -2px 0 #000,
+    0 0 8px rgba(255, 0, 0, 0.8);
+  animation: shake 0.1s infinite, rgbSplit 0.1s infinite;
+}
+
+.evil-glitch-2::before,
+.evil-glitch-2::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  animation: glitchTop 0.1s infinite linear alternate-reverse;
+}
+
+.evil-glitch-2::after {
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  animation: glitchBottom 0.1s infinite linear alternate-reverse;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-1px, -1px) rotate(-0.5deg); }
+  50% { transform: translate(1px, 1px) rotate(0.5deg); }
+  75% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+}
+
+@keyframes rgbSplit {
+  0%, 100% { 
+    text-shadow: 
+      -2px 0 #ff0000,
+      2px 0 #00ff00,
+      0 0 8px rgba(255, 0, 0, 0.8);
+  }
+  50% { 
+    text-shadow: 
+      2px 0 #ff0000,
+      -2px 0 #00ff00,
+      0 0 8px rgba(255, 0, 0, 0.8);
+  }
+}
+
+@keyframes glitchTop {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(2px, -2px); }
+  50% { transform: translate(-2px, 2px); }
+  75% { transform: translate(2px, -2px); }
+  100% { transform: translate(-2px, 2px); }
+}
+
+@keyframes glitchBottom {
+  0% { transform: translate(-2px, 2px); }
+  25% { transform: translate(2px, -2px); }
+  50% { transform: translate(-2px, 2px); }
+  75% { transform: translate(2px, -2px); }
+  100% { transform: translate(-2px, 2px); }
+}
+
+/* Roster styles */
+.roster-list {
+  margin-bottom: 2rem;
+}
+
+.roster-item {
+  margin-bottom: 1.5rem;
+}
+
+.roster-name {
+  color: var(--menu-text);
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 1px var(--menu-text);
+}
+
+.roster-details {
+  list-style-type: none;
+  padding-left: 2rem;
+  margin: 0.5rem 0;
+}
+
+.roster-detail {
+  color: var(--foreground);
+  font-size: 1.6rem;
+  opacity: 0.9;
+  margin-bottom: 0.3rem;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.roster-detail::before {
+  content: "-";
+  position: absolute;
+  left: -1rem;
+  color: var(--separator);
+}
+
+/* Life Support and Components styles */
+.life-support-grid,
+.ship-components-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.support-section,
+.component-section,
+.terminal-section {
+  border: 1px solid var(--menu-text);
+  padding: 1.5rem;
+  background-color: rgba(0, 26, 14, 0.7);
+  position: relative;
+  z-index: 5;
+}
+
+.section-title,
+.component-title,
+.terminal-title {
+  color: var(--menu-text);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 2px var(--menu-text);
+}
+
+.gas-levels,
+.env-controls {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+}
+
+.gas-item,
+.env-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+}
+
+.gas-name,
+.env-name {
+  color: var(--foreground);
+  text-shadow: 0 0 1px var(--foreground);
+}
+
+.gas-value,
+.env-value,
+.component-value {
+  color: var(--highlight-bg);
+  text-shadow: 0 0 2px var(--highlight-bg);
+}
+
+.component-value {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Terminal styles */
+.terminal-section {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.terminal-output {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  height: 200px;
+  overflow-y: auto;
+  font-family: "Glass TTY VT220", "VT323", monospace;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--foreground);
+  text-shadow: 0 0 1px var(--foreground);
+  scroll-behavior: smooth;
+  transition: scrollTop 0.5s ease-out;
+}
+
+.terminal-input-container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1rem;
+}
+
+.terminal-prompt {
+  color: var(--highlight-bg);
+  margin-right: 0.5rem;
+  font-size: 1.4rem;
+  text-shadow: 0 0 1px var(--highlight-bg);
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  color: var(--foreground);
+  font-family: "Glass TTY VT220", "VT323", monospace;
+  font-size: 1.4rem;
+  width: 100%;
+  outline: none;
+  text-shadow: 0 0 1px var(--foreground);
+}
+
+/* Ensure proper z-index for all elements */
+.main-menu:has(.life-support-grid),
+.main-menu:has(.ship-components-grid) {
+  position: relative;
+  z-index: 5;
+}
+
+.main-menu:has(.life-support-grid) *,
+.main-menu:has(.ship-components-grid) * {
+  position: relative;
+  z-index: 5;
+  opacity: 1 !important;
+}
+
+/* Ensure text is fully visible */
+.main-menu:has(.life-support-grid) .menu-title,
+.main-menu:has(.ship-components-grid) .menu-title,
+.main-menu:has(.life-support-grid) .separator,
+.main-menu:has(.ship-components-grid) .separator,
+.main-menu:has(.life-support-grid) .section-title,
+.main-menu:has(.ship-components-grid) .component-title,
+.main-menu:has(.life-support-grid) .terminal-title,
+.main-menu:has(.life-support-grid) .gas-name,
+.main-menu:has(.life-support-grid) .gas-value,
+.main-menu:has(.life-support-grid) .env-name,
+.main-menu:has(.life-support-grid) .env-value,
+.main-menu:has(.ship-components-grid) .component-value {
+  opacity: 1 !important;
+  text-shadow: 0 0 2px currentColor;
+}
+
+/* Terminal trigger styles */
+.terminal-trigger {
+  color: var(--menu-text);
+  font-size: 1.4rem;
+  text-align: center;
+  margin-top: 2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  text-transform: uppercase;
+  text-shadow: 0 0 1px var(--menu-text);
+}
+
+.terminal-trigger:hover {
+  opacity: 1;
+}
+
+/* Evil AI Permanent Glitch Effect for corrupted characters */
+.evil-glitch-permanent {
+  position: relative;
+  display: inline-block;
+  color: #ff0000;
+  text-shadow: 
+    1px 1px 0 #000,
+    -1px -1px 0 #000,
+    0 0 4px rgba(255, 0, 0, 0.8);
+  animation: permanentShake 2s infinite, permanentRgbSplit 3s infinite;
+}
+
+.evil-glitch-permanent::before,
+.evil-glitch-permanent::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  animation: permanentGlitchTop 4s infinite linear alternate-reverse;
+}
+
+.evil-glitch-permanent::after {
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  animation: permanentGlitchBottom 4s infinite linear alternate-reverse;
+}
+
+@keyframes permanentShake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-0.5px, -0.5px) rotate(-0.25deg); }
+  50% { transform: translate(0.5px, 0.5px) rotate(0.25deg); }
+  75% { transform: translate(-0.5px, 0.5px) rotate(-0.25deg); }
+}
+
+@keyframes permanentRgbSplit {
+  0%, 100% { 
+    text-shadow: 
+      -1px 0 #ff0000,
+      1px 0 #00ff00,
+      0 0 4px rgba(255, 0, 0, 0.8);
+  }
+  50% { 
+    text-shadow: 
+      1px 0 #ff0000,
+      -1px 0 #00ff00,
+      0 0 4px rgba(255, 0, 0, 0.8);
+  }
+}
+
+@keyframes permanentGlitchTop {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(1px, -1px); }
+  50% { transform: translate(-1px, 1px); }
+  75% { transform: translate(1px, -1px); }
+  100% { transform: translate(-1px, 1px); }
+}
+
+@keyframes permanentGlitchBottom {
+  0% { transform: translate(-1px, 1px); }
+  25% { transform: translate(1px, -1px); }
+  50% { transform: translate(-1px, 1px); }
+  75% { transform: translate(1px, -1px); }
+  100% { transform: translate(-1px, 1px); }
 }

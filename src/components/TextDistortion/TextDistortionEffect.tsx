@@ -53,10 +53,21 @@ export default function TextDistortionEffect({ enabled = true }: TextDistortionE
         actualNewText = newText.toLowerCase();
       }
       
-      // Create the new content with the replacement
+      // Create a span for the replacement text with evil glitch effect
       const beforeText = content.substring(0, startIndex);
       const afterText = content.substring(startIndex + oldText.length);
-      element.textContent = beforeText + actualNewText + afterText;
+      const glitchSpan = document.createElement('span');
+      glitchSpan.textContent = actualNewText;
+      // Use data-replacing-count to determine which glitch effect to apply
+      const replacingCount = element.getAttribute('data-replacing-count') || '1';
+      glitchSpan.className = `evil-glitch-${replacingCount}`;
+      glitchSpan.setAttribute('data-text', actualNewText);
+      
+      // Clear and rebuild the element's content
+      element.textContent = '';
+      if (beforeText) element.appendChild(document.createTextNode(beforeText));
+      element.appendChild(glitchSpan);
+      if (afterText) element.appendChild(document.createTextNode(afterText));
     };
     
     const applyDistortion = () => {
@@ -94,26 +105,37 @@ export default function TextDistortionEffect({ enabled = true }: TextDistortionE
         if (distance < distortionRange) {
           if (!element.hasAttribute('data-replacing')) {
             element.setAttribute('data-replacing', 'true');
+            element.setAttribute('data-replacing-count', '1');
             
-            // First change to ASHLI
-            replaceTextPreservingCase(element, 'ADMIN', 'ASHLI');
-            
-            // Sequence of changes with delays (400ms each)
+            // First change to ASHLI with minimal delay
             setTimeout(() => {
-              // Back to ADMIN
-              replaceTextPreservingCase(element, 'ASHLI', 'ADMIN');
+              replaceTextPreservingCase(element, 'ADMIN', 'ASHLI');
               
-              // Wait a bit, then change to ASHLI again
+              // Sequence of changes with shorter delays
               setTimeout(() => {
-                replaceTextPreservingCase(element, 'ADMIN', 'ASHLI');
+                // Back to ADMIN
+                const currentText = element.textContent;
+                if (currentText) {
+                  element.textContent = currentText.replace('ASHLI', 'ADMIN');
+                }
                 
-                // Final change back to ADMIN
+                // Wait longer before the second ASHLI
                 setTimeout(() => {
-                  replaceTextPreservingCase(element, 'ASHLI', 'ADMIN');
-                  element.removeAttribute('data-replacing');
-                }, 400);
-              }, 400);
-            }, 400);
+                  element.setAttribute('data-replacing-count', '2');
+                  replaceTextPreservingCase(element, 'ADMIN', 'ASHLI');
+                  
+                  // Final change back to ADMIN
+                  setTimeout(() => {
+                    const finalText = element.textContent;
+                    if (finalText) {
+                      element.textContent = finalText.replace('ASHLI', 'ADMIN');
+                    }
+                    element.removeAttribute('data-replacing');
+                    element.removeAttribute('data-replacing-count');
+                  }, 100); // Second ASHLI duration: 100ms
+                }, 850);
+              }, 200); // First ASHLI duration: 200ms
+            }, 10);
           }
         }
       });
@@ -134,7 +156,10 @@ export default function TextDistortionEffect({ enabled = true }: TextDistortionE
       
       // Restore any remaining replacements
       document.querySelectorAll('[data-replacing]').forEach(element => {
-        replaceTextPreservingCase(element, 'ASHLI', 'ADMIN');
+        const cleanupText = element.textContent;
+        if (cleanupText) {
+          element.textContent = cleanupText.replace('ASHLI', 'ADMIN');
+        }
         element.removeAttribute('data-replacing');
       });
     };

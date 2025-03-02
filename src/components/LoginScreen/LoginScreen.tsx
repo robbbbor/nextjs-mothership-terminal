@@ -4,8 +4,34 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import LoginDialog from '../LoginDialog/LoginDialog';
 import LoadingDialog from '../LoadingDialog/LoadingDialog';
+import TerminalInterface from '../Terminal/TerminalInterface';
+import InfectedText from '../InfectedText/InfectedText';
 
 type DialogType = 'crew' | 'admin' | 'loading' | null;
+
+interface CrewLogin {
+  name: string;
+  infectedName: string;
+}
+
+const crewLogins: CrewLogin[] = [
+  {
+    name: "ANDY THE AUTOMATON",
+    infectedName: "ANNIHILATE ASSAULT"
+  },
+  {
+    name: "HUGO OCTAVIUS PHILLIPS",
+    infectedName: "HURT&OPPRESS. PUNISH!"
+  },
+  {
+    name: "KAI ROE",
+    infectedName: "KILLALL"
+  },
+  {
+    name: "V3235",
+    infectedName: "VILE!"
+  }
+];
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -79,13 +105,28 @@ export default function LoginScreen() {
       <h1 className="menu-title">Terminal Login</h1>
       <div className="separator">========</div>
       <nav>
+        {crewLogins.map((login, index) => (
+          <a
+            key={index}
+            href="/main"
+            className="menu-item"
+            onMouseEnter={playSound}
+            onClick={handleCrewClick}
+          >
+            LOGIN AS <InfectedText 
+              originalText={login.name}
+              infectedText={login.infectedName}
+            />
+          </a>
+        ))}
+        <div className="separator dashed-separator">- - - - - - - -</div>
         <a
           href="/main"
           className="menu-item"
           onMouseEnter={playSound}
           onClick={handleCrewClick}
         >
-          LOGIN AS CREW
+          LOGIN AS GUEST
         </a>
         <a
           href="/admin"
@@ -93,7 +134,7 @@ export default function LoginScreen() {
           onMouseEnter={playSound}
           onClick={handleAdminClick}
         >
-          LOGIN AS ADMIN
+          LOGIN AS <InfectedText originalText="ADMIN" infectedText="ASHLI" />
         </a>
       </nav>
       {showDialog === 'admin' && (
@@ -111,6 +152,8 @@ export default function LoginScreen() {
           }}
         />
       )}
+
+      <TerminalInterface />
     </div>
   );
 } 

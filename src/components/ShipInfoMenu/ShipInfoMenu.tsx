@@ -2,23 +2,20 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import TerminalInterface from '../Terminal/TerminalInterface';
 
-interface MainMenuItem {
+interface ShipInfoMenuItem {
   label: string;
   href: string;
 }
 
-const menuItems: MainMenuItem[] = [
-  { label: 'COMMS', href: '/comms' },
-  { label: 'FILES', href: '/files' },
-  { label: 'ROSTER', href: '/roster' },
-  { label: 'SHIP INFO', href: '/ship-info' },
-  { label: 'SUBNET', href: '/subnet' },
+const menuItems: ShipInfoMenuItem[] = [
+  { label: 'LIFE SUPPORT', href: '/ship-info/life-support' },
+  { label: 'COMPONENTS', href: '/ship-info/components' },
+  { label: 'SCHEMATIC', href: '/ship-info/schematic' },
 ];
 
-export default function MainMenu() {
+export default function ShipInfoMenu() {
   const router = useRouter();
 
   const playSound = () => {
@@ -27,21 +24,13 @@ export default function MainMenu() {
     audio.play().catch(error => console.error('Audio play failed:', error));
   };
 
-  const handleLogout = (e: React.MouseEvent) => {
-    e.preventDefault();
-    playSound();
-    setTimeout(() => {
-      router.push('/');
-    }, 100);
-  };
-
   return (
     <div className="main-menu">
-      <h1 className="menu-title">Main Menu</h1>
+      <h1 className="menu-title">Ship Info</h1>
       <div className="separator">========</div>
       <nav>
         {menuItems.map((item, index) => (
-          <Link
+          <a
             key={index}
             href={item.href}
             className="menu-item"
@@ -55,17 +44,22 @@ export default function MainMenu() {
             }}
           >
             {item.label}
-          </Link>
+          </a>
         ))}
-        <div className="separator logout-separator">========</div>
-        <Link
-          href="/"
-          className="menu-item logout-button"
+        <a
+          href="/main"
+          className="menu-item back-button"
           onMouseEnter={playSound}
-          onClick={handleLogout}
+          onClick={(e) => {
+            playSound();
+            e.preventDefault();
+            setTimeout(() => {
+              router.push('/main');
+            }, 100);
+          }}
         >
-          LOG OUT
-        </Link>
+          BACK TO MAIN MENU
+        </a>
       </nav>
 
       <TerminalInterface />
