@@ -1,24 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Mothership Terminal
+
+This project is inspired by and based on [PHOSPHOR](https://redhg.com/ypsilon14/) by [redhg](https://redhg.com), a retro terminal simulator for tabletop role-playing games. The original project was created for [The Haunting of Ypsilon 14](https://www.mothershiprpg.com/pamphlet-adventures/#The_Haunting_Of_Ypsilon_14), a module written by D G Chapman for [the Mothership tabletop roleplaying game](https://www.mothershiprpg.com/).
+
+Special thanks to:
+- [redhg](https://redhg.com) for the original PHOSPHOR terminal project
+- [Quadra's post](https://www.traaa.sh/the-ypsilon-14-terminal) which inspired the original project
+- D G Chapman for The Haunting of Ypsilon 14 module
+- [Mothership RPG](https://www.mothershiprpg.com/) team
+
+This is a modernized version built with [Next.js](https://nextjs.org) and bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/nextjs-mothership-terminal.git
+cd nextjs-mothership-terminal
+```
 
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the terminal interface.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The terminal includes:
+- Retro CRT screen effect
+- Scan line animation
+- Text distortion effects
+- Interactive terminal interface
+- Support for custom commands and responses
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+You can customize the terminal by modifying the configuration files in the `src/config` directory.
 
 ## Learn More
 

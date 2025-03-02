@@ -1,10 +1,9 @@
-import Terminal from '@/components/Terminal/Terminal';
-import terminalData from '@/data/myspacegame.json';
+import LoginScreen from '@/components/LoginScreen/LoginScreen';
 
 export default function Home() {
   return (
     <main>
-      <Terminal data={terminalData} />
+      <LoginScreen />
     </main>
   );
 }

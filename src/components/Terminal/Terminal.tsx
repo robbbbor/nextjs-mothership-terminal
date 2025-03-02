@@ -1,11 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { TerminalData, Screen, Dialog } from '@/types/terminal';
+import React, { useState } from 'react';
 import styles from './Terminal.module.css';
 
+interface Dialog {
+  id: string;
+  type: string;
+  content: string[];
+}
+
 interface TerminalProps {
-    data: TerminalData;
+  data: {
+    screens: {
+      id: string;
+      content: (string | { type: string; text?: string; target?: string | { target: string; type: string }[] })[];
+    }[];
+    dialogs: Dialog[];
+  };
 }
 
 export default function Terminal({ data }: TerminalProps) {

@@ -1,3 +1,5 @@
+/* Add VT323 font */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -6,21 +8,325 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #001a0e;
+  --foreground: #afd7d7;
+  --menu-text: #afd7d7;
+  --separator: #afd7d7;
+  --text-glow: 0 0 1px rgba(175, 215, 215, 0.3);
+  --highlight-bg: #c5e5e5;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes scanline {
+  0% {
+    transform: translateY(100vh);
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0.1;
   }
 }
 
 body {
   margin: 0;
   padding: 0;
-  background: #000;
-  color: #00ff00;
-  font-family: monospace;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Glass TTY VT220", "VT323", monospace;
+  font-size: 1.8rem;
+  line-height: 1.4;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.35) 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.04),
+      rgba(0, 0, 255, 0.06)
+    );
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 26, 14, 0.8) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+main {
+  padding: 2rem;
+  position: relative;
+  z-index: 3;
+}
+
+.menu-title {
+  color: var(--menu-text);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  text-shadow: 0 0 1px var(--menu-text);
+}
+
+.separator {
+  color: var(--separator);
+  margin: 0.5rem 0 1.5rem 0;
+  opacity: 0.9;
+  font-size: 2rem;
+  position: relative;
+  text-shadow: 0 0 1px var(--menu-text);
+}
+
+.menu-item {
+  color: var(--menu-text);
+  display: block;
+  padding: 0.4rem 0.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  position: relative;
+  font-size: 2rem;
+  transition: all 0.1s ease;
+  width: 100%;
+  opacity: 0.9;
+  text-shadow: 0 0 1px var(--menu-text);
+}
+
+.menu-item::before {
+  content: ">";
+  display: inline-block;
+  margin-right: 1rem;
+  opacity: 0.9;
+  font-size: 2rem;
+}
+
+.menu-item:hover {
+  color: var(--background);
+  background-color: var(--highlight-bg);
+  text-shadow: none;
+  opacity: 1;
+}
+
+.menu-item:hover::before {
+  color: var(--background);
+  text-shadow: none;
+  opacity: 1;
+}
+
+/* Add slight blur to simulate phosphor decay */
+* {
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  font-smooth: never;
+}
+
+.back-button {
+  margin-top: 2rem;
+  border-top: 1px solid rgba(175, 215, 215, 0.2);
+  padding-top: 1rem !important;
+}
+
+/* Remove the individual ::after elements and add a global scanline effect */
+main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(175, 215, 215, 0.03) 3px,
+    rgba(175, 215, 215, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 4;
+}
+
+.login-form {
+  margin-top: 2rem;
+}
+
+.login-field {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 2rem;
+}
+
+.login-field .label {
+  color: var(--menu-text);
+  opacity: 0.9;
+}
+
+.login-field .value {
+  color: var(--highlight-bg);
+  text-shadow: 0 0 2px var(--highlight-bg);
+}
+
+.login-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 26, 14, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dialog-content {
+  background: var(--background);
+  padding: 2rem;
+  border: 1px solid var(--menu-text);
+  min-width: 400px;
+}
+
+.dialog-title {
+  color: var(--menu-text);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.input-field {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 2rem;
+}
+
+.input-field label {
+  color: var(--menu-text);
+  opacity: 0.9;
+}
+
+.input-field input {
+  background: transparent;
+  border: none;
+  color: var(--highlight-bg);
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.2rem;
+  text-transform: uppercase;
+  text-shadow: 0 0 2px var(--highlight-bg);
+  outline: none;
+  width: 200px;
+}
+
+.error-message {
+  color: #ff4444;
+  text-align: center;
+  font-size: 2rem;
+  margin: 1rem 0;
+  text-shadow: 0 0 2px #ff4444;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.dialog-actions .menu-item {
+  width: auto;
+  padding: 0.4rem 2rem;
+}
+
+.logout-separator {
+  margin-top: 2rem;
+  opacity: 0.6;
+}
+
+.logout-button {
+  color: #ff8c00 !important;
+  text-shadow: 0 0 2px #ff8c00 !important;
+}
+
+.logout-button:hover {
+  color: var(--background) !important;
+  background-color: #ff8c00 !important;
+  text-shadow: none !important;
+}
+
+.logout-button:hover::before {
+  color: var(--background) !important;
+}
+
+.loading-content {
+  text-align: center;
+}
+
+.loading-message {
+  color: var(--highlight-bg);
+  font-size: 2rem;
+  margin: 2rem 0;
+  text-shadow: 0 0 2px var(--highlight-bg);
+}
+
+.success-message {
+  color: #44ff44;
+  text-align: center;
+  font-size: 2rem;
+  margin: 1rem 0;
+  text-shadow: 0 0 2px #44ff44;
+}
+
+.scan-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(175, 215, 215, 0.4),
+    rgba(175, 215, 215, 0.7),
+    rgba(175, 215, 215, 0.4),
+    transparent
+  );
+  animation: scanline 15s linear infinite;
+  pointer-events: none;
+  z-index: 5;
+  mix-blend-mode: screen;
 }
