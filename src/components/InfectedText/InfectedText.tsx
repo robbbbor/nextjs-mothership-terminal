@@ -57,7 +57,7 @@ export default function InfectedText({ originalText, infectedText, className = '
     });
 
     return () => cancelAnimationFrame(animationFrame);
-  }, [isInfected, originalText]);
+  }, [isInfected, originalText, isNearScanLine]);
 
   // Handle glitch effect when scan line is near
   useEffect(() => {
@@ -80,9 +80,7 @@ export default function InfectedText({ originalText, infectedText, className = '
       
       // Phase 1: Initial glitch (200ms)
       glitchInterval = setInterval(() => {
-        setDisplayText(prev => 
-          Math.random() > 0.5 ? originalText : infectedText
-        );
+        setDisplayText(Math.random() > 0.5 ? originalText : infectedText);
       }, 100);
 
       // Phase 2: Rapid glitch (100ms)
@@ -90,9 +88,7 @@ export default function InfectedText({ originalText, infectedText, className = '
         setGlitchPhase(2);
         clearInterval(glitchInterval);
         glitchInterval = setInterval(() => {
-          setDisplayText(prev => 
-            Math.random() > 0.3 ? infectedText : originalText
-          );
+          setDisplayText(Math.random() > 0.3 ? infectedText : originalText);
         }, 50);
 
         // Final phase: Return to mixed text with one more character corrupted

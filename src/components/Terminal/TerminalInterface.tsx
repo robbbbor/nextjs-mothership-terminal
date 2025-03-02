@@ -100,38 +100,27 @@ export default function TerminalInterface() {
   };
 
   return (
-    <>
+    <div className="terminal-section">
+      <div className="terminal-title">TERMINAL {'>'}</div>
       <div 
-        className="terminal-trigger"
-        onClick={toggleTerminal}
+        ref={terminalOutputRef}
+        className="terminal-output"
       >
-        TERMINAL INTERFACE
+        {terminalOutput.map((line, index) => (
+          <div key={index} className="terminal-line">{line}</div>
+        ))}
       </div>
-      
-      {isOpen && (
-        <div className="terminal-section">
-          <h2 className="terminal-title">Terminal Interface</h2>
-          <div 
-            ref={terminalOutputRef}
-            className="terminal-output"
-          >
-            {terminalOutput.map((line, index) => (
-              <div key={index} className="terminal-line">{line}</div>
-            ))}
-          </div>
-          <div className="terminal-input-container">
-            <span className="terminal-prompt">></span>
-            <input
-              type="text"
-              className="terminal-input"
-              value={terminalInput}
-              onChange={(e) => setTerminalInput(e.target.value)}
-              onKeyDown={handleTerminalInput}
-              autoFocus
-            />
-          </div>
-        </div>
-      )}
-    </>
+      <div className="terminal-input-container">
+        <span className="terminal-prompt">></span>
+        <input
+          type="text"
+          className="terminal-input"
+          value={terminalInput}
+          onChange={(e) => setTerminalInput(e.target.value)}
+          onKeyDown={handleTerminalInput}
+          autoFocus
+        />
+      </div>
+    </div>
   );
 } 

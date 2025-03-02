@@ -55,6 +55,12 @@ export default function LifeSupportPage() {
     return () => clearInterval(interval);
   }, [otherGasesLevel]);
 
+  const handleSystemClick = () => {
+    if (selectedSystem) {
+      setSelectedSystem(null);
+    }
+  };
+
   return (
     <div className="main-menu">
       <h1 className="menu-title">Life Support Systems</h1>
