@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import TerminalInterface from '../Terminal/TerminalInterface';
+import GlitchText from '../GlitchText/GlitchText';
 
 export default function LifeSupportPage() {
   const [oxygenLevel, setOxygenLevel] = useState(78);
@@ -57,42 +58,42 @@ export default function LifeSupportPage() {
 
   return (
     <div className="main-menu">
-      <h1 className="menu-title">Life Support Systems</h1>
+      <h1 className="menu-title"><GlitchText>Life Support Systems</GlitchText></h1>
       <div className="separator">========</div>
       
       <div className="life-support-grid">
         <div className="support-section">
-          <h2 className="section-title">Atmospheric Composition</h2>
+          <h2 className="section-title"><GlitchText>Atmospheric Composition</GlitchText></h2>
           <div className="gas-levels">
             <div className="gas-item">
-              <span className="gas-name">Oxygen:</span>
-              <span className="gas-value">{oxygenLevel}%</span>
+              <span className="gas-name"><GlitchText>Oxygen:</GlitchText></span>
+              <span className="gas-value"><GlitchText>{oxygenLevel}%</GlitchText></span>
             </div>
             <div className="gas-item">
-              <span className="gas-name">Nitrogen:</span>
-              <span className="gas-value">{nitrogenLevel}%</span>
+              <span className="gas-name"><GlitchText>Nitrogen:</GlitchText></span>
+              <span className="gas-value"><GlitchText>{nitrogenLevel}%</GlitchText></span>
             </div>
             <div className="gas-item">
-              <span className="gas-name">Other Gases:</span>
-              <span className="gas-value">{otherGasesLevel}%</span>
+              <span className="gas-name"><GlitchText>Other Gases:</GlitchText></span>
+              <span className="gas-value"><GlitchText>{otherGasesLevel}%</GlitchText></span>
             </div>
           </div>
         </div>
         
         <div className="support-section">
-          <h2 className="section-title">Environmental Controls</h2>
+          <h2 className="section-title"><GlitchText>Environmental Controls</GlitchText></h2>
           <div className="env-controls">
             <div className="env-item">
-              <span className="env-name">Gravity:</span>
-              <span className="env-value">{gravity} G</span>
+              <span className="env-name"><GlitchText>Gravity:</GlitchText></span>
+              <span className="env-value"><GlitchText>{gravity} G</GlitchText></span>
             </div>
             <div className="env-item">
-              <span className="env-name">Pressure:</span>
-              <span className="env-value">{pressure} kPa</span>
+              <span className="env-name"><GlitchText>Pressure:</GlitchText></span>
+              <span className="env-value"><GlitchText>{pressure} kPa</GlitchText></span>
             </div>
             <div className="env-item">
-              <span className="env-name">Temperature:</span>
-              <span className="env-value">{temperature}°C</span>
+              <span className="env-name"><GlitchText>Temperature:</GlitchText></span>
+              <span className="env-value"><GlitchText>{temperature}°C</GlitchText></span>
             </div>
           </div>
         </div>
@@ -104,7 +105,7 @@ export default function LifeSupportPage() {
         onMouseEnter={playSound}
         onClick={playSound}
       >
-        BACK TO SHIP INFO
+        <GlitchText>BACK TO SHIP INFO</GlitchText>
       </Link>
 
       <TerminalInterface />

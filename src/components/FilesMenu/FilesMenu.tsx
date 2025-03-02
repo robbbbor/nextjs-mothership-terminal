@@ -3,6 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import TerminalInterface from '../Terminal/TerminalInterface';
+import GlitchText from '../GlitchText/GlitchText';
 
 interface FilesMenuItem {
   label: string;
@@ -25,7 +26,7 @@ export default function FilesMenu() {
 
   return (
     <div className="main-menu">
-      <h1 className="menu-title">Files</h1>
+      <h1 className="menu-title"><GlitchText>Files</GlitchText></h1>
       <div className="separator">========</div>
       <nav>
         {menuItems.map((item, index) => (
@@ -42,7 +43,7 @@ export default function FilesMenu() {
               }, 100);
             }}
           >
-            {item.label}
+            <GlitchText>{item.label}</GlitchText>
           </a>
         ))}
         <a
@@ -57,7 +58,7 @@ export default function FilesMenu() {
             }, 100);
           }}
         >
-          BACK TO MAIN MENU
+          <GlitchText>BACK TO MAIN MENU</GlitchText>
         </a>
       </nav>
 

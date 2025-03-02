@@ -6,6 +6,7 @@ import LoginDialog from '../LoginDialog/LoginDialog';
 import LoadingDialog from '../LoadingDialog/LoadingDialog';
 import TerminalInterface from '../Terminal/TerminalInterface';
 import InfectedText from '../InfectedText/InfectedText';
+import { useGlitch } from '@/contexts/GlitchContext';
 
 type DialogType = 'crew' | 'admin' | 'loading' | null;
 
@@ -35,6 +36,7 @@ const crewLogins: CrewLogin[] = [
 
 export default function LoginScreen() {
   const router = useRouter();
+  const { startGlitch } = useGlitch();
   const [audio] = useState(() => typeof window !== 'undefined' ? new Audio('/sounds/click.mp3') : null);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [showDialog, setShowDialog] = useState<DialogType>(null);
@@ -79,12 +81,14 @@ export default function LoginScreen() {
   const handleCrewClick = (e: React.MouseEvent) => {
     e.preventDefault();
     playSound();
+    startGlitch();
     setShowDialog('loading');
   };
 
   const handleAdminClick = (e: React.MouseEvent) => {
     e.preventDefault();
     playSound();
+    startGlitch();
     setShowDialog('admin');
   };
 

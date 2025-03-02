@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import TerminalInterface from '../Terminal/TerminalInterface';
+import GlitchText from '../GlitchText/GlitchText';
 
 export default function ComponentsPage() {
   const playSound = () => {
@@ -13,23 +14,23 @@ export default function ComponentsPage() {
 
   return (
     <div className="main-menu">
-      <h1 className="menu-title">Ship Components</h1>
+      <h1 className="menu-title"><GlitchText>Ship Components</GlitchText></h1>
       <div className="separator">========</div>
       
       <div className="ship-components-grid">
         <div className="component-section">
-          <h2 className="component-title">Hull Integrity</h2>
-          <div className="component-value">92%</div>
+          <h2 className="component-title"><GlitchText>Hull Integrity</GlitchText></h2>
+          <div className="component-value"><GlitchText>92%</GlitchText></div>
         </div>
         
         <div className="component-section">
-          <h2 className="component-title">Jump Fuel</h2>
-          <div className="component-value">78%</div>
+          <h2 className="component-title"><GlitchText>Jump Fuel</GlitchText></h2>
+          <div className="component-value"><GlitchText>78%</GlitchText></div>
         </div>
         
         <div className="component-section">
-          <h2 className="component-title">System Fuel</h2>
-          <div className="component-value">65%</div>
+          <h2 className="component-title"><GlitchText>System Fuel</GlitchText></h2>
+          <div className="component-value"><GlitchText>65%</GlitchText></div>
         </div>
       </div>
       
@@ -39,7 +40,7 @@ export default function ComponentsPage() {
         onMouseEnter={playSound}
         onClick={playSound}
       >
-        BACK TO SHIP INFO
+        <GlitchText>BACK TO SHIP INFO</GlitchText>
       </Link>
 
       <TerminalInterface />
