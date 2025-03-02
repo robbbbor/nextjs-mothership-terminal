@@ -55,12 +55,6 @@ export default function LifeSupportPage() {
     return () => clearInterval(interval);
   }, [otherGasesLevel]);
 
-  const handleSystemClick = () => {
-    if (selectedSystem) {
-      setSelectedSystem(null);
-    }
-  };
-
   return (
     <div className="main-menu">
       <h1 className="menu-title">Life Support Systems</h1>
@@ -108,9 +102,7 @@ export default function LifeSupportPage() {
         href="/ship-info"
         className="menu-item back-button"
         onMouseEnter={playSound}
-        onClick={(e) => {
-          playSound();
-        }}
+        onClick={playSound}
       >
         BACK TO SHIP INFO
       </Link>

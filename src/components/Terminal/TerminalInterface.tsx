@@ -111,7 +111,7 @@ export default function TerminalInterface() {
         ))}
       </div>
       <div className="terminal-input-container">
-        <span className="terminal-prompt">></span>
+        <span className="terminal-prompt">{'>'}</span>
         <input
           type="text"
           className="terminal-input"

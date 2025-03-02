@@ -11,12 +11,6 @@ export default function ComponentsPage() {
     audio.play().catch(error => console.error('Audio play failed:', error));
   };
 
-  const handleComponentClick = () => {
-    if (selectedComponent) {
-      setSelectedComponent(null);
-    }
-  };
-
   return (
     <div className="main-menu">
       <h1 className="menu-title">Ship Components</h1>
@@ -43,9 +37,7 @@ export default function ComponentsPage() {
         href="/ship-info"
         className="menu-item back-button"
         onMouseEnter={playSound}
-        onClick={(e) => {
-          playSound();
-        }}
+        onClick={playSound}
       >
         BACK TO SHIP INFO
       </Link>
