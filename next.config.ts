@@ -1,10 +1,15 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: "export",
-  basePath: "/nextjs-mothership-terminal",
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  output: 'export',
+  basePath: process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal' : '',
   images: {
-    unoptimized: true, 
+    unoptimized: true,
   },
+  // Disable server-side features since we're exporting static files
+  trailingSlash: true,
+  // Ensure we can deploy to GitHub Pages
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal' : '',
 };
 
-module.exports = nextConfig;
+export default nextConfig;
