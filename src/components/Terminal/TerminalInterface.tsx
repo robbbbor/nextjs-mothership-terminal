@@ -5,7 +5,6 @@ import { useInfection } from '@/contexts/InfectionContext';
 
 export default function TerminalInterface() {
   const { isInfected, startInfection } = useInfection();
-  const [isOpen, setIsOpen] = useState(false);
   const [terminalInput, setTerminalInput] = useState('');
   const [terminalOutput, setTerminalOutput] = useState<string[]>([
     'MOTHERSHIP TERMINAL v1.0.3',
@@ -93,10 +92,6 @@ export default function TerminalInterface() {
       setTerminalOutput([...terminalOutput, `> ${terminalInput}`, ...response]);
       setTerminalInput('');
     }
-  };
-
-  const toggleTerminal = () => {
-    setIsOpen(!isOpen);
   };
 
   return (
