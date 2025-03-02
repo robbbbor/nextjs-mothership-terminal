@@ -13,7 +13,7 @@ export default function InfectedText({ originalText, infectedText, className = '
   const { isInfected } = useInfection();
   const [glitchPhase, setGlitchPhase] = useState(0);
   const [displayText, setDisplayText] = useState(originalText);
-  const [corruptedChars, setCorruptedChars] = useState(0);
+  const [corruptedPositions, setCorruptedPositions] = useState<Set<number>>(new Set());
   const elementRef = useRef<HTMLSpanElement>(null);
   const [isNearScanLine, setIsNearScanLine] = useState(false);
   const lastGlitchTime = useRef(0);
@@ -23,7 +23,7 @@ export default function InfectedText({ originalText, infectedText, className = '
     if (!isInfected) {
       setDisplayText(originalText);
       setGlitchPhase(0);
-      setCorruptedChars(0);
+      setCorruptedPositions(new Set());
       return;
     }
 
@@ -62,12 +62,12 @@ export default function InfectedText({ originalText, infectedText, className = '
   // Handle glitch effect when scan line is near
   useEffect(() => {
     if (!isInfected || !isNearScanLine) {
-      // When not glitching, show corrupted part from infected text and uncorrupted part from original
-      if (corruptedChars > 0) {
-        setDisplayText(infectedText.slice(0, corruptedChars) + originalText.slice(corruptedChars));
-      } else {
-        setDisplayText(originalText);
-      }
+      // When not glitching, show text with current corrupted positions
+      let newText = originalText.split('');
+      corruptedPositions.forEach(pos => {
+        newText[pos] = infectedText[pos];
+      });
+      setDisplayText(newText.join(''));
       setGlitchPhase(0);
       return;
     }
@@ -91,12 +91,47 @@ export default function InfectedText({ originalText, infectedText, className = '
           setDisplayText(Math.random() > 0.3 ? infectedText : originalText);
         }, 50);
 
-        // Final phase: Return to mixed text with one more character corrupted
+        // Final phase: Return to mixed text with two more characters corrupted
         setTimeout(() => {
           clearInterval(glitchInterval);
-          setCorruptedChars(prev => Math.min(prev + 1, originalText.length));
-          const newCorruptedCount = Math.min(corruptedChars + 1, originalText.length);
-          setDisplayText(infectedText.slice(0, newCorruptedCount) + originalText.slice(newCorruptedCount));
+          
+          // Find first uncorrupted position
+          let firstUncorruptedPos = 0;
+          while (corruptedPositions.has(firstUncorruptedPos) && firstUncorruptedPos < originalText.length) {
+            firstUncorruptedPos++;
+          }
+          
+          // Get all available uncorrupted positions (excluding the first uncorrupted position)
+          const availablePositions = [];
+          for (let i = 0; i < originalText.length; i++) {
+            if (i !== firstUncorruptedPos && !corruptedPositions.has(i)) {
+              availablePositions.push(i);
+            }
+          }
+          
+          // Create new corrupted positions set
+          const newCorruptedPositions = new Set(corruptedPositions);
+          
+          // Always corrupt the first uncorrupted position if available
+          if (firstUncorruptedPos < originalText.length) {
+            newCorruptedPositions.add(firstUncorruptedPos);
+          }
+          
+          // Corrupt a random position if available
+          if (availablePositions.length > 0) {
+            const randomIndex = Math.floor(Math.random() * availablePositions.length);
+            newCorruptedPositions.add(availablePositions[randomIndex]);
+          }
+          
+          // Update corrupted positions
+          setCorruptedPositions(newCorruptedPositions);
+          
+          // Create new display text
+          let newText = originalText.split('');
+          newCorruptedPositions.forEach(pos => {
+            newText[pos] = infectedText[pos];
+          });
+          setDisplayText(newText.join(''));
           setGlitchPhase(0);
         }, 100);
       }, 200);
@@ -108,11 +143,11 @@ export default function InfectedText({ originalText, infectedText, className = '
       clearInterval(glitchInterval);
       clearTimeout(phaseTimeout);
     };
-  }, [isInfected, isNearScanLine, originalText, infectedText, corruptedChars]);
+  }, [isInfected, isNearScanLine, originalText, infectedText, corruptedPositions]);
 
-  // Split text into corrupted and uncorrupted parts
+  // Split text into corrupted and uncorrupted parts for rendering
   const renderText = () => {
-    if (!isInfected || corruptedChars === 0) {
+    if (!isInfected || corruptedPositions.size === 0) {
       return <span>{displayText}</span>;
     }
 
@@ -121,16 +156,18 @@ export default function InfectedText({ originalText, infectedText, className = '
       return <span data-text={displayText}>{displayText}</span>;
     }
 
-    // Split display into corrupted and uncorrupted parts
-    const corruptedPart = displayText.slice(0, corruptedChars);
-    const uncorruptedPart = displayText.slice(corruptedChars);
-
+    // Create spans for each character with appropriate styling
     return (
       <>
-        <span className="evil-glitch-permanent" data-text={corruptedPart}>
-          {corruptedPart}
-        </span>
-        <span>{uncorruptedPart}</span>
+        {displayText.split('').map((char, index) => (
+          corruptedPositions.has(index) ? (
+            <span key={index} className="evil-glitch-permanent" data-text={char}>
+              {char}
+            </span>
+          ) : (
+            <span key={index}>{char}</span>
+          )
+        ))}
       </>
     );
   };

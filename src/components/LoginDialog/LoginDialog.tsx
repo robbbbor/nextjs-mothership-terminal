@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import InfectedText from '../InfectedText/InfectedText';
 
 interface LoginDialogProps {
   type: 'crew' | 'admin';
@@ -74,7 +75,13 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
   return (
     <div className="login-dialog">
       <div className="dialog-content">
-        <h2 className="dialog-title">{type.toUpperCase()} LOGIN</h2>
+        <h2 className="dialog-title">
+          {type === 'admin' ? (
+            <InfectedText originalText="ADMIN LOGIN" infectedText="ASHLI LOGIN" />
+          ) : (
+            `${type.toUpperCase()} LOGIN`
+          )}
+        </h2>
         <div className="separator">========</div>
         {message && (
           <div className={

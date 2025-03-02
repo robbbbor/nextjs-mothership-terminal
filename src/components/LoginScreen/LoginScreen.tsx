@@ -102,7 +102,7 @@ export default function LoginScreen() {
 
   return (
     <div className="main-menu">
-      <h1 className="menu-title">Terminal Login</h1>
+      <h1 className="menu-title">Spacedix Login</h1>
       <div className="separator">========</div>
       <nav>
         {crewLogins.map((login, index) => (
@@ -126,7 +126,7 @@ export default function LoginScreen() {
           onMouseEnter={playSound}
           onClick={handleCrewClick}
         >
-          LOGIN AS GUEST
+          LOGIN AS <InfectedText originalText="GUEST           " infectedText="GUESS WHO? :D" />
         </a>
         <a
           href="/admin"

@@ -16,36 +16,44 @@ const crewMembers: CrewMember[] = [
     name: "ANDY THE AUTOMATON",
     infectedName: "ANNIHILATE ASSAULT",
     details: [
-      "ROLE: SHIP'S ENGINEER",
-      "STATUS: OPERATIONAL",
-      "NOTES: ARTIFICIAL INTELLIGENCE, MAINTENANCE SPECIALIST"
+      "PILOT",
+      "MECHANIC",
+      "MAY BE OBSOLETE SOON",
+      "ANDROID",
+      "ANOMALY: SMOKES CIGARETTES AND TAKES PILLS DESPITE BEING AN AUTOMATON"
     ]
   },
   {
     name: "HUGO OCTAVIUS PHILLIPS",
     infectedName: "HURT&OPPRESS. PUNISH!",
     details: [
-      "ROLE: CAPTAIN",
-      "STATUS: ACTIVE",
-      "NOTES: VETERAN SPACER, FORMER MILITARY"
+      "FORMER CAPTAIN OF INFINITE PROFITS",
+      "MILITARY TRAINING",
+      "PET DOG",
+      "HUMAN",
+      "ANOMALY: MYSTICISM. NO ELABORATION REQUIRED"
     ]
   },
   {
     name: "KAI ROE",
     infectedName: "KILLALL",
     details: [
-      "ROLE: PILOT",
-      "STATUS: ACTIVE",
-      "NOTES: EXPERT NAVIGATOR, RACING BACKGROUND"
+      "MEDIC",
+      "HAND-TO-HAND SPECIALIST",
+      "DETACHABLE PENIS",
+      "HUMAN CYBORG",
+      "ANOMALY: CRACKS BACKS AND CRACKS SKULLS"
     ]
   },
   {
     name: "V3235",
     infectedName: "VILE!",
     details: [
-      "ROLE: SECURITY",
-      "STATUS: ACTIVE",
-      "NOTES: COMBAT ANDROID, ADVANCED TACTICAL SYSTEMS"
+      "SCIENTIST",
+      "PET LAB RAT",
+      "GENDER-SHIFTING CAPABILITIES",
+      "ANDROID",
+      "ANOMALY: ONLY ACTIVATES NON-GENDERED CONFIGURATION"
     ]
   }
 ];

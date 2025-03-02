@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import TerminalInterface from '../Terminal/TerminalInterface';
+import GlitchText from '../GlitchText/GlitchText';
 
 interface MainMenuItem {
   label: string;
@@ -37,7 +38,7 @@ export default function MainMenu() {
 
   return (
     <div className="main-menu">
-      <h1 className="menu-title">Main Menu</h1>
+      <h1 className="menu-title"><GlitchText>Main Menu</GlitchText></h1>
       <div className="separator">========</div>
       <nav>
         {menuItems.map((item, index) => (
@@ -54,7 +55,7 @@ export default function MainMenu() {
               }, 100);
             }}
           >
-            {item.label}
+            <GlitchText>{item.label}</GlitchText>
           </Link>
         ))}
         <div className="separator logout-separator">========</div>
@@ -64,7 +65,7 @@ export default function MainMenu() {
           onMouseEnter={playSound}
           onClick={handleLogout}
         >
-          LOG OUT
+          <GlitchText>LOG OUT</GlitchText>
         </Link>
       </nav>
 

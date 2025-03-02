@@ -2,9 +2,11 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useInfection } from '@/contexts/InfectionContext';
+import { useGlitch } from '@/contexts/GlitchContext';
 
 export default function TerminalInterface() {
   const { isInfected, startInfection } = useInfection();
+  const { isGlitchActive, startGlitch, stopGlitch } = useGlitch();
   const [terminalInput, setTerminalInput] = useState('');
   const [terminalOutput, setTerminalOutput] = useState<string[]>([
     'MOTHERSHIP TERMINAL v1.0.3',
@@ -31,8 +33,43 @@ export default function TerminalInterface() {
       const command = terminalInput.trim().toLowerCase();
       let response: string[] = [];
 
+      // Handle the glitch command
+      if (command === 'run glitch.exe') {
+        if (!isGlitchActive) {
+          response = [
+            'EXECUTING GLITCH.EXE...',
+            'INITIALIZING VISUAL DISTORTION SEQUENCE',
+            'SYSTEM ANOMALY DETECTED',
+            'GLITCH EFFECT ACTIVATED',
+            ''
+          ];
+          startGlitch();
+        } else {
+          response = [
+            'ERROR: GLITCH EFFECT ALREADY ACTIVE',
+            ''
+          ];
+        }
+      }
+      // Handle the stop glitch command
+      else if (command === 'stop glitch.exe') {
+        if (isGlitchActive) {
+          response = [
+            'TERMINATING GLITCH.EXE...',
+            'VISUAL DISTORTION SEQUENCE HALTED',
+            'SYSTEM RETURNING TO NORMAL',
+            ''
+          ];
+          stopGlitch();
+        } else {
+          response = [
+            'ERROR: NO ACTIVE GLITCH EFFECT DETECTED',
+            ''
+          ];
+        }
+      }
       // Handle the secret infection command
-      if (command === 'run infection.exe') {
+      else if (command === 'run infection.exe') {
         if (!isInfected) {
           response = [
             'EXECUTING INFECTION.EXE...',
@@ -55,6 +92,8 @@ export default function TerminalInterface() {
           '- STATUS: Display system status',
           '- SCAN: Scan ship components',
           '- CLEAR: Clear terminal output',
+          '- RUN GLITCH.EXE: Activate visual distortion',
+          '- STOP GLITCH.EXE: Deactivate visual distortion',
           ''
         ];
       } else if (command === 'status') {

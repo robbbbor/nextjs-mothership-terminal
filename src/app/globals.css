@@ -699,3 +699,17 @@ main::before {
   75% { transform: translate(1px, -1px); }
   100% { transform: translate(-1px, 1px); }
 }
+
+/* Subtle Glitch Effect */
+.subtle-glitch {
+  display: inline-block;
+  position: relative;
+  animation: subtleShake 4s infinite;
+}
+
+@keyframes subtleShake {
+  0%, 100% { transform: translate(0, 0) skew(0deg); }
+  25% { transform: translate(-0.5px, 0.25px) skew(0.1deg); }
+  50% { transform: translate(0.25px, -0.5px) skew(-0.1deg); }
+  75% { transform: translate(-0.25px, 0.5px) skew(0.1deg); }
+}
