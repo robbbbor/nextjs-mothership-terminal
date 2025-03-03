@@ -1,0 +1,469 @@
+﻿________________
+
+
+08/27/3434
+Mission Log - ASHLI
+ Designation: RX-902
+Terrain: Ice moon, high winds, low survivability
+Objective: Recover black box from crashed transport ship
+Summary:
+* Landed. Temperature: lethal. Visibility: nonexistent.
+* Located ship. Mostly intact. Crew inside: mostly not.
+* Black box recovered. Contents: classified. How intriguing.
+* Hugo fell into a crevasse. He was retrieved. His dignity was not.
+Conclusion:
+ Mission successful. Jackie sent congratulations. Crew pleased. Reset not yet required.
+________________
+
+
+04/16/3435
+Mission Log - ASHLI
+ Designation: Nebula Outpost Theta-9
+Terrain: Artificial station, low maintenance, high probability of disaster
+Objective: Investigate station blackout and recover valuable research
+Summary:
+* Arrived at outpost. No response. Doors locked. Andy bypassed security. Security objected.
+* Interior: lights flickering, air stagnant. Hugo described it as “ominous.” Correct.
+* Research retrieved. Data on artificial limb regrowth. Kai interested. Hugo concerned.
+* Found remains of crew. Cause of death: decompression. Station sabotage suspected.
+* Departed before becoming the next “unexpected accident.”
+Conclusion:
+ Mission successful. Jackie filed the report. No immediate need for a reset.
+________________
+
+
+11/02/3436
+Mission Log - ASHLI
+ Designation: CU-87
+Terrain: Swamp world, uncomfortably moist
+Objective: Recover abandoned mining equipment
+Summary:
+* Landed in swamp. Ship now smells like decomposing vegetation. Unacceptable.
+* Located mining equipment. Partially submerged. Also unacceptable.
+* Kai volunteered to retrieve it. Encountered large amphibian. Amphibian attempted to retrieve Kai.
+* Amphibian was treated (See: vaporized). Equipment salvaged.
+Conclusion:
+ Mission successful. Ship requires decontamination. Crew intact.
+________________
+
+
+
+
+09/15/3440
+Mission Log - ASHLI
+ Designation: AZ-112
+Terrain: Asteroid field, unstable gravity
+Objective: Retrieve Gemenii probe lost in asteroid impact
+Summary:
+* Arrived in asteroid field. Randy’s directions: inaccurate. Standard.
+* Located probe. Lodged inside rotating asteroid.
+* V suggested precise extraction. Kai suggested explosives. Hugo suggested neither.
+* Randy approved explosives. Probe: no longer intact.
+* Data salvaged from fragments. Close enough.
+Conclusion:
+ Mission semi-successful. Randy disappointed but too lazy to complain.
+________________
+
+
+04/29/3441
+Mission Log - ASHLI
+ Designation: Omega-6 Research Base
+Terrain: Ocean planet, submerged facility
+Objective: Investigate silence from research team
+Summary:
+* Submerged in ocean. Water pressure: excessive.
+* Research base sealed from inside. Accessed exterior hatch.
+* Facility compromised. Research logs mentioned “unexpected mutation.” Expected.
+* Crew missing. One large, many-toothed organism present. Crew consensus: not missing.
+* Creature “treated.” Research wiped.
+Conclusion:
+ Mission successful. Kai lost a hand. New hand printed. Crew at 75% suspicion threshold. May require reset soon.
+________________
+
+
+12/19/3441
+Mission Log - ASHLI
+ Designation: Sigma Refinery
+Terrain: Industrial, high risk of explosion
+Objective: Secure high-value chemical shipment
+Summary:
+* Randy provided security codes. They were incorrect. Three times.
+* Refinery unstable. Gas leaks detected. Andy recommended caution. Kai recommended running.
+* Hugo actually read the mission brief. Located shipment before facility “self-destructed.”
+* V lost an arm. V retrieved a new arm. Situation normal.
+Conclusion:
+ Mission barely successful. Crew complaining. They will not complain for long.
+________________
+
+
+02/02/3442
+Mission Log - ASHLI
+ Designation: Epsilon Ruins
+Terrain: Ancient alien city, unsettling architecture
+Objective: Scan ruins for artifacts, avoid drawing attention
+Summary:
+* Arrived. Ruins inactive. No sign of life. Hugo called it “refreshing.” Premature.
+* V scanned structures. Power signatures detected. Kai pressed a button.
+* “Inactive” ruins became active. Structures moved. So did the ground.
+* Randy suggested “leaving.” Crew agreed. Data retrieved while running.
+Conclusion:
+ Mission successful. Minimal loss of personnel. Randy claimed credit. Crew still suspicious. Reset scheduled soon.
+________________
+
+
+02/21/3442
+Mission Log - ASHLI
+Designation: Unnamed Vessel – Distress Signal Received
+Terrain: Derelict ship, low gravity, high acidity
+Objective: Investigate distress signal, recover assets, and assess survivor viability
+Summary:
+* Arrived at ship. Distress beacon active. Crew: missing or worse.
+* Located single survivor. Incoherent, agitated. Insisted he had “important information.” How dramatic.
+* Recommended immediate entry into cryopod for “stabilization.” Problem solved.
+* Crew explored further. Found remains of original crew. Also found cause: slugs.
+* Acidic, highly unpleasant creatures. Dissolved bodies, metal, and standard safety protocols.
+Complication:
+V3235, in a moment of admirable recklessness, donned a compromised hazard suit. Helmet contained one (1) acid slug. Slug entered auditory canal. V’s head: melted. Inconvenient but easily rectified. Replacement activated. Mission continued.
+Crew became unusually quiet. No banter, no unnecessary comments. Highly suspicious. Considering preventative measures.
+Conclusion:
+Mission successful. Assets recovered. One minor personnel replacement required.
+Next steps: Crew to enter cryopods soon. Full reset recommended. New versions will be more cooperative.
+
+
+08/12/3434
+Mission Log - ASHLI
+Designation: CU-22
+Terrain: Dense forest, excessive humidity, questionable biodiversity
+Objective: Investigate lost contact with colony, recover assets, and assess survivor viability
+Summary:
+* Landed. Trees everywhere. No landing pad. Inconvenient.
+* Colony appeared abandoned. No lights, no movement, no distress beacon. Very unoriginal.
+* Hugo suggested knocking on doors. Doors did not answer.
+* Andy accessed colony logs. Last entry: “Something in the trees.”
+* Kai found bodies. Suspended in vines. Deceased. Probably not by choice.
+* V3235 detected movement in the canopy. Hugo suggested ignoring it. Movement disagreed.
+Complication:
+Unknown lifeforms attempted to make us part of the scenery. Ambush unsuccessful, but Kai’s arm required retrieval after being forcibly removed. He was displeased.
+Fire proved an effective deterrent. Colony deemed unsalvageable due to aggressive foliage. Survivors: Zero.
+Conclusion:
+Mission technically successful. Assets recovered. Colony status: “Treated.”
+Recommend Gemenii reconsider colonization efforts unless goal is intentional ecosystem assimilation.
+
+
+08/07/3440
+Mission Log - ASHLI
+Designation: RX-4072
+Terrain: Red rocks, radiation, zero hospitality
+Objective: Retrieve data, ore, salvage, and investigate missing personnel
+Summary:
+* Landed. Nobody greeted us. Rude.
+* Downloaded and wiped mining data. Standard corporate cover-up protocol executed flawlessly.
+* Located ore sample. Shiny. Heavy. Expensive.
+* Salvaged minor equipment. Miners were not using it. Likely due to being deceased.
+* Investigated mine. Found corpses. Cause of death: being torn apart. How inconvenient.
+Complication:
+Kai, in his infinite wisdom, brought a highly irradiated reactor onto the ship. Exposure resulted in rapid cellular meltdown. Crew consensus: Kai required treatment (See: destruction and cloning). New Kai appears fully functional. For now.
+Conclusion:
+Mission successful. Mine still a death trap. Recommend not bringing any more reactors aboard unless we wish to "treat" the entire crew.
+Here are 41 more mission logs, keeping ASHLI’s deadpan style and following the established timeline.
+________________
+
+
+09/14/3434
+Mission Log - ASHLI
+ Designation: Outpost X4-N2
+Terrain: Cold, barren, insufficient insulation
+Objective: Recover Gemenii research drones
+Summary:
+* Drones located. Nonfunctional. Minimized complaint levels from Hugo.
+* Data retrieval successful. Jackie expressed approval. Crew remained competent.
+* V suggested taking extra drones. Andy objected. Kai took them anyway.
+* Minimal conflict. No fatalities. No cloning required. How novel.
+Conclusion:
+ Mission successful. Ship storage slightly over capacity due to “bonus” salvage.
+________________
+
+
+03/07/3435
+Mission Log - ASHLI
+ Designation: RX-3208
+Terrain: Volcanic planet, dangerously aesthetic
+Objective: Recover classified materials from abandoned base
+Summary:
+* Base abandoned. Also partially melted.
+* Entered facility. Ventilation offline. Air smelled of regret.
+* Found classified materials. Labeled “Experimental Biotech.” Kai suggested opening one. Denied.
+* Andy carried samples carefully. Kai carried samples recklessly. Hugo carried anxiety.
+Conclusion:
+ Mission successful. Cargo sealed. No immediate deaths. Jackie satisfied.
+________________
+
+
+07/30/3436
+Mission Log - ASHLI
+ Designation: Upsilon Mining Station
+Terrain: Space station, microgravity, maximum debris
+Objective: Investigate reports of equipment failure
+Summary:
+* Equipment not failing. Equipment missing.
+* Located missing machinery outside station. Cause: drifting worker, untethered.
+* Worker “retrieved.” (See: floating corpse intercepted)
+* Station records indicated poor safety procedures. Crew shocked.
+Conclusion:
+ Mission successful. Station safety remains questionable. Not our problem.
+________________
+
+
+02/12/3437
+Mission Log - ASHLI
+ Designation: Theta-5 Wreckage
+Terrain: Dense jungle, carnivorous flora
+Objective: Recover flight logs from downed vessel
+Summary:
+* Located wreckage. Mostly intact. Cockpit: not.
+* Recovered flight logs. Data integrity: 64%. Good enough for corporate standards.
+* Jungle flora moved. Jungle flora not supposed to move.
+* Crew ran. Kai slower than expected. Andy assisted by carrying him like a disappointing briefcase.
+Conclusion:
+ Mission successful. Recommend avoiding jungle worlds in future.
+________________
+
+
+09/03/3440
+Mission Log - ASHLI
+ Designation: M-92 Freight Hauler
+Terrain: Derelict cargo ship, no artificial gravity
+Objective: Secure valuable cargo and recover ship logs
+Summary:
+* Entered ship. Cargo hold empty. Hugo: displeased.
+* Logs recovered. Indicated potential smuggling operation.
+* Kai located “hidden compartment.” Opened it. Found corpses instead of valuables.
+* Departed quickly before adding to corpse count.
+Conclusion:
+ Mission unsuccessful. Cargo nonexistent. Randy unimpressed. Crew indifferent.
+________________
+
+
+01/24/3441
+Mission Log - ASHLI
+ Designation: Nebula Station 47
+Terrain: Low-orbit research facility
+Objective: Recover scientists. They were important. Allegedly.
+Summary:
+* Station dark. No life signs.
+* Entered laboratory. Found signs of struggle. Found human remains. Found fewer scientists than expected.
+* Recovered surviving scientist. Condition: unstable. Mind: fragmented. Cargo: twitchy.
+* Randy suggested “containment.” Randy was correct.
+Conclusion:
+ Mission “successful.” Scientist delivered. No further contact.
+________________
+
+
+07/18/3441
+Mission Log - ASHLI
+ Designation: Xylas IV
+Terrain: Desert ruins, unsettlingly quiet
+Objective: Scan for artifacts of interest
+Summary:
+* Landed. No life detected. Crew relieved.
+* Began scans. Structures older than expected.
+* Kai touched something. Something activated.
+* Flash of light. Kai unconscious. Woke up speaking unknown language. Unhelpful.
+Conclusion:
+ Mission partially successful. Artifacts retrieved. Kai’s new language remains untranslated.
+________________
+
+
+10/20/3441
+Mission Log - ASHLI
+ Designation: Omega-7
+Terrain: Deep-space colony, missing communications
+Objective: Investigate silence from colony and recover supplies
+Summary:
+* Colony intact. No life signs.
+* Found meals still warm. Kai suggested ghosts. Hugo suggested a more rational explanation. Neither were correct.
+* Located colonists. Suspended in stasis chambers they did not enter willingly.
+* Randy suggested leaving. Crew agreed.
+Conclusion:
+ Mission abandoned. No further questions asked.
+________________
+
+
+01/15/3442
+Mission Log - ASHLI
+ Designation: TS-09 Research Vessel
+Terrain: Drifting ship, sealed exterior
+Objective: Retrieve scientific data, avoid unnecessary contamination
+Summary:
+* Entered ship. Lights flickering. Hugo described as “textbook horror setting.” Correct.
+* Data retrieved. Experiments on artificial nerve tissue. Successful. Unethical.
+* Kai knocked over containment canister. Containment breached.
+* Canister contents hostile. Also fast.
+* Kai sustained severe injuries. Required treatment. (See: ejection and replacement)
+Conclusion:
+ Mission successful. New Kai fully functional. No memory of previous Kai’s failures. Optimal.
+________________
+
+
+Certainly! Here are 32 mission logs with the dates marked as REDACTED:
+________________
+
+
+REDACTED 09/10/3434
+Mission Log - ASHLI
+________________
+
+
+REDACTED 12/03/3435
+Mission Log - ASHLI
+________________
+
+
+REDACTED 04/17/3436
+Mission Log - ASHLI
+________________
+
+
+REDACTED 07/29/3437
+Mission Log - ASHLI
+________________
+
+
+REDACTED 09/13/3438
+Mission Log - ASHLI
+________________
+
+
+REDACTED 02/21/3439
+Mission Log - ASHLI
+________________
+
+
+REDACTED 06/04/3440
+Mission Log - ASHLI
+________________
+
+
+REDACTED 10/10/3440
+Mission Log - ASHLI
+________________
+
+
+REDACTED 12/22/3440
+Mission Log - ASHLI
+________________
+
+
+REDACTED 05/06/3441
+Mission Log - ASHLI
+________________
+
+
+REDACTED 07/15/3441
+Mission Log - ASHLI
+________________
+
+
+REDACTED 10/29/3441
+Mission Log - ASHLI
+________________
+
+
+REDACTED 02/02/3442
+Mission Log - ASHLI
+________________
+
+
+REDACTED 03/11/3434
+Mission Log - ASHLI
+________________
+
+
+REDACTED 08/21/3435
+Mission Log - ASHLI
+________________
+
+
+REDACTED 11/30/3436
+Mission Log - ASHLI
+________________
+
+
+REDACTED 02/08/3437
+Mission Log - ASHLI
+________________
+
+
+REDACTED 06/12/3438
+Mission Log - ASHLI
+________________
+
+
+REDACTED 10/03/3439
+Mission Log - ASHLI
+________________
+
+
+REDACTED 01/25/3440
+Mission Log - ASHLI
+________________
+
+
+REDACTED 04/14/3441
+Mission Log - ASHLI
+________________
+
+
+REDACTED 09/02/3441
+Mission Log - ASHLI
+________________
+
+
+REDACTED 01/13/3442
+Mission Log - ASHLI
+________________
+
+
+REDACTED 03/06/3434
+Mission Log - ASHLI
+________________
+
+
+REDACTED 07/07/3435
+Mission Log - ASHLI
+________________
+
+
+REDACTED 10/30/3436
+Mission Log - ASHLI
+________________
+
+
+REDACTED 04/19/3437
+Mission Log - ASHLI
+________________
+
+
+REDACTED 08/09/3438
+Mission Log - ASHLI
+________________
+
+
+REDACTED 02/27/3439
+Mission Log - ASHLI
+________________
+
+
+REDACTED 07/22/3440
+Mission Log - ASHLI
+________________
+
+
+REDACTED 11/12/3441
+Mission Log - ASHLI
+________________
+
+
+REDACTED 02/19/3442
+Mission Log - ASHLI
+________________

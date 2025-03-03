@@ -11,9 +11,7 @@ interface CommsMenuItem {
 }
 
 const menuItems: CommsMenuItem[] = [
-  { label: 'STATUS', href: '/comms/status' },
-  { label: 'PERSONAL COMMUNICATIONS', href: '/comms/personal' },
-  { label: 'SHIP COMMUNICATIONS', href: '/comms/ship' },
+  // Removed STATUS, PERSONAL COMMUNICATIONS, and SHIP COMMUNICATIONS
 ];
 
 export default function CommsMenu() {

@@ -6,7 +6,9 @@ import LoginDialog from '../LoginDialog/LoginDialog';
 import LoadingDialog from '../LoadingDialog/LoadingDialog';
 import TerminalInterface from '../Terminal/TerminalInterface';
 import InfectedText from '../InfectedText/InfectedText';
+import GlitchText from '../GlitchText/GlitchText';
 import { useGlitch } from '@/contexts/GlitchContext';
+import { useUser } from '@/contexts/UserContext';
 
 type DialogType = 'crew' | 'admin' | 'loading' | null;
 
@@ -37,6 +39,7 @@ const crewLogins: CrewLogin[] = [
 export default function LoginScreen() {
   const router = useRouter();
   const { startGlitch } = useGlitch();
+  const { setLoggedInUser } = useUser();
   const [audio] = useState(() => typeof window !== 'undefined' ? new Audio('/sounds/click.mp3') : null);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [showDialog, setShowDialog] = useState<DialogType>(null);
@@ -78,22 +81,24 @@ export default function LoginScreen() {
     }
   };
 
-  const handleCrewClick = (e: React.MouseEvent) => {
+  const handleCrewClick = (crewName?: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     playSound();
-    startGlitch();
+    setLoggedInUser(crewName || 'GUEST');
     setShowDialog('loading');
   };
 
   const handleAdminClick = (e: React.MouseEvent) => {
     e.preventDefault();
     playSound();
-    startGlitch();
     setShowDialog('admin');
   };
 
   const handleLoginSuccess = () => {
     playSound();
+    if (showDialog === 'admin') {
+      setLoggedInUser('ADMIN');
+    }
     setTimeout(() => {
       router.push(showDialog === 'admin' ? '/admin' : '/main');
     }, 100);
@@ -106,7 +111,7 @@ export default function LoginScreen() {
 
   return (
     <div className="main-menu">
-      <h1 className="menu-title">Spacedix Login</h1>
+      <h1 className="menu-title"><GlitchText>Spacedix Login</GlitchText></h1>
       <div className="separator">========</div>
       <nav>
         {crewLogins.map((login, index) => (
@@ -115,7 +120,7 @@ export default function LoginScreen() {
             href="/main"
             className="menu-item"
             onMouseEnter={playSound}
-            onClick={handleCrewClick}
+            onClick={handleCrewClick(login.name)}
           >
             LOGIN AS <InfectedText 
               originalText={login.name}
@@ -128,7 +133,7 @@ export default function LoginScreen() {
           href="/main"
           className="menu-item"
           onMouseEnter={playSound}
-          onClick={handleCrewClick}
+          onClick={handleCrewClick()}
         >
           LOGIN AS <InfectedText originalText="GUEST           " infectedText="GUESS WHO? :D" />
         </a>

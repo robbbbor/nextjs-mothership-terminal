@@ -17,6 +17,7 @@ const menuItems: MainMenuItem[] = [
   { label: 'ROSTER', href: '/roster' },
   { label: 'SHIP INFO', href: '/ship-info' },
   { label: 'SUBNET', href: '/subnet' },
+  { label: 'NAVIGATION', href: '/navigation' },
 ];
 
 export default function MainMenu() {

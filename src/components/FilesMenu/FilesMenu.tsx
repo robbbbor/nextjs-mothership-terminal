@@ -4,25 +4,63 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import TerminalInterface from '../Terminal/TerminalInterface';
 import GlitchText from '../GlitchText/GlitchText';
+import { useUser } from '@/contexts/UserContext';
 
 interface FilesMenuItem {
   label: string;
   href: string;
 }
 
-const menuItems: FilesMenuItem[] = [
-  { label: 'MISSION LOGS', href: '/files/mission-logs' },
-  { label: 'DEBT', href: '/files/debt' },
-];
-
 export default function FilesMenu() {
   const router = useRouter();
+  const { loggedInUser } = useUser();
 
   const playSound = () => {
     const audio = new Audio('/sounds/click.mp3');
     audio.volume = 0.8;
     audio.play().catch(error => console.error('Audio play failed:', error));
   };
+
+  // Define menu items based on logged-in user
+  const getMenuItems = (): FilesMenuItem[] => {
+    const baseItems = [
+      { label: 'MISSION LOGS', href: '/files/mission-logs' },
+      { label: 'PROGRAM FILES', href: '/files/program-files' },
+    ];
+
+    // Add user-specific menu items
+    switch (loggedInUser) {
+      case 'ADMIN':
+        return [
+          ...baseItems,
+          { label: 'SYSTEM LOGS', href: '/files/admin' },
+        ];
+      case 'ANDY THE AUTOMATON':
+        return [
+          ...baseItems,
+          { label: 'ANDY THE AUTOMATON PERSONAL FILES', href: '/files/andy' },
+        ];
+      case 'HUGO OCTAVIUS PHILLIPS':
+        return [
+          ...baseItems,
+          { label: 'HUGO OCTAVIUS PHILLIPS PERSONAL FILES', href: '/files/hugo' },
+        ];
+      case 'KAI ROE':
+        return [
+          ...baseItems,
+          { label: 'KAI ROE PERSONAL FILES', href: '/files/kai' },
+        ];
+      case 'V3235':
+        return [
+          ...baseItems,
+          { label: 'V3235 PERSONAL FILES', href: '/files/v3235' },
+        ];
+      default:
+        return baseItems;
+    }
+  };
+
+  const menuItems = getMenuItems();
 
   return (
     <div className="main-menu">

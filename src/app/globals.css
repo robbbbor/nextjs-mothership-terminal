@@ -40,7 +40,8 @@ body {
   line-height: 1.4;
   min-height: 100vh;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   font-weight: 300;
   letter-spacing: 0.08em;
 }
@@ -51,7 +52,7 @@ body::before {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: 
     linear-gradient(
       rgba(18, 16, 16, 0) 50%,
@@ -65,7 +66,7 @@ body::before {
     );
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
 }
 
 body::after {
@@ -74,7 +75,7 @@ body::after {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: radial-gradient(
     circle at center,
     transparent 0%,
@@ -88,6 +89,9 @@ main {
   padding: 2rem;
   position: relative;
   z-index: 3;
+  min-height: 100vh;
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
 .menu-title {
@@ -97,30 +101,38 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   position: relative;
-  text-shadow: 0 0 1px var(--menu-text);
+  z-index: 10;
+  opacity: 1;
+  text-shadow: var(--text-glow);
+}
+
+.menu-title > * {
+  opacity: 1;
 }
 
 .separator {
   color: var(--separator);
   margin: 0.5rem 0 1.5rem 0;
-  opacity: 0.9;
+  opacity: 1;
   font-size: 2rem;
   position: relative;
-  text-shadow: 0 0 1px var(--menu-text);
+  z-index: 10;
+  text-shadow: var(--text-glow);
 }
 
 .menu-item {
+  position: relative;
+  z-index: 10;
   color: var(--menu-text);
   display: block;
   padding: 0.4rem 0.5rem;
   cursor: pointer;
   text-transform: uppercase;
-  position: relative;
   font-size: 2rem;
   transition: all 0.1s ease;
   width: 100%;
-  opacity: 0.9;
-  text-shadow: 0 0 1px var(--menu-text);
+  opacity: 1;
+  text-shadow: var(--text-glow);
 }
 
 .menu-item::before {
@@ -173,7 +185,7 @@ main::before {
     rgba(175, 215, 215, 0.03) 4px
   );
   pointer-events: none;
-  z-index: 4;
+  z-index: 1;
 }
 
 .login-form {
@@ -209,13 +221,54 @@ main::before {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  overflow-y: auto;
 }
 
 .dialog-content {
   background: var(--background);
-  padding: 2rem;
   border: 1px solid var(--menu-text);
-  min-width: 400px;
+  padding: 2rem;
+  max-width: 80%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  font-family: "Glass TTY VT220", "VT323", monospace;
+  color: var(--menu-text);
+  text-shadow: var(--text-glow);
+  font-size: 1.8rem;
+  margin: 2rem;
+}
+
+.mission-log-content {
+  white-space: pre-wrap;
+  margin: 0;
+  font-size: 1.8rem;
+  line-height: 1.5;
+  color: var(--menu-text);
+  text-shadow: var(--text-glow);
+  opacity: 0.9;
+}
+
+.dialog-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: 1px solid var(--menu-text);
+  color: var(--menu-text);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: "Glass TTY VT220", "VT323", monospace;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  font-size: 1.8rem;
+  text-shadow: var(--text-glow);
+}
+
+.dialog-close:hover {
+  color: var(--background);
+  background-color: var(--menu-text);
+  text-shadow: none;
 }
 
 .dialog-title {
@@ -727,4 +780,48 @@ main::before {
   justify-content: center;
   font-size: 1.5rem;
   color: var(--menu-text);
+}
+
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Mission logs specific styles */
+.mission-logs {
+  position: relative;
+  z-index: 10;
+}
+
+.mission-logs nav {
+  position: relative;
+  z-index: 10;
+}
+
+.mission-logs .menu-item {
+  position: relative;
+  z-index: 10;
+  opacity: 1;
+  padding: 0.4rem 2rem;
+}
+
+.mission-logs .menu-title {
+  opacity: 1;
+  text-shadow: var(--text-glow);
+  padding: 0 2rem;
+}
+
+.mission-logs .separator {
+  position: relative;
+  z-index: 10;
+  opacity: 1;
+  padding: 0 2rem;
 }
