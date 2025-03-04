@@ -4,6 +4,7 @@ import "./globals.css";
 import { InfectionProvider } from '@/contexts/InfectionContext';
 import { GlitchProvider } from '@/contexts/GlitchContext';
 import { UserProvider } from '@/contexts/UserContext';
+import { ScrollToTop } from '@/components/ScrollToTop/ScrollToTop';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
         <InfectionProvider>
           <GlitchProvider>
             <UserProvider>
+              <ScrollToTop />
               <div className="scan-line" />
               {children}
             </UserProvider>

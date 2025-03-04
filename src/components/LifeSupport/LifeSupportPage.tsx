@@ -25,36 +25,45 @@ export default function LifeSupportPage() {
     return Number(value.toFixed(precision));
   };
 
+  // Function to get a small random change (-0.1, 0, or 0.1)
+  const getSmallChange = () => {
+    const random = Math.random();
+    if (random < 0.33) return -0.1;
+    if (random < 0.66) return 0;
+    return 0.1;
+  };
+
   // Update values periodically to simulate fluctuations
   useEffect(() => {
     const interval = setInterval(() => {
-      // Update oxygen with more fluctuation
-      const newOxygen = getRandomValue(76, 80, 1);
+      // Calculate new oxygen value with small change
+      const oxygenChange = getSmallChange();
+      const newOxygen = Number((oxygenLevel + oxygenChange).toFixed(1));
       
-      // Only update nitrogen occasionally (5% chance)
-      if (Math.random() < 0.05) {
-        const newNitrogen = getRandomValue(20, 22, 1);
+      // Calculate new nitrogen value with small change
+      const nitrogenChange = getSmallChange();
+      const newNitrogen = Number((nitrogenLevel + nitrogenChange).toFixed(1));
+      
+      // Calculate other gases to ensure total is exactly 100%
+      const otherGases = Number((100 - newOxygen - newNitrogen).toFixed(1));
+      
+      // Only update if values are within acceptable ranges
+      if (newOxygen >= 77.5 && newOxygen <= 78.5 &&
+          newNitrogen >= 20.5 && newNitrogen <= 21.5 &&
+          otherGases >= 0 && otherGases <= 2) {
+        setOxygenLevel(newOxygen);
         setNitrogenLevel(newNitrogen);
-        
-        // Adjust other gases to ensure total is 100%
-        const total = newOxygen + newNitrogen;
-        if (total < 100) {
-          setOtherGasesLevel(Number((100 - total).toFixed(1)));
-        } else {
-          // If rounding causes total to exceed 100, adjust oxygen
-          setOxygenLevel(Number((100 - newNitrogen - otherGasesLevel).toFixed(1)));
-          return;
-        }
+        setOtherGasesLevel(otherGases);
       }
-      
-      setOxygenLevel(newOxygen);
+
+      // Update other environmental values
       setGravity(getRandomValue(0.98, 1.02, 2));
       setPressure(getRandomValue(101.1, 101.5, 1));
       setTemperature(getRandomValue(21.0, 22.0, 1));
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [otherGasesLevel]);
+  }, [oxygenLevel, nitrogenLevel]);
 
   return (
     <div className="main-menu">

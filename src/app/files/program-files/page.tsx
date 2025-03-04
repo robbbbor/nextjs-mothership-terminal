@@ -19,7 +19,9 @@ export default function ProgramFilesPage() {
         <div className="separator">========</div>
         
         <div className="program-files-container">
-          {/* Placeholder for future program files content */}
+          <div className="no-files-message">
+            <GlitchText>NO FILES INSTALLED</GlitchText>
+          </div>
         </div>
         
         <Link
@@ -32,6 +34,22 @@ export default function ProgramFilesPage() {
         </Link>
 
         <TerminalInterface />
+
+        <style jsx>{`
+          .program-files-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 1px solid var(--menu-text);
+            background: rgba(0, 0, 0, 0.7);
+          }
+          .no-files-message {
+            text-align: center;
+            color: var(--menu-text);
+            opacity: 0.8;
+            font-size: 1.2rem;
+            text-shadow: var(--text-glow);
+          }
+        `}</style>
       </div>
     </main>
   );

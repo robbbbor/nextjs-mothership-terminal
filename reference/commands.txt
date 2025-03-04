@@ -1,0 +1,11 @@
+to push changes to git:
+git status
+git add .
+git commit -m "put changes and comments here"
+git push origin main
+
+to get updated from git:
+
+
+to run program locally:
+npm run dev

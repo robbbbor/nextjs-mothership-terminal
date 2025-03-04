@@ -92,8 +92,6 @@ export default function TerminalInterface() {
           '- STATUS: Display system status',
           '- SCAN: Scan ship components',
           '- CLEAR: Clear terminal output',
-          '- RUN GLITCH.EXE: Activate visual distortion',
-          '- STOP GLITCH.EXE: Deactivate visual distortion',
           ''
         ];
       } else if (command === 'status') {

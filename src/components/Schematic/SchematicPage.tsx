@@ -2,8 +2,27 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import TerminalInterface from '../Terminal/TerminalInterface';
 import GlitchText from '../GlitchText/GlitchText';
+
+interface SchematicLabel {
+  id: string;
+  text: string;
+  position: { top: string; left: string };
+}
+
+const labels: SchematicLabel[] = [
+  { id: 'cockpit', text: 'COCKPIT', position: { top: '50%', left: '85%' } },
+  { id: 'medbay', text: 'MEDBAY/LAB', position: { top: '75%', left: '75%' } },
+  { id: 'engine1', text: 'ENGINE 1', position: { top: '25%', left: '15%' } },
+  { id: 'engine2', text: 'ENGINE 2', position: { top: '80%', left: '15%' } },
+  { id: 'bathroom', text: 'BATHROOM', position: { top: '30%', left: '70%' } },
+  { id: 'central', text: 'CENTRAL ROOM', position: { top: '45%', left: '50%' } },
+  { id: 'quarters1', text: 'QUARTERS 1', position: { top: '80%', left: '45%' } },
+  { id: 'quarters2', text: 'QUARTERS 2', position: { top: '30%', left: '45%' } },
+  { id: 'cargo', text: 'CARGO', position: { top: '50%', left: '25%' } },
+];
 
 export default function SchematicPage() {
   const playSound = () => {
@@ -18,7 +37,30 @@ export default function SchematicPage() {
       <div className="separator">========</div>
       
       <div className="schematic-container">
-        {/* Placeholder for future schematic content */}
+        <div className="schematic-wrapper">
+          <Image
+            src="/images/schematic.svg"
+            alt="Ship Schematic"
+            width={800}
+            height={600}
+            priority
+            className="schematic-image"
+          />
+          <div className="schematic-labels">
+            {labels.map((label) => (
+              <div
+                key={label.id}
+                className="schematic-label"
+                style={{
+                  top: label.position.top,
+                  left: label.position.left,
+                }}
+              >
+                <GlitchText>{label.text}</GlitchText>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       
       <Link

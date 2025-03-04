@@ -16,6 +16,22 @@
   --highlight-bg: #c5e5e5;
 }
 
+html {
+  scroll-behavior: instant;
+  scroll-padding-top: 0;
+  overflow-y: visible;
+  height: 100%;
+  overflow-anchor: none;
+  overscroll-behavior: none;
+}
+
+html, body {
+  scroll-to-top: instant;
+  overflow-anchor: none;
+  overscroll-behavior: none;
+  position: relative;
+}
+
 @keyframes scanline {
   0% {
     transform: translateY(100vh);
@@ -40,7 +56,7 @@ body {
   line-height: 1.4;
   min-height: 100vh;
   position: relative;
-  overflow-y: auto;
+  overflow-y: visible;
   overflow-x: hidden;
   font-weight: 300;
   letter-spacing: 0.08em;
@@ -90,8 +106,8 @@ main {
   position: relative;
   z-index: 3;
   min-height: 100vh;
-  overflow-y: auto;
-  max-height: 100vh;
+  overflow-y: visible;
+  max-height: none;
 }
 
 .menu-title {
@@ -535,6 +551,9 @@ main::before {
   grid-template-columns: 1fr;
   gap: 2rem;
   margin: 2rem 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .support-section,
@@ -568,21 +587,47 @@ main::before {
 .gas-item,
 .env-item {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   font-size: 1.6rem;
+  position: relative;
+  padding: 0.3rem 0;
 }
 
 .gas-name,
 .env-name {
   color: var(--foreground);
   text-shadow: 0 0 1px var(--foreground);
+  margin-right: 1rem;
+  flex: 0 0 auto;
 }
 
 .gas-value,
-.env-value,
-.component-value {
+.env-value {
   color: var(--highlight-bg);
   text-shadow: 0 0 2px var(--highlight-bg);
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+/* Add dotted line between label and value */
+.gas-item::after,
+.env-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-bottom: 1px dotted rgba(175, 215, 215, 0.3);
+  margin: 0 8rem;
+  z-index: -1;
+}
+
+/* Ensure the text stays above the dotted line */
+.gas-item > *,
+.env-item > * {
+  background: rgba(0, 26, 14, 0.7);
+  padding: 0 0.5rem;
+  z-index: 1;
 }
 
 .component-value {
@@ -778,21 +823,87 @@ main::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  color: var(--menu-text);
+  background: rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-.dialog-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+.schematic-wrapper {
+  max-width: 100%;
+  height: auto;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+}
+
+.schematic-image {
+  max-width: 100%;
+  height: auto;
+  filter: brightness(0.8) sepia(0.2) hue-rotate(160deg);
+  transition: filter 0.3s ease;
+}
+
+.schematic-image:hover {
+  filter: brightness(1) sepia(0) hue-rotate(0deg);
+}
+
+.schematic-labels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.schematic-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: var(--menu-text);
+  font-size: 1.2rem;
+  text-shadow: 
+    0 0 2px var(--menu-text),
+    0 0 4px rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
+  opacity: 0.9;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  padding: 0.2rem 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--menu-text);
+  pointer-events: auto;
+}
+
+.schematic-label:hover {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Add a subtle scan effect */
+.schematic-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(175, 215, 215, 0.1) 50%,
+    transparent 100%
+  );
+  animation: scanEffect 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scanEffect {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
 }
 
 /* Mission logs specific styles */

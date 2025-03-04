@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TerminalInterface from '../Terminal/TerminalInterface';
 import GlitchText from '../GlitchText/GlitchText';
 
@@ -496,6 +496,19 @@ Recommend Gemenii reconsider colonization efforts unless goal is intentional eco
 export default function MissionLogs() {
   const [selectedLog, setSelectedLog] = useState<MissionLog | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [recoveryMessage, setRecoveryMessage] = useState('ATTEMPTING DATA RECOVERY...');
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setRecoveryMessage('ERROR: RECOVERY FAILED');
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const playSound = () => {
     const audio = new Audio('/sounds/click.mp3');
@@ -520,6 +533,16 @@ export default function MissionLogs() {
       <div className="main-menu mission-logs">
         <h1 className="menu-title"><GlitchText>Mission Logs</GlitchText></h1>
         <div className="separator">========</div>
+        
+        <div className="warning-message">
+          <GlitchText>WARNING: FILE SYSTEM CORRUPTION DETECTED</GlitchText>
+          <div className="file-status">
+            <GlitchText>ACCESSIBLE FILES: 19</GlitchText>
+            <GlitchText>CORRUPTED FILES: 32</GlitchText>
+            <GlitchText>{recoveryMessage}</GlitchText>
+          </div>
+        </div>
+
         <nav>
           {missionLogs.map((log, index) => (
             <a
@@ -549,6 +572,8 @@ export default function MissionLogs() {
           </a>
         </nav>
 
+        <TerminalInterface />
+
         {isDialogOpen && selectedLog && (
           <div className="dialog-overlay" onClick={handleCloseDialog}>
             <div className="dialog-content" onClick={(e) => e.stopPropagation()}>
@@ -559,9 +584,95 @@ export default function MissionLogs() {
             </div>
           </div>
         )}
-
-        <TerminalInterface />
       </div>
+
+      <style jsx>{`
+        .dialog-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.8);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+
+        .dialog-content {
+          background: var(--background);
+          border: 1px solid var(--menu-text);
+          padding: 2rem;
+          max-width: 80%;
+          max-height: 80vh;
+          overflow-y: auto;
+          position: relative;
+          font-family: "Glass TTY VT220", "VT323", monospace;
+          color: var(--menu-text);
+          text-shadow: var(--text-glow);
+          font-size: 1.8rem;
+          margin: 2rem;
+        }
+
+        .mission-log-content {
+          white-space: pre-wrap;
+          margin: 0;
+          font-size: 1.8rem;
+          line-height: 1.5;
+          color: var(--menu-text);
+          text-shadow: var(--text-glow);
+          opacity: 0.9;
+        }
+
+        .dialog-close {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          background: none;
+          border: 1px solid var(--menu-text);
+          color: var(--menu-text);
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          font-family: "Glass TTY VT220", "VT323", monospace;
+          text-transform: uppercase;
+          transition: all 0.2s ease;
+          font-size: 1.8rem;
+          text-shadow: var(--text-glow);
+        }
+
+        .dialog-close:hover {
+          color: var(--background);
+          background-color: var(--menu-text);
+          text-shadow: none;
+        }
+
+        .warning-message {
+          margin: 2rem 0;
+          padding: 1rem;
+          border: 1px solid #ff3300;
+          background: rgba(255, 51, 0, 0.1);
+          text-align: center;
+        }
+
+        .warning-message :global(.glitch-text) {
+          color: #ff3300;
+          text-shadow: 0 0 8px #ff3300;
+          font-size: 1.8rem;
+        }
+
+        .file-status {
+          margin-top: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .file-status :global(.glitch-text) {
+          font-size: 1.4rem;
+          opacity: 0.9;
+        }
+      `}</style>
     </main>
   );
 }

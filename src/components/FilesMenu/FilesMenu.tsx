@@ -28,36 +28,8 @@ export default function FilesMenu() {
       { label: 'PROGRAM FILES', href: '/files/program-files' },
     ];
 
-    // Add user-specific menu items
-    switch (loggedInUser) {
-      case 'ADMIN':
-        return [
-          ...baseItems,
-          { label: 'SYSTEM LOGS', href: '/files/admin' },
-        ];
-      case 'ANDY THE AUTOMATON':
-        return [
-          ...baseItems,
-          { label: 'ANDY THE AUTOMATON PERSONAL FILES', href: '/files/andy' },
-        ];
-      case 'HUGO OCTAVIUS PHILLIPS':
-        return [
-          ...baseItems,
-          { label: 'HUGO OCTAVIUS PHILLIPS PERSONAL FILES', href: '/files/hugo' },
-        ];
-      case 'KAI ROE':
-        return [
-          ...baseItems,
-          { label: 'KAI ROE PERSONAL FILES', href: '/files/kai' },
-        ];
-      case 'V3235':
-        return [
-          ...baseItems,
-          { label: 'V3235 PERSONAL FILES', href: '/files/v3235' },
-        ];
-      default:
-        return baseItems;
-    }
+    // Only return base items for now
+    return baseItems;
   };
 
   const menuItems = getMenuItems();
