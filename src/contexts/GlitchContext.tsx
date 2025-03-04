@@ -11,21 +11,26 @@ interface GlitchContextType {
 const GlitchContext = createContext<GlitchContextType | undefined>(undefined);
 
 export function GlitchProvider({ children }: { children: React.ReactNode }) {
-  const [isGlitchActive, setIsGlitchActive] = useState(() => {
-    // Initialize from localStorage if available, otherwise false
-    if (typeof window !== 'undefined') {
+  const [isGlitchActive, setIsGlitchActive] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Initialize from localStorage when component mounts
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !isInitialized) {
       const saved = localStorage.getItem('isGlitchActive');
-      return saved === 'true';
+      if (saved !== null) {
+        setIsGlitchActive(saved === 'true');
+      }
+      setIsInitialized(true);
     }
-    return false;
-  });
+  }, [isInitialized]);
 
   // Update localStorage when state changes
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && isInitialized) {
       localStorage.setItem('isGlitchActive', isGlitchActive.toString());
     }
-  }, [isGlitchActive]);
+  }, [isGlitchActive, isInitialized]);
 
   const startGlitch = () => setIsGlitchActive(true);
   const stopGlitch = () => setIsGlitchActive(false);

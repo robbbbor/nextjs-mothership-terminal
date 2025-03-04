@@ -802,7 +802,35 @@ main::before {
 .subtle-glitch {
   display: inline-block;
   position: relative;
+  -webkit-animation: subtleShake 4s infinite;
+  -moz-animation: subtleShake 4s infinite;
+  -o-animation: subtleShake 4s infinite;
   animation: subtleShake 4s infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+@-webkit-keyframes subtleShake {
+  0%, 100% { -webkit-transform: translate(0, 0) skew(0deg); transform: translate(0, 0) skew(0deg); }
+  25% { -webkit-transform: translate(-0.5px, 0.25px) skew(0.1deg); transform: translate(-0.5px, 0.25px) skew(0.1deg); }
+  50% { -webkit-transform: translate(0.25px, -0.5px) skew(-0.1deg); transform: translate(0.25px, -0.5px) skew(-0.1deg); }
+  75% { -webkit-transform: translate(-0.25px, 0.5px) skew(0.1deg); transform: translate(-0.25px, 0.5px) skew(0.1deg); }
+}
+
+@-moz-keyframes subtleShake {
+  0%, 100% { -moz-transform: translate(0, 0) skew(0deg); transform: translate(0, 0) skew(0deg); }
+  25% { -moz-transform: translate(-0.5px, 0.25px) skew(0.1deg); transform: translate(-0.5px, 0.25px) skew(0.1deg); }
+  50% { -moz-transform: translate(0.25px, -0.5px) skew(-0.1deg); transform: translate(0.25px, -0.5px) skew(-0.1deg); }
+  75% { -moz-transform: translate(-0.25px, 0.5px) skew(0.1deg); transform: translate(-0.25px, 0.5px) skew(0.1deg); }
+}
+
+@-o-keyframes subtleShake {
+  0%, 100% { -o-transform: translate(0, 0) skew(0deg); transform: translate(0, 0) skew(0deg); }
+  25% { -o-transform: translate(-0.5px, 0.25px) skew(0.1deg); transform: translate(-0.5px, 0.25px) skew(0.1deg); }
+  50% { -o-transform: translate(0.25px, -0.5px) skew(-0.1deg); transform: translate(0.25px, -0.5px) skew(-0.1deg); }
+  75% { -o-transform: translate(-0.25px, 0.5px) skew(0.1deg); transform: translate(-0.25px, 0.5px) skew(0.1deg); }
 }
 
 @keyframes subtleShake {

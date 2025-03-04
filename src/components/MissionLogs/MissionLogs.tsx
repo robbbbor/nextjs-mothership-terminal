@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import TerminalInterface from '../Terminal/TerminalInterface';
 import GlitchText from '../GlitchText/GlitchText';
 
@@ -494,6 +495,7 @@ Recommend Gemenii reconsider colonization efforts unless goal is intentional eco
 ];
 
 export default function MissionLogs() {
+  const router = useRouter();
   const [selectedLog, setSelectedLog] = useState<MissionLog | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [recoveryMessage, setRecoveryMessage] = useState('ATTEMPTING DATA RECOVERY...');
@@ -565,7 +567,9 @@ export default function MissionLogs() {
             onClick={(e) => {
               playSound();
               e.preventDefault();
-              window.location.href = '/files';
+              setTimeout(() => {
+                router.push('/files');
+              }, 100);
             }}
           >
             <GlitchText>BACK TO FILES</GlitchText>
