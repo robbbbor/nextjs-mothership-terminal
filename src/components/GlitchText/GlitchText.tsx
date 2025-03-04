@@ -25,9 +25,7 @@ export default function GlitchText({ children }: GlitchTextProps) {
     const frameInterval = 100; // Increased from 50ms to 100ms
 
     const glitchInterval = setInterval(() => {
-      frameCount++;
-      
-      const newText = originalText.split('').map((char, index) => {
+      const newText = originalText.split('').map(char => {
         // Only glitch if random chance hits and character is not a space
         if (Math.random() < glitchProbability && char !== ' ') {
           // Randomly choose between different glitch effects

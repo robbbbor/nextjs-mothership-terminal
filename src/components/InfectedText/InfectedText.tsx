@@ -63,7 +63,7 @@ export default function InfectedText({ originalText, infectedText, className = '
   useEffect(() => {
     if (!isInfected || !isNearScanLine) {
       // When not glitching, show text with current corrupted positions
-      let newText = originalText.split('');
+      const newText = originalText.split('');
       corruptedPositions.forEach(pos => {
         newText[pos] = infectedText[pos];
       });
@@ -127,7 +127,7 @@ export default function InfectedText({ originalText, infectedText, className = '
           setCorruptedPositions(newCorruptedPositions);
           
           // Create new display text
-          let newText = originalText.split('');
+          const newText = originalText.split('');
           newCorruptedPositions.forEach(pos => {
             newText[pos] = infectedText[pos];
           });

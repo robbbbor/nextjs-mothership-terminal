@@ -38,7 +38,6 @@ const crewLogins: CrewLogin[] = [
 
 export default function LoginScreen() {
   const router = useRouter();
-  const { startGlitch } = useGlitch();
   const { setLoggedInUser } = useUser();
   const [audio] = useState(() => typeof window !== 'undefined' ? new Audio('/sounds/click.mp3') : null);
   const [audioEnabled, setAudioEnabled] = useState(false);

@@ -4,7 +4,6 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import TerminalInterface from '../Terminal/TerminalInterface';
 import GlitchText from '../GlitchText/GlitchText';
-import { useUser } from '@/contexts/UserContext';
 
 interface FilesMenuItem {
   label: string;
@@ -13,7 +12,6 @@ interface FilesMenuItem {
 
 export default function FilesMenu() {
   const router = useRouter();
-  const { loggedInUser } = useUser();
 
   const playSound = () => {
     const audio = new Audio('/sounds/click.mp3');
