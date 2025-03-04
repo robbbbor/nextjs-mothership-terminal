@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
 interface GlitchContextType {
   isGlitchActive: boolean;
@@ -11,15 +11,20 @@ interface GlitchContextType {
 const GlitchContext = createContext<GlitchContextType | undefined>(undefined);
 
 export function GlitchProvider({ children }: { children: React.ReactNode }) {
+  // Initialize with a default value
   const [isGlitchActive, setIsGlitchActive] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // Initialize from localStorage when component mounts
+  // Initialize from localStorage when the component mounts
   useEffect(() => {
     if (typeof window !== 'undefined' && !isInitialized) {
-      const saved = localStorage.getItem('isGlitchActive');
-      if (saved !== null) {
-        setIsGlitchActive(saved === 'true');
+      try {
+        const saved = localStorage.getItem('isGlitchActive');
+        if (saved !== null) {
+          setIsGlitchActive(saved === 'true');
+        }
+      } catch (error) {
+        console.error('Failed to read from localStorage:', error);
       }
       setIsInitialized(true);
     }
@@ -28,15 +33,30 @@ export function GlitchProvider({ children }: { children: React.ReactNode }) {
   // Update localStorage when state changes
   useEffect(() => {
     if (typeof window !== 'undefined' && isInitialized) {
-      localStorage.setItem('isGlitchActive', isGlitchActive.toString());
+      try {
+        localStorage.setItem('isGlitchActive', isGlitchActive.toString());
+      } catch (error) {
+        console.error('Failed to write to localStorage:', error);
+      }
     }
   }, [isGlitchActive, isInitialized]);
 
-  const startGlitch = () => setIsGlitchActive(true);
-  const stopGlitch = () => setIsGlitchActive(false);
+  const startGlitch = useCallback(() => {
+    setIsGlitchActive(true);
+  }, []);
+
+  const stopGlitch = useCallback(() => {
+    setIsGlitchActive(false);
+  }, []);
+
+  const value = {
+    isGlitchActive,
+    startGlitch,
+    stopGlitch
+  };
 
   return (
-    <GlitchContext.Provider value={{ isGlitchActive, startGlitch, stopGlitch }}>
+    <GlitchContext.Provider value={value}>
       {children}
     </GlitchContext.Provider>
   );
