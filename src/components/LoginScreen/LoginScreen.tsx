@@ -7,7 +7,6 @@ import LoadingDialog from '../LoadingDialog/LoadingDialog';
 import TerminalInterface from '../Terminal/TerminalInterface';
 import InfectedText from '../InfectedText/InfectedText';
 import GlitchText from '../GlitchText/GlitchText';
-import { useGlitch } from '@/contexts/GlitchContext';
 import { useUser } from '@/contexts/UserContext';
 
 type DialogType = 'crew' | 'admin' | 'loading' | null;

@@ -20,7 +20,6 @@ export default function GlitchText({ children }: GlitchTextProps) {
       return;
     }
 
-    let frameCount = 0;
     const glitchProbability = 0.01; // Reduced from 0.02 to 0.01 (1% chance per character per frame)
     const frameInterval = 100; // Increased from 50ms to 100ms
 
