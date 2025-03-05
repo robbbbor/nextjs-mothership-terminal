@@ -137,7 +137,7 @@ export default function NavigationPage() {
               >
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                   <Image
-                    src={`/${activeMap}lys.svg`}
+                    src={`${process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal' : ''}/${activeMap}lys.svg`}
                     alt={`Star Map (${activeMap} Light Years)`}
                     width={800}
                     height={800}

@@ -39,7 +39,7 @@ export default function SchematicPage() {
       <div className="schematic-container">
         <div className="schematic-wrapper">
           <Image
-            src="/schematic.svg"
+            src={process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal/schematic.svg' : '/schematic.svg'}
             alt="Ship Schematic"
             width={1200}
             height={900}
