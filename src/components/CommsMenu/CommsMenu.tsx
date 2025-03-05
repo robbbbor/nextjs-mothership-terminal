@@ -56,7 +56,7 @@ export default function CommsMenu() {
         {
           sender: 'PROJECT RICHTER',
           subject: 'this you? XD',
-          content: '<img src="/images/hugo-news.png" alt="News Article" style="max-width: 100%; margin-bottom: 1rem;" />\n\nthat was fucking metal lmao. we\'re impressed. contact us if you want to fuck shit up and show the corporate shills what true anarchy means',
+          content: `<img src="/images/hugo-news.png" alt="News Article" style="width: 100%; height: auto; display: block;" />\n\nLMFAO. We're impressed. Contact us if you want to fuck shit up and show some corporate shills what true anarchy means.`,
           timestamp: '02/23/3442 4:20'
         }
       ];
@@ -274,10 +274,13 @@ export default function CommsMenu() {
                     <div 
                       className={`message-image ${isImageZoomed ? 'zoomed' : ''}`}
                       onClick={handleImageClick}
-                      dangerouslySetInnerHTML={{ 
-                        __html: selectedMessage.content.split('\n\n')[0].replace('max-width: 100%;', '') 
-                      }} 
-                    />
+                    >
+                      <div
+                        dangerouslySetInnerHTML={{ 
+                          __html: selectedMessage.content.split('\n\n')[0]
+                        }} 
+                      />
+                    </div>
                     {isImageZoomed && (
                       <div className="zoom-overlay" onClick={handleImageClick} />
                     )}

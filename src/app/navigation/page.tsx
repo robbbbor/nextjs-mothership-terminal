@@ -81,6 +81,32 @@ export default function NavigationPage() {
     setIsDragging(false);
   };
 
+  // Add touch event handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      setIsDragging(true);
+      setStartPosition({
+        x: touch.clientX - position.x,
+        y: touch.clientY - position.y
+      });
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || e.touches.length !== 1) return;
+    
+    const touch = e.touches[0];
+    setPosition({
+      x: touch.clientX - startPosition.x,
+      y: touch.clientY - startPosition.y
+    });
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
   const currentMap = starMaps.find(map => map.range === activeMap)!;
 
   return (
@@ -130,12 +156,16 @@ export default function NavigationPage() {
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
               onMouseLeave={handleMouseUp}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
               <div 
                 className="star-map-wrapper"
                 style={{
                   transform: `scale(${zoomLevel}) translate(${position.x / zoomLevel}px, ${position.y / zoomLevel}px)`,
-                  cursor: isDragging ? 'grabbing' : 'grab'
+                  cursor: isDragging ? 'grabbing' : 'grab',
+                  touchAction: 'none'
                 }}
               >
                 <Image
@@ -145,6 +175,7 @@ export default function NavigationPage() {
                   height={600}
                   className="star-map"
                   priority
+                  draggable={false}
                 />
                 {(activeMap === '20' || activeMap === '50') && (
                   <div className={`ship-position ${activeMap === '50' ? 'position-50ly' : ''}`}>
@@ -296,13 +327,13 @@ export default function NavigationPage() {
 
         .ship-position {
           position: absolute;
-          left: 89%;
-          top: 46%;
+          left: 77%;
+          top: 45%;
           z-index: 2;
         }
 
         .position-50ly {
-          left: 65.3%;
+          left: 61%;
           top: 48.5%;
         }
 
