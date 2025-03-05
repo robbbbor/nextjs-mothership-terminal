@@ -120,52 +120,6 @@ export default function RosterMenu() {
       </a>
 
       <TerminalInterface />
-
-      <style jsx>{`
-        .roster-name-button {
-          background: none;
-          border: none;
-          width: 100%;
-          text-align: left;
-          padding: 0.5rem 1rem;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          color: var(--menu-text);
-          border: 1px solid transparent;
-        }
-
-        .roster-name-button:hover {
-          background: rgba(var(--menu-text-rgb), 0.1);
-          border: 1px solid var(--menu-text);
-        }
-
-        .roster-name {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .expand-indicator {
-          font-family: "Glass TTY VT220", "VT323", monospace;
-          margin-left: 1rem;
-          opacity: 0.8;
-        }
-
-        .roster-details {
-          animation: slideDown 0.3s ease-out;
-        }
-
-        @keyframes slideDown {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   );
 } 
