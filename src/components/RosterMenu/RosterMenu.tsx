@@ -67,35 +67,37 @@ export default function RosterMenu() {
 
   const toggleCrewDetails = (crewName: string) => {
     playSound('click');
-    setExpandedCrew(expandedCrew === crewName ? null : crewName);
+    setExpandedCrew(prevState => prevState === crewName ? null : crewName);
   };
 
   return (
     <div className="main-menu">
       <h1 className="menu-title"><GlitchText>Roster</GlitchText></h1>
       <div className="separator">========</div>
-      <div className="roster-list">
-        {crewMembers.map((crew, index) => (
-          <div key={index} className="roster-item">
+      <nav className="roster-list">
+        {crewMembers.map((crew) => (
+          <div key={crew.name} className="roster-item">
             <button 
+              type="button"
               className="roster-name-button"
               onClick={() => toggleCrewDetails(crew.name)}
               onMouseEnter={() => playSound('click')}
+              aria-expanded={expandedCrew === crew.name}
             >
               <div className="roster-name">
                 <InfectedText 
                   originalText={crew.name}
                   infectedText={crew.infectedName}
                 />
-                <span className="expand-indicator">
+                <span className="expand-indicator" aria-hidden="true">
                   {expandedCrew === crew.name ? '[-]' : '[+]'}
                 </span>
               </div>
             </button>
             {expandedCrew === crew.name && (
-              <ul className="roster-details">
-                {crew.details.map((detail, detailIndex) => (
-                  <li key={detailIndex} className="roster-detail">
+              <ul className="roster-details" role="list">
+                {crew.details.map((detail) => (
+                  <li key={`${crew.name}-${detail}`} className="roster-detail">
                     <GlitchText>{detail}</GlitchText>
                   </li>
                 ))}
@@ -103,14 +105,14 @@ export default function RosterMenu() {
             )}
           </div>
         ))}
-      </div>
+      </nav>
       <a
         href="/main"
         className="menu-item back-button"
         onMouseEnter={() => playSound('click')}
         onClick={(e) => {
-          playSound('click');
           e.preventDefault();
+          playSound('click');
           setTimeout(() => {
             router.push('/main');
           }, 100);
