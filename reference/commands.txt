@@ -1,4 +1,5 @@
 to push changes to git:
+npm run build
 git status
 git add .
 git commit -m "put changes and comments here"
