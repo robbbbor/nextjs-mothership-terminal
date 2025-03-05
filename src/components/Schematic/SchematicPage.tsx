@@ -24,6 +24,8 @@ const labels: SchematicLabel[] = [
   { id: 'cargo', text: 'CARGO', position: { top: '50%', left: '25%' } },
 ];
 
+const basePath = process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal' : '';
+
 export default function SchematicPage() {
   const playSound = () => {
     const audio = new Audio('/click.mp3');
@@ -39,7 +41,7 @@ export default function SchematicPage() {
       <div className="schematic-container">
         <div className="schematic-wrapper">
           <Image
-            src={process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal/schematic.svg' : '/schematic.svg'}
+            src={`${basePath}/schematic.svg`}
             alt="Ship Schematic"
             width={1200}
             height={900}

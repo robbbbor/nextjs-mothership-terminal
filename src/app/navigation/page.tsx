@@ -7,6 +7,8 @@ import GlitchText from '@/components/GlitchText/GlitchText';
 import TerminalInterface from '@/components/Terminal/TerminalInterface';
 import { useAudio } from '@/hooks/useAudio';
 
+const basePath = process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal' : '';
+
 type StarMapRange = '12' | '20' | '50';
 
 interface StarMapData {
@@ -137,7 +139,7 @@ export default function NavigationPage() {
               >
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                   <Image
-                    src={`${process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal' : ''}/${activeMap}lys.svg`}
+                    src={`${basePath}/${activeMap}lys.svg`}
                     alt={`Star Map (${activeMap} Light Years)`}
                     width={800}
                     height={800}
