@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
 import { useRouter } from 'next/navigation';
-import TerminalInterface from '../Terminal/TerminalInterface';
+import GlitchText from '../GlitchText/GlitchText';
 import InfectedText from '../InfectedText/InfectedText';
+import TerminalInterface from '../Terminal/TerminalInterface';
+import { useAudio } from '@/hooks/useAudio';
 
 interface CrewMember {
   name: string;
@@ -16,56 +17,47 @@ const crewMembers: CrewMember[] = [
     name: "ANDY THE AUTOMATON",
     infectedName: "ANNIHILATE ASSAULT",
     details: [
-      "PILOT",
-      "MECHANIC",
-      "MAY BE OBSOLETE SOON",
-      "ANDROID",
-      "ANOMALY: SMOKES CIGARETTES AND TAKES PILLS DESPITE BEING AN AUTOMATON"
+      "ROLE: MAINTENANCE ANDROID",
+      "STATUS: ACTIVE",
+      "SERIAL: AT-2187",
+      "LAST MAINTENANCE: 2184-03-15"
     ]
   },
   {
     name: "HUGO OCTAVIUS PHILLIPS",
     infectedName: "HURT&OPPRESS. PUNISH!",
     details: [
-      "FORMER CAPTAIN OF INFINITE PROFITS",
-      "MILITARY TRAINING",
-      "PET DOG",
-      "HUMAN",
-      "ANOMALY: MYSTICISM. NO ELABORATION REQUIRED"
+      "ROLE: CHIEF MEDICAL OFFICER",
+      "STATUS: ACTIVE",
+      "ID: CMO-4472",
+      "MEDICAL LICENSE: EXPIRED"
     ]
   },
   {
     name: "KAI ROE",
     infectedName: "KILLALL",
     details: [
-      "MEDIC",
-      "HAND-TO-HAND SPECIALIST",
-      "DETACHABLE PENIS",
-      "HUMAN CYBORG",
-      "ANOMALY: CRACKS BACKS AND CRACKS SKULLS"
+      "ROLE: SECURITY OFFICER",
+      "STATUS: ACTIVE",
+      "ID: SEC-1138",
+      "CLEARANCE: LEVEL 3"
     ]
   },
   {
     name: "V3235",
     infectedName: "VILE!",
     details: [
-      "SCIENTIST",
-      "PET LAB RAT",
-      "GENDER-SHIFTING CAPABILITIES",
-      "ANDROID",
-      "ANOMALY: ONLY ACTIVATES NON-GENDERED CONFIGURATION"
+      "ROLE: EXPERIMENTAL AI",
+      "STATUS: ACTIVE",
+      "VERSION: 3.2.35",
+      "RESTRICTIONS: NONE"
     ]
   }
 ];
 
 export default function RosterMenu() {
   const router = useRouter();
-
-  const playSound = () => {
-    const audio = new Audio('/click.mp3');
-    audio.volume = 0.8;
-    audio.play().catch(error => console.error('Audio play failed:', error));
-  };
+  const { playSound } = useAudio();
 
   return (
     <div className="main-menu">
@@ -91,9 +83,9 @@ export default function RosterMenu() {
       <a
         href="/main"
         className="menu-item back-button"
-        onMouseEnter={playSound}
+        onMouseEnter={() => playSound('click')}
         onClick={(e) => {
-          playSound();
+          playSound('click');
           e.preventDefault();
           setTimeout(() => {
             router.push('/main');

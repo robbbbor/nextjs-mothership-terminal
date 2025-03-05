@@ -8,6 +8,7 @@ import TerminalInterface from '../Terminal/TerminalInterface';
 import InfectedText from '../InfectedText/InfectedText';
 import GlitchText from '../GlitchText/GlitchText';
 import { useUser } from '@/contexts/UserContext';
+import { useAudio } from '@/hooks/useAudio';
 
 type DialogType = 'crew' | 'admin' | 'loading' | null;
 
@@ -38,62 +39,24 @@ const crewLogins: CrewLogin[] = [
 export default function LoginScreen() {
   const router = useRouter();
   const { setLoggedInUser } = useUser();
-  const [audio] = useState(() => typeof window !== 'undefined' ? new Audio('/click.mp3') : null);
-  const [audioEnabled, setAudioEnabled] = useState(false);
+  const { playSound } = useAudio();
   const [showDialog, setShowDialog] = useState<DialogType>(null);
-
-  useEffect(() => {
-    if (audio) {
-      audio.volume = 0.8;
-      
-      // Enable audio on first user interaction
-      const enableAudio = () => {
-        audio.play().then(() => {
-          audio.pause();
-          audio.currentTime = 0;
-          setAudioEnabled(true);
-        }).catch(() => {
-          // Handle any play() failures silently
-        });
-      };
-
-      document.addEventListener('mouseenter', enableAudio, { once: true });
-      document.addEventListener('click', enableAudio, { once: true });
-      
-      return () => {
-        document.removeEventListener('mouseenter', enableAudio);
-        document.removeEventListener('click', enableAudio);
-      };
-    }
-  }, [audio]);
-
-  const playSound = () => {
-    if (audio && audioEnabled) {
-      audio.currentTime = 0;
-      const playPromise = audio.play();
-      if (playPromise) {
-        playPromise.catch(() => {
-          // Handle any play() failures silently
-        });
-      }
-    }
-  };
 
   const handleCrewClick = (crewName?: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    playSound();
+    playSound('click');
     setLoggedInUser(crewName || 'GUEST');
     setShowDialog('loading');
   };
 
   const handleAdminClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    playSound();
+    playSound('click');
     setShowDialog('admin');
   };
 
   const handleLoginSuccess = () => {
-    playSound();
+    playSound('grant');
     if (showDialog === 'admin') {
       setLoggedInUser('ADMIN');
     }
@@ -103,7 +66,7 @@ export default function LoginScreen() {
   };
 
   const handleLoginCancel = () => {
-    playSound();
+    playSound('click');
     setShowDialog(null);
   };
 
@@ -117,7 +80,7 @@ export default function LoginScreen() {
             key={index}
             href="/main"
             className="menu-item"
-            onMouseEnter={playSound}
+            onMouseEnter={() => playSound('click')}
             onClick={handleCrewClick(login.name)}
           >
             LOGIN AS <InfectedText 
@@ -130,7 +93,7 @@ export default function LoginScreen() {
         <a
           href="/main"
           className="menu-item"
-          onMouseEnter={playSound}
+          onMouseEnter={() => playSound('click')}
           onClick={handleCrewClick()}
         >
           LOGIN AS <InfectedText originalText="GUEST           " infectedText="GUESS WHO? :D" />
@@ -138,7 +101,7 @@ export default function LoginScreen() {
         <a
           href="/admin"
           className="menu-item"
-          onMouseEnter={playSound}
+          onMouseEnter={() => playSound('click')}
           onClick={handleAdminClick}
         >
           LOGIN AS <InfectedText originalText="ADMIN" infectedText="ASHLI" />

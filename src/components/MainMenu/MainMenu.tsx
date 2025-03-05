@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import TerminalInterface from '../Terminal/TerminalInterface';
 import GlitchText from '../GlitchText/GlitchText';
+import { useAudio } from '@/hooks/useAudio';
 
 interface MainMenuItem {
   label: string;
@@ -22,16 +23,11 @@ const menuItems: MainMenuItem[] = [
 
 export default function MainMenu() {
   const router = useRouter();
-
-  const playSound = () => {
-    const audio = new Audio('/click.mp3');
-    audio.volume = 0.8;
-    audio.play().catch(error => console.error('Audio play failed:', error));
-  };
+  const { playSound } = useAudio();
 
   const handleLogout = (e: React.MouseEvent) => {
     e.preventDefault();
-    playSound();
+    playSound('click');
     setTimeout(() => {
       router.push('/');
     }, 100);
@@ -47,9 +43,9 @@ export default function MainMenu() {
             key={index}
             href={item.href}
             className="menu-item"
-            onMouseEnter={playSound}
+            onMouseEnter={() => playSound('click')}
             onClick={(e) => {
-              playSound();
+              playSound('click');
               e.preventDefault();
               setTimeout(() => {
                 router.push(item.href);
@@ -63,7 +59,7 @@ export default function MainMenu() {
         <Link
           href="/"
           className="menu-item logout-button"
-          onMouseEnter={playSound}
+          onMouseEnter={() => playSound('click')}
           onClick={handleLogout}
         >
           <GlitchText>LOG OUT</GlitchText>

@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAudio } from '@/hooks/useAudio';
 
 interface LoadingDialogProps {
   onComplete: () => void;
@@ -8,27 +9,16 @@ interface LoadingDialogProps {
 
 export default function LoadingDialog({ onComplete }: LoadingDialogProps) {
   const [message, setMessage] = useState('AUTHENTICATING...');
-
-  const playClickSound = () => {
-    const audio = new Audio('/click.mp3');
-    audio.volume = 0.8;
-    audio.play().catch(error => console.error('Audio play failed:', error));
-  };
-
-  const playGrantSound = () => {
-    const audio = new Audio('/grant.mp3');
-    audio.volume = 0.8;
-    audio.play().catch(error => console.error('Audio play failed:', error));
-  };
+  const { playSound } = useAudio();
 
   useEffect(() => {
     // Play initial sound
-    playClickSound();
+    playSound('click');
     
     // Sequence timing
     const authTimeout = setTimeout(() => {
       setMessage('ACCESS GRANTED');
-      playGrantSound();
+      playSound('grant');
       // Wait a moment after showing "ACCESS GRANTED" before completing
       const completeTimeout = setTimeout(() => {
         onComplete();
@@ -38,7 +28,7 @@ export default function LoadingDialog({ onComplete }: LoadingDialogProps) {
     }, 2000);
 
     return () => clearTimeout(authTimeout);
-  }, [onComplete]);
+  }, [onComplete, playSound]);
 
   return (
     <div className="login-dialog">

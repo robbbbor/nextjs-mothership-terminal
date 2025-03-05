@@ -1,7 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+import GlitchText from '../GlitchText/GlitchText';
 import InfectedText from '../InfectedText/InfectedText';
+import { useAudio } from '@/hooks/useAudio';
 
 interface LoginDialogProps {
   type: 'crew' | 'admin';
@@ -14,30 +16,13 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [isAuthenticating, setIsAuthenticating] = useState(false);
-
-  const playClickSound = () => {
-    const audio = new Audio('/click.mp3');
-    audio.volume = 0.8;
-    audio.play().catch(error => console.error('Audio play failed:', error));
-  };
-
-  const playGrantSound = () => {
-    const audio = new Audio('/grant.mp3');
-    audio.volume = 0.8;
-    audio.play().catch(error => console.error('Audio play failed:', error));
-  };
-
-  const playDenySound = () => {
-    const audio = new Audio('/deny.mp3');
-    audio.volume = 0.8;
-    audio.play().catch(error => console.error('Audio play failed:', error));
-  };
+  const { playSound } = useAudio();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsAuthenticating(true);
     setMessage('AUTHENTICATING...');
-    playClickSound();
+    playSound('click');
 
     const validCreds = credentials[type];
     
@@ -45,13 +30,13 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
     setTimeout(() => {
       if (username === validCreds.username && password === validCreds.password) {
         setMessage('ACCESS GRANTED');
-        playGrantSound();
+        playSound('grant');
         setTimeout(() => {
           onSuccess();
         }, 1500);
       } else {
         setMessage('ACCESS DENIED');
-        playDenySound();
+        playSound('deny');
         setPassword('');
         setTimeout(() => {
           setIsAuthenticating(false);
@@ -63,7 +48,7 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
 
   const handleCancel = (e: React.MouseEvent) => {
     e.preventDefault();
-    playClickSound();
+    playSound('click');
     onCancel();
   };
 
@@ -117,7 +102,7 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
               <button 
                 type="submit" 
                 className="menu-item"
-                onMouseEnter={playClickSound}
+                onMouseEnter={() => playSound('click')}
               >
                 LOGIN
               </button>
@@ -125,7 +110,7 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
                 type="button" 
                 className="menu-item" 
                 onClick={handleCancel}
-                onMouseEnter={playClickSound}
+                onMouseEnter={() => playSound('click')}
               >
                 CANCEL
               </button>

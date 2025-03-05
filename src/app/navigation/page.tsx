@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import TerminalInterface from '@/components/Terminal/TerminalInterface';
 import GlitchText from '@/components/GlitchText/GlitchText';
+import TerminalInterface from '@/components/Terminal/TerminalInterface';
+import { useAudio } from '@/hooks/useAudio';
 
 type StarMapRange = '12' | '20' | '50';
 
@@ -38,15 +39,10 @@ export default function NavigationPage() {
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
-
-  const playSound = () => {
-    const audio = new Audio('/click.mp3');
-    audio.volume = 0.8;
-    audio.play().catch(error => console.error('Audio play failed:', error));
-  };
+  const { playSound } = useAudio();
 
   const handleTabClick = (range: StarMapRange) => {
-    playSound();
+    playSound('click');
     setActiveMap(range);
     // Reset zoom and position when changing maps
     setZoomLevel(1);
@@ -54,6 +50,7 @@ export default function NavigationPage() {
   };
 
   const handleZoom = (delta: number) => {
+    playSound('click');
     setZoomLevel(prev => {
       const newZoom = prev + delta * 0.1;
       return Math.min(Math.max(newZoom, 0.5), 3); // Limit zoom between 0.5x and 3x
@@ -70,7 +67,7 @@ export default function NavigationPage() {
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging) return;
-    
+
     setPosition({
       x: e.clientX - startPosition.x,
       y: e.clientY - startPosition.y
@@ -81,33 +78,7 @@ export default function NavigationPage() {
     setIsDragging(false);
   };
 
-  // Add touch event handlers
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length === 1) {
-      const touch = e.touches[0];
-      setIsDragging(true);
-      setStartPosition({
-        x: touch.clientX - position.x,
-        y: touch.clientY - position.y
-      });
-    }
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging || e.touches.length !== 1) return;
-    
-    const touch = e.touches[0];
-    setPosition({
-      x: touch.clientX - startPosition.x,
-      y: touch.clientY - startPosition.y
-    });
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
-  const currentMap = starMaps.find(map => map.range === activeMap)!;
+  const currentMap = starMaps.find(map => map.range === activeMap) || starMaps[1];
 
   return (
     <main>
@@ -123,26 +94,27 @@ export default function NavigationPage() {
                   key={map.range}
                   className={`map-tab ${activeMap === map.range ? 'active' : ''}`}
                   onClick={() => handleTabClick(map.range)}
-                  onMouseEnter={playSound}
+                  onMouseEnter={() => playSound('click')}
                 >
                   <GlitchText>{`${map.range}LY`}</GlitchText>
                 </button>
               ))}
             </div>
             <div className="zoom-controls">
-              <button className="zoom-button" onClick={() => handleZoom(1)} onMouseEnter={playSound}>
+              <button className="zoom-button" onClick={() => handleZoom(1)} onMouseEnter={() => playSound('click')}>
                 <GlitchText>ZOOM +</GlitchText>
               </button>
-              <button className="zoom-button" onClick={() => handleZoom(-1)} onMouseEnter={playSound}>
+              <button className="zoom-button" onClick={() => handleZoom(-1)} onMouseEnter={() => playSound('click')}>
                 <GlitchText>ZOOM -</GlitchText>
               </button>
               <button 
                 className="zoom-button" 
                 onClick={() => {
+                  playSound('click');
                   setZoomLevel(1);
                   setPosition({ x: 0, y: 0 });
                 }}
-                onMouseEnter={playSound}
+                onMouseEnter={() => playSound('click')}
               >
                 <GlitchText>RESET</GlitchText>
               </button>
@@ -156,44 +128,37 @@ export default function NavigationPage() {
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
               onMouseLeave={handleMouseUp}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
             >
               <div 
                 className="star-map-wrapper"
                 style={{
                   transform: `scale(${zoomLevel}) translate(${position.x / zoomLevel}px, ${position.y / zoomLevel}px)`,
-                  cursor: isDragging ? 'grabbing' : 'grab',
-                  touchAction: 'none'
+                  cursor: isDragging ? 'grabbing' : 'grab'
                 }}
               >
                 <Image
                   src={`/${activeMap}lys.svg`}
-                  alt={`Star map showing all stars within ${activeMap} light years of Earth`}
+                  alt={`Star Map (${activeMap} Light Years)`}
                   width={800}
-                  height={600}
+                  height={800}
                   className="star-map"
                   priority
-                  draggable={false}
                 />
-                {(activeMap === '20' || activeMap === '50') && (
+                {activeMap !== '12' && (
                   <div className={`ship-position ${activeMap === '50' ? 'position-50ly' : ''}`}>
-                    <div className="ship-dot"></div>
-                    <div className="ship-pulse"></div>
-                  </div>
-                )}
-                {activeMap === '12' && (
-                  <div className="error-message">
-                    <GlitchText>ERROR: SHIP OUTSIDE MAP RANGE</GlitchText>
+                    <div className="ship-dot" />
+                    <div className="ship-pulse" />
                   </div>
                 )}
               </div>
+              {activeMap === '12' && (
+                <div className="error-message">
+                  <GlitchText>SHIP POSITION OUTSIDE MAP RANGE</GlitchText>
+                </div>
+              )}
             </div>
             <div className="map-description">
-              <GlitchText>
-                {currentMap.description}
-              </GlitchText>
+              <GlitchText>{currentMap.description}</GlitchText>
             </div>
           </div>
         </div>
@@ -201,8 +166,8 @@ export default function NavigationPage() {
         <Link
           href="/main"
           className="menu-item back-button"
-          onMouseEnter={playSound}
-          onClick={playSound}
+          onMouseEnter={() => playSound('click')}
+          onClick={() => playSound('click')}
         >
           <GlitchText>BACK TO MAIN MENU</GlitchText>
         </Link>

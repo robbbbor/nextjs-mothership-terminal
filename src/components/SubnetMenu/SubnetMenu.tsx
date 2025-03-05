@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import TerminalInterface from '../Terminal/TerminalInterface';
 import GlitchText from '../GlitchText/GlitchText';
+import TerminalInterface from '../Terminal/TerminalInterface';
+import { useAudio } from '@/hooks/useAudio';
 
 interface SubnetMenuItem {
   label: string;
@@ -17,12 +18,7 @@ const menuItems: SubnetMenuItem[] = [
 export default function SubnetMenu() {
   const router = useRouter();
   const [showErrorDialog, setShowErrorDialog] = useState(false);
-
-  const playSound = () => {
-    const audio = new Audio('/click.mp3');
-    audio.volume = 0.8;
-    audio.play().catch(error => console.error('Audio play failed:', error));
-  };
+  const { playSound } = useAudio();
 
   return (
     <div className="main-menu">
@@ -42,9 +38,9 @@ export default function SubnetMenu() {
             key={index}
             href={item.href}
             className="menu-item"
-            onMouseEnter={playSound}
+            onMouseEnter={() => playSound('click')}
             onClick={(e) => {
-              playSound();
+              playSound('click');
               e.preventDefault();
               setShowErrorDialog(true);
             }}
@@ -55,9 +51,9 @@ export default function SubnetMenu() {
         <a
           href="/main"
           className="menu-item back-button"
-          onMouseEnter={playSound}
+          onMouseEnter={() => playSound('click')}
           onClick={(e) => {
-            playSound();
+            playSound('click');
             e.preventDefault();
             setTimeout(() => {
               router.push('/main');
@@ -72,9 +68,16 @@ export default function SubnetMenu() {
         <div className="dialog-overlay" onClick={() => setShowErrorDialog(false)}>
           <div className="dialog-content" onClick={(e) => e.stopPropagation()}>
             <div className="error-message">
-              <GlitchText>error: subnet offline</GlitchText>
+              <GlitchText>ERROR: SUBNET OFFLINE</GlitchText>
+              <div className="separator">--------</div>
+              <GlitchText>Unable to establish connection.</GlitchText>
+              <GlitchText>Please check network status.</GlitchText>
             </div>
-            <button className="dialog-close" onClick={() => setShowErrorDialog(false)}>
+            <button 
+              className="dialog-close" 
+              onClick={() => setShowErrorDialog(false)}
+              onMouseEnter={() => playSound('click')}
+            >
               <GlitchText>CLOSE</GlitchText>
             </button>
           </div>

@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
 import { useRouter } from 'next/navigation';
-import TerminalInterface from '../Terminal/TerminalInterface';
 import GlitchText from '../GlitchText/GlitchText';
+import TerminalInterface from '../Terminal/TerminalInterface';
+import { useAudio } from '@/hooks/useAudio';
 
 interface FilesMenuItem {
   label: string;
@@ -12,12 +12,7 @@ interface FilesMenuItem {
 
 export default function FilesMenu() {
   const router = useRouter();
-
-  const playSound = () => {
-    const audio = new Audio('/click.mp3');
-    audio.volume = 0.8;
-    audio.play().catch(error => console.error('Audio play failed:', error));
-  };
+  const { playSound } = useAudio();
 
   // Define menu items based on logged-in user
   const getMenuItems = (): FilesMenuItem[] => {
@@ -42,9 +37,9 @@ export default function FilesMenu() {
             key={index}
             href={item.href}
             className="menu-item"
-            onMouseEnter={playSound}
+            onMouseEnter={() => playSound('click')}
             onClick={(e) => {
-              playSound();
+              playSound('click');
               e.preventDefault();
               setTimeout(() => {
                 router.push(item.href);
@@ -57,9 +52,9 @@ export default function FilesMenu() {
         <a
           href="/main"
           className="menu-item back-button"
-          onMouseEnter={playSound}
+          onMouseEnter={() => playSound('click')}
           onClick={(e) => {
-            playSound();
+            playSound('click');
             e.preventDefault();
             setTimeout(() => {
               router.push('/main');
