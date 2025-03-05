@@ -843,11 +843,11 @@ main::before {
 /* Schematic styles */
 .schematic-container {
   width: 100%;
-  max-width: 100vw;
+  max-width: 1200px;
   position: relative;
   aspect-ratio: 4/3;
   border: 1px solid var(--menu-text);
-  margin: 2rem 0;
+  margin: 2rem auto;
   padding: 1rem;
   opacity: 0.9;
   display: flex;
@@ -867,8 +867,10 @@ main::before {
 }
 
 .schematic-image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
   filter: brightness(0.8) sepia(0.2) hue-rotate(160deg);
   transition: filter 0.3s ease;
@@ -1002,17 +1004,21 @@ img, Image {
 
 .message-image {
   width: 100%;
+  max-width: 800px;
   height: auto;
   border: 1px solid var(--menu-text);
   background: rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  margin: 0 auto;
 }
 
 .message-image img {
-  width: 100%;
+  max-width: 100%;
+  width: auto;
   height: auto;
   object-fit: contain;
   display: block;
+  margin: 0 auto;
 }
 
 .message-image.zoomed {
@@ -1020,7 +1026,8 @@ img, Image {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90vw;
+  width: auto;
+  max-width: 90vw;
   max-height: 90vh;
   z-index: 1100;
   background: var(--background);
@@ -1051,10 +1058,13 @@ img, Image {
 /* Star map styles */
 .star-map-container {
   width: 100%;
-  max-width: 100vw;
-  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
   position: relative;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--menu-text);
+  background: rgba(0, 0, 0, 0.3);
   touch-action: none;
 }
 
@@ -1078,6 +1088,23 @@ img, Image {
   user-select: none;
 }
 
+.ship-position {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ship-position.position-50ly {
+  left: 61%;
+  top: 48.5%;
+}
+
+.ship-position:not(.position-50ly) {
+  left: 77%;
+  top: 45%;
+}
+
 /* Media queries for mobile devices */
 @media (max-width: 768px) {
   .message-image.zoomed {
@@ -1091,8 +1118,8 @@ img, Image {
     padding: 0.1rem 0.3rem;
   }
 
-  .star-map-container,
-  .schematic-container {
-    aspect-ratio: 1/1;
+  .star-map-container {
+    aspect-ratio: 1;
+    margin: 1rem auto;
   }
 }

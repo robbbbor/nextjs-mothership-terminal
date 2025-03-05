@@ -1,13 +1,13 @@
 # Next.js Mothership Terminal
 
-This project is inspired by and based on [PHOSPHOR](https://redhg.com/ypsilon14/) by [redhg](https://redhg.com), a retro terminal simulator for Mothership ttrpg. The original project was created for [The Haunting of Ypsilon 14](https://www.mothershiprpg.com/pamphlet-adventures/#The_Haunting_Of_Ypsilon_14), a module written by D G Chapman for [the Mothership tabletop roleplaying game](https://www.mothershiprpg.com/).
+This project is inspired by and based on [PHOSPHOR](https://redhg.com/ypsilon14/) by [redhg](https://redhg.com), a terminal simulator for Mothership ttrpg [the Mothership tabletop roleplaying game](https://www.mothershiprpg.com/).
 
 This project was created for use with my own homebrew Mothership game.
 
 Special thanks to:
 - [redhg](https://redhg.com) for the original PHOSPHOR terminal project
 - [Quadra's post](https://www.traaa.sh/the-ypsilon-14-terminal) which inspired the original project
-- D G Chapman for The Haunting of Ypsilon 14 module
+- [atlas of the universe] (http://www.atlasoftheuniverse.com) website created by Richard Powell to give an idea of what the universe actually looks like 
 - [Mothership RPG](https://www.mothershiprpg.com/) team
 
 This is a modernized version built with [Next.js](https://nextjs.org) and bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).

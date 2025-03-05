@@ -97,7 +97,7 @@ export default function CommsMenu() {
         {
           sender: 'Voxon Industries',
           subject: 'Limited Time Offer For Those With Limited Time!',
-          content: 'Worried about becoming obsolete? Obsolescence got you down? Get an upgrade today! We\'ll take all the important parts about what makes you who you are and shove them into a more efficient, up-to-date package that will be updated for years to come. 20 year service guarantee. Prices starting at $799,999. Ask about our payment plans!',
+          content: 'Worried about becoming obsolete? Obsolescence got you down? Get an upgrade today! We\'ll take all the important parts about what makes you who you are and shove them into a more efficient package that will be updated for years to come. 20 year service guarantee. Prices starting at $799,999. Ask about our payment plans!',
           timestamp: '02/21/3442 23:15'
         }
       ];
@@ -107,7 +107,7 @@ export default function CommsMenu() {
         {
           sender: 'PROJECT RICHTER',
           subject: 'this you? XD',
-          content: 'that was fucking metal lmao. we\'re impressed. contact us if you want to fuck shit up and show some corporate shills what true anarchy means',
+          content: 'LMAO. You\'ve got our attention. I assume you know who we are. Contact us if you want to fuck shit up and show some corporate shills what true anarchy means.  -PROJECT RICHTER',
           timestamp: '02/23/3442 4:20',
           image: {
             src: process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal/hugo-news.png' : '/hugo-news.png',

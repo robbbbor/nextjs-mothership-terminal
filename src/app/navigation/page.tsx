@@ -122,34 +122,34 @@ export default function NavigationPage() {
             <h2 className="section-title">
               <GlitchText>{currentMap.title}</GlitchText>
             </h2>
-            <div 
-              className="star-map-container"
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-            >
+            <div className="star-map-container">
               <div 
                 className="star-map-wrapper"
                 style={{
                   transform: `scale(${zoomLevel}) translate(${position.x / zoomLevel}px, ${position.y / zoomLevel}px)`,
-                  cursor: isDragging ? 'grabbing' : 'grab'
+                  cursor: isDragging ? 'grabbing' : 'grab',
+                  width: '100%',
+                  height: '100%',
+                  position: 'relative'
                 }}
               >
-                <Image
-                  src={`/${activeMap}lys.svg`}
-                  alt={`Star Map (${activeMap} Light Years)`}
-                  width={800}
-                  height={800}
-                  className="star-map"
-                  priority
-                />
-                {activeMap !== '12' && (
-                  <div className={`ship-position ${activeMap === '50' ? 'position-50ly' : ''}`}>
-                    <div className="ship-dot" />
-                    <div className="ship-pulse" />
-                  </div>
-                )}
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  <Image
+                    src={`/${activeMap}lys.svg`}
+                    alt={`Star Map (${activeMap} Light Years)`}
+                    width={800}
+                    height={800}
+                    className="star-map"
+                    priority
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                  />
+                  {activeMap !== '12' && (
+                    <div className={`ship-position ${activeMap === '50' ? 'position-50ly' : ''}`}>
+                      <div className="ship-dot" />
+                      <div className="ship-pulse" />
+                    </div>
+                  )}
+                </div>
               </div>
               {activeMap === '12' && (
                 <div className="error-message">
@@ -241,12 +241,12 @@ export default function NavigationPage() {
         .star-map-container {
           position: relative;
           width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin: 1rem 0;
+          max-width: 1200px;
+          margin: 1rem auto;
+          aspect-ratio: 1;
           overflow: hidden;
-          height: 600px;
+          border: 1px solid var(--menu-text);
+          background: rgba(0, 0, 0, 0.3);
         }
 
         .star-map-wrapper {
@@ -256,8 +256,9 @@ export default function NavigationPage() {
         }
 
         .star-map {
-          max-width: 100%;
-          height: auto;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
           filter: brightness(0.8) sepia(0.2) hue-rotate(160deg);
           transition: filter 0.3s ease;
         }
@@ -292,14 +293,18 @@ export default function NavigationPage() {
 
         .ship-position {
           position: absolute;
-          left: 77%;
-          top: 45%;
+          transform: translate(-50%, -50%);
           z-index: 2;
         }
 
-        .position-50ly {
-          left: 61%;
+        .ship-position.position-50ly {
+          left: 65.4%;
           top: 48.5%;
+        }
+
+        .ship-position:not(.position-50ly) {
+          left: 89%;
+          top: 45%;
         }
 
         .ship-dot {
