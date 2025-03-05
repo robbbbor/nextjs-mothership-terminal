@@ -470,9 +470,11 @@ export default function CommsMenu() {
           cursor: pointer;
           padding: 0.5rem 1rem;
           width: 100%;
-          transition: all 0.2s ease;
+          transition: all 0.3s ease;
           color: var(--menu-text);
           border-bottom: 1px solid rgba(var(--menu-text-rgb), 0.2);
+          position: relative;
+          overflow: hidden;
         }
         .message-button::before {
           content: none;
@@ -481,7 +483,13 @@ export default function CommsMenu() {
           border-bottom: none;
         }
         .message-button:hover {
-          background: rgba(var(--menu-text-rgb), 0.1);
+          background: var(--menu-text);
+          color: var(--background);
+          text-shadow: none;
+        }
+        .message-button:hover :global(.glitch-text) {
+          color: var(--background);
+          text-shadow: none;
         }
         .message-preview {
           display: grid;
