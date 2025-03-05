@@ -10,7 +10,7 @@ import { useUser } from '@/contexts/UserContext';
 interface CommsMessage {
   sender: string;
   subject: string;
-  content: string;
+  content: string | string[];
   timestamp?: string;
   image?: {
     src: string;
@@ -18,6 +18,7 @@ interface CommsMessage {
     width: number;
     height: number;
   };
+  hasMalware?: boolean;
 }
 
 export default function CommsMenu() {
@@ -79,8 +80,9 @@ export default function CommsMenu() {
         {
           sender: 'Dr. Vortex\'s Lab of Wonders',
           subject: '🚀🐭 Upgrade Your Pet Today!',
-          content: 'Attention, valued synthetic lifeform! Is your organic companion fragile, inefficient, or prone to unfortunate mortality? Upgrade your pet today with BioMod Solutions™!\n\n✅ Neural Uplink Compatibility – Sync your rat\'s thoughts directly to your database!\n✅ Enhanced Durability – Never worry about accidental squishing again!\n✅ Cybernetic Enhancements – Jetpack? Laser eyes? We got you.\n\nAct now and receive a FREE mini exosuit for your rodent friend! 🦾🐀\n\nClick here to evolve your pet: <span className="malware-link" onClick={handleMalwareClick}>[TotallyNotAMalwareLink.exe]</span>',
-          timestamp: '02/23/3442 15:30'
+          content: ['Attention, valued synthetic lifeform! Is your organic companion fragile, inefficient, or prone to unfortunate mortality? Upgrade your pet today with BioMod Solutions™!\n\n✅ Neural Uplink Compatibility – Sync your rat\'s thoughts directly to your database!\n✅ Enhanced Durability – Never worry about accidental squishing again!\n✅ Cybernetic Enhancements – Jetpack? Laser eyes? We got you.\n\nAct now and receive a FREE mini exosuit for your rodent friend! 🦾🐀\n\nClick here to evolve your pet: ', '[TotallyNotAMalwareLink.exe]'],
+          timestamp: '02/23/3442 15:30',
+          hasMalware: true
         }
       ];
     }
@@ -89,8 +91,9 @@ export default function CommsMenu() {
         {
           sender: 'Dr. Vortex\'s Lab of Wonders',
           subject: '🤖 Need a Spare? Detachable Appendages for Every Occasion!',
-          content: 'Dear Kai,\nTired of the same old limbs? Want more flexibility in your everyday life? At XtraLimbs Unlimited, we\'ve got the perfect solution for you!\n\n🔧 Swap on the Fly! – Choose from an array of high-performance detachable appendages!\n🔥 Enhanced Features! – Strength boosters, spinning blades, built-in beverage dispensers—customize your experience!\n🤫 Discreet & Secure! – No one has to know which parts you\'ve upgraded…\n\nFor a limited time, get a FREE emergency backup limb with your first order!\n\nClick here to browse our collection: <span className="malware-link" onClick={handleMalwareClick}>[TotallyNotAMalwareLink.exe]</span>',
-          timestamp: '02/23/3442 15:45'
+          content: ['Dear Kai,\nTired of the same old limbs? Want more flexibility in your everyday life? At XtraLimbs Unlimited, we\'ve got the perfect solution for you!\n\n🔧 Swap on the Fly! – Choose from an array of high-performance detachable appendages!\n🔥 Enhanced Features! – Strength boosters, spinning blades, built-in beverage dispensers—customize your experience!\n🤫 Discreet & Secure! – No one has to know which parts you\'ve upgraded…\n\nFor a limited time, get a FREE emergency backup limb with your first order!\n\nClick here to browse our collection: ', '[TotallyNotAMalwareLink.exe]'],
+          timestamp: '02/23/3442 15:45',
+          hasMalware: true
         }
       ];
     }
@@ -297,7 +300,18 @@ export default function CommsMenu() {
               )}
               <div className="message-text">
                 <GlitchText>
-                  <div dangerouslySetInnerHTML={{ __html: selectedMessage.content }} />
+                  {Array.isArray(selectedMessage.content) ? (
+                    <>
+                      {selectedMessage.content[0]}
+                      {selectedMessage.hasMalware && (
+                        <span className="malware-link" onClick={handleMalwareClick}>
+                          {selectedMessage.content[1]}
+                        </span>
+                      )}
+                    </>
+                  ) : (
+                    selectedMessage.content
+                  )}
                 </GlitchText>
               </div>
             </div>
