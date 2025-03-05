@@ -122,7 +122,13 @@ export default function NavigationPage() {
             <h2 className="section-title">
               <GlitchText>{currentMap.title}</GlitchText>
             </h2>
-            <div className="star-map-container">
+            <div 
+              className="star-map-container"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+            >
               <div 
                 className="star-map-wrapper"
                 style={{
