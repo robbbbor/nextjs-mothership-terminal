@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import TerminalInterface from '../Terminal/TerminalInterface';
 import GlitchText from '../GlitchText/GlitchText';
 import { useUser } from '@/contexts/UserContext';
@@ -11,6 +12,12 @@ interface CommsMessage {
   subject: string;
   content: string;
   timestamp?: string;
+  image?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
 }
 
 export default function CommsMenu() {
@@ -56,16 +63,14 @@ export default function CommsMenu() {
         {
           sender: 'PROJECT RICHTER',
           subject: 'this you? XD',
-          content: `<div style="width: 100%; height: auto; display: block;">
-            <img 
-              src="/hugo-news.png" 
-              alt="News Article" 
-              width="800"
-              height="600"
-              style="width: 100%; height: auto; display: block;"
-            />
-          </div>\n\nthat was fucking metal lmao. we're impressed. contact us if you want to fuck shit up and show some corporate shills what true anarchy means`,
-          timestamp: '02/23/3442 4:20'
+          content: 'that was fucking metal lmao. we\'re impressed. contact us if you want to fuck shit up and show some corporate shills what true anarchy means',
+          timestamp: '02/23/3442 4:20',
+          image: {
+            src: '/hugo-news.png',
+            alt: 'News Article',
+            width: 800,
+            height: 600
+          }
         }
       ];
     }
@@ -263,62 +268,36 @@ export default function CommsMenu() {
         <div className="dialog-overlay" onClick={handleCloseDialog}>
           <div className="dialog-content" onClick={(e) => e.stopPropagation()}>
             <div className="message-header">
-              <div className="message-from">
-                <GlitchText>FROM: {selectedMessage.sender}</GlitchText>
-              </div>
-              <div className="message-subject-line">
-                <GlitchText>SUBJECT: {selectedMessage.subject}</GlitchText>
-              </div>
-              {selectedMessage.timestamp && (
-                <div className="message-timestamp">
-                  <GlitchText>{selectedMessage.timestamp}</GlitchText>
+              <div className="message-info">
+                <div className="message-sender">
+                  <GlitchText>FROM: {selectedMessage.sender}</GlitchText>
                 </div>
-              )}
+                <div className="message-subject">
+                  <GlitchText>SUBJECT: {selectedMessage.subject}</GlitchText>
+                </div>
+                {selectedMessage.timestamp && (
+                  <div className="message-timestamp">
+                    <GlitchText>TIMESTAMP: {selectedMessage.timestamp}</GlitchText>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="message-body">
-              {selectedMessage.content.includes('<img') ? (
-                <>
-                  <div className="message-image-container">
-                    <div 
-                      className={`message-image ${isImageZoomed ? 'zoomed' : ''}`}
-                      onClick={handleImageClick}
-                    >
-                      <div
-                        dangerouslySetInnerHTML={{ 
-                          __html: selectedMessage.content.split('\n\n')[0]
-                        }} 
-                      />
-                    </div>
-                    {isImageZoomed && (
-                      <div className="zoom-overlay" onClick={handleImageClick} />
-                    )}
-                  </div>
-                  <div className="message-text">
-                    <GlitchText>
-                      {selectedMessage.content.split('\n\n')[1]}
-                    </GlitchText>
-                  </div>
-                </>
-              ) : (
-                <div className="message-text">
-                  {selectedMessage.content.split('\n').map((line, index) => (
-                    <div key={index}>
-                      {line.includes('[TotallyNotAMalwareLink.exe]') ? (
-                        <>
-                          <GlitchText>
-                            {line.split('[TotallyNotAMalwareLink.exe]')[0]}
-                          </GlitchText>
-                          <a href="#" className="malware-link" onClick={handleMalwareClick}>
-                            <GlitchText>[TotallyNotAMalwareLink.exe]</GlitchText>
-                          </a>
-                        </>
-                      ) : (
-                        <GlitchText>{line}</GlitchText>
-                      )}
-                    </div>
-                  ))}
+              {selectedMessage.image && (
+                <div className={`message-image ${isImageZoomed ? 'zoomed' : ''}`}>
+                  <Image
+                    src={selectedMessage.image.src}
+                    alt={selectedMessage.image.alt}
+                    width={selectedMessage.image.width}
+                    height={selectedMessage.image.height}
+                    onClick={handleImageClick}
+                    style={{ width: '100%', height: 'auto', cursor: 'pointer' }}
+                  />
                 </div>
               )}
+              <div className="message-text">
+                <GlitchText>{selectedMessage.content}</GlitchText>
+              </div>
             </div>
             <button className="dialog-close" onClick={handleCloseDialog}>
               <GlitchText>CLOSE</GlitchText>
@@ -505,10 +484,13 @@ export default function CommsMenu() {
           padding-bottom: 1rem;
           border-bottom: 1px solid var(--menu-text);
         }
-        .message-from {
+        .message-info {
           margin-bottom: 0.5rem;
         }
-        .message-subject-line {
+        .message-sender {
+          margin-bottom: 0.5rem;
+        }
+        .message-subject {
           margin-bottom: 0.5rem;
         }
         .message-timestamp {
@@ -520,42 +502,16 @@ export default function CommsMenu() {
           white-space: pre-wrap;
           line-height: 1.5;
         }
-        .message-image-container {
-          display: flex;
-          justify-content: center;
-          margin-bottom: 0.5rem;
-          position: relative;
-        }
         .message-image {
-          cursor: pointer;
-          transition: all 0.3s ease;
-          width: 400px;
-          position: relative;
-          z-index: 1;
+          width: 100%;
+          margin-bottom: 1rem;
+          transition: transform 0.3s ease;
         }
         .message-image.zoomed {
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%) scale(2);
-          z-index: 1100;
-        }
-        .zoom-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.8);
-          z-index: 1050;
-        }
-        .message-image img {
-          width: 100%;
-          height: auto;
-          display: block;
+          transform: scale(1.5);
         }
         .message-text {
-          text-align: left;
+          white-space: pre-wrap;
         }
         .dialog-close {
           position: absolute;

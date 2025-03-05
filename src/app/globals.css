@@ -970,10 +970,26 @@ main::before {
 }
 
 /* Global image styles */
-img {
+img, Image {
   max-width: 100%;
   height: auto;
   display: block;
+  margin: 0 auto;
+}
+
+.next-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.next-image-wrapper > span {
+  position: unset !important;
+}
+
+.next-image-wrapper img {
+  position: relative !important;
+  height: auto !important;
 }
 
 /* Message image styles */
