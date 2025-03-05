@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import TerminalInterface from '../Terminal/TerminalInterface';
@@ -31,11 +31,41 @@ export default function CommsMenu() {
   const [invertColors, setInvertColors] = useState(false);
   const [installProgress, setInstallProgress] = useState(0);
   const [showPopupAds, setShowPopupAds] = useState<number[]>([]);
+  const [audioElements] = useState(() => ({
+    click: typeof Audio !== 'undefined' ? new Audio('/click.mp3') : null,
+    grant: typeof Audio !== 'undefined' ? new Audio('/grant.mp3') : null,
+    deny: typeof Audio !== 'undefined' ? new Audio('/deny.mp3') : null
+  }));
 
-  const playSound = () => {
-    const audio = new Audio('/click.mp3');
-    audio.volume = 0.8;
-    audio.play().catch(error => console.error('Audio play failed:', error));
+  const playSound = (type: 'click' | 'grant' | 'deny' = 'click') => {
+    try {
+      const audio = audioElements?.[type];
+      if (audio) {
+        audio.volume = 0.8;
+        audio.currentTime = 0;
+        audio.play().catch(error => {
+          console.warn(`Audio play failed: ${error.message}`);
+        });
+      }
+    } catch (error) {
+      console.warn(`Sound playback error: ${error}`);
+    }
+  };
+
+  useEffect(() => {
+    // Preload audio files
+    if (typeof Audio !== 'undefined') {
+      Object.values(audioElements || {}).forEach(audio => {
+        if (audio) {
+          audio.load();
+        }
+      });
+    }
+  }, [audioElements]);
+
+  // Error boundary for image loading
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    console.warn('Image failed to load:', e);
   };
 
   const generalMessages: CommsMessage[] = [
@@ -103,13 +133,13 @@ export default function CommsMenu() {
   const personalMessages = getPersonalMessages();
 
   const handleMessageClick = (message: CommsMessage) => {
-    playSound();
+    playSound('click');
     setSelectedMessage(message);
     setIsDialogOpen(true);
   };
 
   const handleCloseDialog = () => {
-    playSound();
+    playSound('click');
     setIsDialogOpen(false);
     setSelectedMessage(null);
     setIsImageZoomed(false);
@@ -118,12 +148,12 @@ export default function CommsMenu() {
   const handleImageClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsImageZoomed(!isImageZoomed);
-    playSound();
+    playSound('click');
   };
 
   const handleMalwareClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    playSound();
+    playSound('click');
     setShowInstalling(true);
     setInstallProgress(0);
 
@@ -192,7 +222,7 @@ export default function CommsMenu() {
               <button
             key={index}
                 className="message-button menu-item"
-            onMouseEnter={playSound}
+            onMouseEnter={() => playSound('click')}
                 onClick={() => handleMessageClick(message)}
               >
                 <div className="message-preview">
@@ -228,7 +258,7 @@ export default function CommsMenu() {
                   <button
                     key={index}
                     className="message-button menu-item"
-                    onMouseEnter={playSound}
+                    onMouseEnter={() => playSound('click')}
                     onClick={() => handleMessageClick(message)}
                   >
                     <div className="message-preview">
@@ -253,10 +283,10 @@ export default function CommsMenu() {
         <a
           href="/main"
           className="menu-item back-button"
-          onMouseEnter={playSound}
+          onMouseEnter={() => playSound('click')}
           onClick={(e) => {
-            playSound();
             e.preventDefault();
+            playSound('click');
             setTimeout(() => {
               router.push('/main');
             }, 100);
@@ -294,6 +324,8 @@ export default function CommsMenu() {
                     width={selectedMessage.image.width}
                     height={selectedMessage.image.height}
                     onClick={handleImageClick}
+                    onError={handleImageError}
+                    priority
                     style={{ width: '100%', height: 'auto', cursor: 'pointer' }}
                   />
                 </div>
