@@ -40,7 +40,7 @@ export default function NavigationPage() {
   const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
 
   const playSound = () => {
-    const audio = new Audio('/sounds/click.mp3');
+    const audio = new Audio('/click.mp3');
     audio.volume = 0.8;
     audio.play().catch(error => console.error('Audio play failed:', error));
   };
@@ -169,7 +169,7 @@ export default function NavigationPage() {
                 }}
               >
                 <Image
-                  src={`/images/${activeMap}lys.svg`}
+                  src={`/${activeMap}lys.svg`}
                   alt={`Star map showing all stars within ${activeMap} light years of Earth`}
                   width={800}
                   height={600}

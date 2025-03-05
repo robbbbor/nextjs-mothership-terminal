@@ -15,20 +15,20 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
   const [message, setMessage] = useState('');
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  const playSound = () => {
-    const audio = new Audio('/sounds/click.mp3');
+  const playClickSound = () => {
+    const audio = new Audio('/click.mp3');
     audio.volume = 0.8;
     audio.play().catch(error => console.error('Audio play failed:', error));
   };
 
   const playGrantSound = () => {
-    const audio = new Audio('/sounds/grant.mp3');
+    const audio = new Audio('/grant.mp3');
     audio.volume = 0.8;
     audio.play().catch(error => console.error('Audio play failed:', error));
   };
 
   const playDenySound = () => {
-    const audio = new Audio('/sounds/deny.mp3');
+    const audio = new Audio('/deny.mp3');
     audio.volume = 0.8;
     audio.play().catch(error => console.error('Audio play failed:', error));
   };
@@ -37,7 +37,7 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
     e.preventDefault();
     setIsAuthenticating(true);
     setMessage('AUTHENTICATING...');
-    playSound();
+    playClickSound();
 
     const validCreds = credentials[type];
     
@@ -63,7 +63,7 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
 
   const handleCancel = (e: React.MouseEvent) => {
     e.preventDefault();
-    playSound();
+    playClickSound();
     onCancel();
   };
 
@@ -117,7 +117,7 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
               <button 
                 type="submit" 
                 className="menu-item"
-                onMouseEnter={playSound}
+                onMouseEnter={playClickSound}
               >
                 LOGIN
               </button>
@@ -125,7 +125,7 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
                 type="button" 
                 className="menu-item" 
                 onClick={handleCancel}
-                onMouseEnter={playSound}
+                onMouseEnter={playClickSound}
               >
                 CANCEL
               </button>

@@ -9,21 +9,21 @@ interface LoadingDialogProps {
 export default function LoadingDialog({ onComplete }: LoadingDialogProps) {
   const [message, setMessage] = useState('AUTHENTICATING...');
 
-  const playSound = () => {
-    const audio = new Audio('/sounds/click.mp3');
+  const playClickSound = () => {
+    const audio = new Audio('/click.mp3');
     audio.volume = 0.8;
     audio.play().catch(error => console.error('Audio play failed:', error));
   };
 
   const playGrantSound = () => {
-    const audio = new Audio('/sounds/grant.mp3');
+    const audio = new Audio('/grant.mp3');
     audio.volume = 0.8;
     audio.play().catch(error => console.error('Audio play failed:', error));
   };
 
   useEffect(() => {
     // Play initial sound
-    playSound();
+    playClickSound();
     
     // Sequence timing
     const authTimeout = setTimeout(() => {

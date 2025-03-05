@@ -25,7 +25,7 @@ export default function CommsMenu() {
   const [showPopupAds, setShowPopupAds] = useState<number[]>([]);
 
   const playSound = () => {
-    const audio = new Audio('/sounds/click.mp3');
+    const audio = new Audio('/click.mp3');
     audio.volume = 0.8;
     audio.play().catch(error => console.error('Audio play failed:', error));
   };
@@ -56,7 +56,15 @@ export default function CommsMenu() {
         {
           sender: 'PROJECT RICHTER',
           subject: 'this you? XD',
-          content: `<img src="/images/hugo-news.png" alt="News Article" style="width: 100%; height: auto; display: block;" />\n\nLMFAO. We're impressed. Contact us if you want to fuck shit up and show some corporate shills what true anarchy means.`,
+          content: `<div style="width: 100%; height: auto; display: block;">
+            <img 
+              src="/hugo-news.png" 
+              alt="News Article" 
+              width="800"
+              height="600"
+              style="width: 100%; height: auto; display: block;"
+            />
+          </div>\n\nthat was fucking metal lmao. we're impressed. contact us if you want to fuck shit up and show some corporate shills what true anarchy means`,
           timestamp: '02/23/3442 4:20'
         }
       ];

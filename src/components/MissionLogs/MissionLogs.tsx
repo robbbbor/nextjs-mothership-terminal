@@ -513,7 +513,7 @@ export default function MissionLogs() {
   }, []);
 
   const playSound = () => {
-    const audio = new Audio('/sounds/click.mp3');
+    const audio = new Audio('/click.mp3');
     audio.volume = 0.8;
     audio.play().catch(error => console.error('Audio play failed:', error));
   };

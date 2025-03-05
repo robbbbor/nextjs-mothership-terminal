@@ -38,7 +38,7 @@ const crewLogins: CrewLogin[] = [
 export default function LoginScreen() {
   const router = useRouter();
   const { setLoggedInUser } = useUser();
-  const [audio] = useState(() => typeof window !== 'undefined' ? new Audio('/sounds/click.mp3') : null);
+  const [audio] = useState(() => typeof window !== 'undefined' ? new Audio('/click.mp3') : null);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [showDialog, setShowDialog] = useState<DialogType>(null);
 

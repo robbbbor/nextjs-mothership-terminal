@@ -26,7 +26,7 @@ const labels: SchematicLabel[] = [
 
 export default function SchematicPage() {
   const playSound = () => {
-    const audio = new Audio('/sounds/click.mp3');
+    const audio = new Audio('/click.mp3');
     audio.volume = 0.8;
     audio.play().catch(error => console.error('Audio play failed:', error));
   };
@@ -39,12 +39,12 @@ export default function SchematicPage() {
       <div className="schematic-container">
         <div className="schematic-wrapper">
           <Image
-            src="/images/schematic.svg"
+            src="/schematic.svg"
             alt="Ship Schematic"
-            width={800}
-            height={600}
-            priority
+            width={1200}
+            height={900}
             className="schematic-image"
+            priority
           />
           <div className="schematic-labels">
             {labels.map((label) => (
