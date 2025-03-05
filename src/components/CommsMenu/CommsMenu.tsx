@@ -31,11 +31,14 @@ export default function CommsMenu() {
   const [invertColors, setInvertColors] = useState(false);
   const [installProgress, setInstallProgress] = useState(0);
   const [showPopupAds, setShowPopupAds] = useState<number[]>([]);
-  const [audioElements] = useState(() => ({
-    click: typeof Audio !== 'undefined' ? new Audio('/click.mp3') : null,
-    grant: typeof Audio !== 'undefined' ? new Audio('/grant.mp3') : null,
-    deny: typeof Audio !== 'undefined' ? new Audio('/deny.mp3') : null
-  }));
+  const [audioElements] = useState(() => {
+    const basePath = process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal' : '';
+    return {
+      click: typeof Audio !== 'undefined' ? new Audio(`${basePath}/click.mp3`) : null,
+      grant: typeof Audio !== 'undefined' ? new Audio(`${basePath}/grant.mp3`) : null,
+      deny: typeof Audio !== 'undefined' ? new Audio(`${basePath}/deny.mp3`) : null
+    };
+  });
 
   const playSound = (type: 'click' | 'grant' | 'deny' = 'click') => {
     try {
@@ -61,6 +64,16 @@ export default function CommsMenu() {
         }
       });
     }
+
+    // Clean up audio elements on unmount
+    return () => {
+      Object.values(audioElements || {}).forEach(audio => {
+        if (audio) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      });
+    };
   }, [audioElements]);
 
   // Error boundary for image loading
@@ -97,7 +110,7 @@ export default function CommsMenu() {
           content: 'that was fucking metal lmao. we\'re impressed. contact us if you want to fuck shit up and show some corporate shills what true anarchy means',
           timestamp: '02/23/3442 4:20',
           image: {
-            src: '/hugo-news.png',
+            src: process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal/hugo-news.png' : '/hugo-news.png',
             alt: 'News Article',
             width: 800,
             height: 600
