@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import LoginDialog from '../LoginDialog/LoginDialog';
 import LoadingDialog from '../LoadingDialog/LoadingDialog';

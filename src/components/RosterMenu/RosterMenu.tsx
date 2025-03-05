@@ -61,7 +61,7 @@ export default function RosterMenu() {
 
   return (
     <div className="main-menu">
-      <h1 className="menu-title">Roster</h1>
+      <h1 className="menu-title"><GlitchText>Roster</GlitchText></h1>
       <div className="separator">========</div>
       <div className="roster-list">
         {crewMembers.map((crew, index) => (
@@ -92,7 +92,7 @@ export default function RosterMenu() {
           }, 100);
         }}
       >
-        BACK TO MAIN MENU
+        <GlitchText>BACK TO MAIN MENU</GlitchText>
       </a>
 
       <TerminalInterface />
