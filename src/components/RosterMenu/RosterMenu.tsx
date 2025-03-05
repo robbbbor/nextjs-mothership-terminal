@@ -30,7 +30,7 @@ const crewMembers: CrewMember[] = [
     details: [
       "FORMER CAPTAIN OF INFINITE PROFITS",
       "MILITARY TRAINING",
-      "PET DOG",
+      "HAS A PET DOG",
       "HUMAN",
       "ANOMALY: MYSTICISM. NO ELABORATION REQUIRED"
     ]
@@ -40,10 +40,10 @@ const crewMembers: CrewMember[] = [
     infectedName: "KILLALL",
     details: [
       "MEDIC",
-      "HAND-TO-HAND SPECIALIST",
-      "DETACHABLE PENIS",
+      "HAND-TO-HAND SPECIALIST. CRACKS SKULLS",
+      "HAND-TO-BACK SPECIALIST. CRACKS BACKS",
       "HUMAN CYBORG",
-      "ANOMALY: CRACKS BACKS AND CRACKS SKULLS"
+      "ANOMALY: DETACHABLE APPENDAGE. UNSPECIFIED"
     ]
   },
   {
@@ -51,7 +51,7 @@ const crewMembers: CrewMember[] = [
     infectedName: "VILE!",
     details: [
       "SCIENTIST",
-      "PET LAB RAT",
+      "HAS A PET LAB RAT",
       "GENDER-SHIFTING CAPABILITIES",
       "ANDROID",
       "ANOMALY: ONLY ACTIVATES NON-GENDERED CONFIGURATION"
