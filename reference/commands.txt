@@ -9,3 +9,8 @@ to get updated from git:
 
 to run program locally:
 npm run dev
+
+delete next folder
+rm -r -Force .next
+
+The text appears dull because it's being rendered behind the scan lines and CRT effects. Let's fix this by adjusting the z-index and adding proper text shadows. I'll update the styling:

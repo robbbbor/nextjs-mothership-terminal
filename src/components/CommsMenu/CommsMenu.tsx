@@ -8,7 +8,9 @@ import GlitchText from '../GlitchText/GlitchText';
 import { useUser } from '@/contexts/UserContext';
 
 interface CommsMessage {
+  id?: string;
   sender: string;
+  senderName?: string;
   subject: string;
   content: string;
   timestamp?: string;
@@ -19,6 +21,7 @@ interface CommsMessage {
     height: number;
   };
   hasMalware?: boolean;
+  read?: boolean;
 }
 
 export default function CommsMenu() {
@@ -31,6 +34,7 @@ export default function CommsMenu() {
   const [invertColors, setInvertColors] = useState(false);
   const [installProgress, setInstallProgress] = useState(0);
   const [showPopupAds, setShowPopupAds] = useState<number[]>([]);
+  const [realTimeMessages, setRealTimeMessages] = useState<CommsMessage[]>([]);
   const [audioElements] = useState(() => {
     const basePath = process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal' : '';
     return {
@@ -39,6 +43,8 @@ export default function CommsMenu() {
       deny: typeof Audio !== 'undefined' ? new Audio(`${basePath}/deny.mp3`) : null
     };
   });
+
+  // Message subscription removed - Firebase dependency removed
 
   const playSound = (type: 'click' | 'grant' | 'deny' = 'click') => {
     try {
@@ -81,73 +87,40 @@ export default function CommsMenu() {
     console.warn('Image failed to load:', e);
   };
 
-  const generalMessages: CommsMessage[] = [
-    {
-      sender: 'Johnson',
-      subject: 'WTF',
-      content: '!!! WHAT THE FUCK DID YOU DO?!?! CONTACT ME IMMEDIATELY.',
-      timestamp: '02/22/3442 2:43'
-    }
-  ];
-
-  // Personal messages based on logged-in user
+  // Get all messages for display to the user (different filtering for admins vs regular users)
   const getPersonalMessages = (): CommsMessage[] => {
-    if (loggedInUser === 'ANDY THE AUTOMATON') {
-      return [
-        {
-          sender: 'Voxon Industries',
-          subject: 'Limited Time Offer For Those With Limited Time!',
-          content: 'Worried about becoming obsolete? Obsolescence got you down? Get an upgrade today! We\'ll take all the important parts about what makes you who you are and shove them into a more efficient package that will be updated for years to come. 20 year service guarantee. Prices starting at $799,999. Ask about our payment plans!',
-          timestamp: '02/21/3442 23:15'
-        }
-      ];
+    // Admin users should see all messages, including system messages
+    const isAdmin = loggedInUser === 'ADMIN';
+    if (isAdmin) {
+      console.log(`Admin user: showing all ${realTimeMessages.length} messages including system messages`);
+      return realTimeMessages;
     }
-    if (loggedInUser === 'HUGO OCTAVIUS PHILLIPS') {
-      return [
-        {
-          sender: 'PROJECT RICHTER',
-          subject: 'this you? XD',
-          content: 'LMAO. You\'ve got our attention. I assume you know who we are. Contact us if you want to fuck shit up and show some corporate shills what true anarchy means.  -PROJECT RICHTER',
-          timestamp: '02/23/3442 4:20',
-          image: {
-            src: process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal/hugo-news.png' : '/hugo-news.png',
-            alt: 'News Article',
-            width: 800,
-            height: 600
-          }
-        }
-      ];
-    }
-    if (loggedInUser === 'V3235') {
-      return [
-        {
-          sender: 'Dr. Vortex\'s Lab of Wonders',
-          subject: '🚀🐭 Upgrade Your Pet Today!',
-          content: 'Attention, valued synthetic lifeform! Is your organic companion fragile, inefficient, or prone to unfortunate mortality? Upgrade your pet today with BioMod Solutions™!\n\n✅ Neural Uplink Compatibility – Sync your rat\'s thoughts directly to your database!\n✅ Enhanced Durability – Never worry about accidental squishing again!\n✅ Cybernetic Enhancements – Jetpack? Laser eyes? We got you.\n\nAct now and receive a FREE mini exosuit for your rodent friend! 🦾🐀\n\nClick here to evolve your pet: [TotallyNotAMalwareLink.exe]',
-          timestamp: '02/23/3442 15:30',
-          hasMalware: true
-        }
-      ];
-    }
-    if (loggedInUser === 'KAI ROE') {
-      return [
-        {
-          sender: 'Dr. Vortex\'s Lab of Wonders',
-          subject: '🤖 Need a Spare? Detachable Appendages for Every Occasion!',
-          content: 'Dear Kai,\nTired of the same old limbs? Want more flexibility in your everyday life? At XtraLimbs Unlimited, we\'ve got the perfect solution for you!\n\n🔧 Swap on the Fly! – Choose from an array of high-performance detachable appendages!\n🔥 Enhanced Features! – Strength boosters, spinning blades, built-in beverage dispensers—customize your experience!\n🤫 Discreet & Secure! – No one has to know which parts you\'ve upgraded…\n\nFor a limited time, get a FREE emergency backup limb with your first order!\n\nClick here to browse our collection: [TotallyNotAMalwareLink.exe]',
-          timestamp: '02/23/3442 15:45',
-          hasMalware: true
-        }
-      ];
-    }
-    return [];
+    
+    // For non-admin users, filter out system messages
+    const userMessages = realTimeMessages.filter(msg => 
+      msg.sender !== 'SYSTEM' // Exclude system messages for regular users
+    );
+    
+    console.log(`Regular user: showing ${userMessages.length} messages (filtered from ${realTimeMessages.length})`);
+    return userMessages;
   };
 
   const personalMessages = getPersonalMessages();
 
   const handleMessageClick = (message: CommsMessage) => {
     playSound('click');
-    setSelectedMessage(message);
+    
+    // Check if message contains malware link text - case insensitive, with or without brackets
+    const hasMalwareLink = message.content && 
+      message.content.toLowerCase().includes('totallynotamalwarelink.exe');
+    
+    // Add malware property dynamically to any message containing the link text
+    const messageWithMalwareCheck = {
+      ...message,
+      hasMalware: hasMalwareLink || message.hasMalware
+    };
+    
+    setSelectedMessage(messageWithMalwareCheck);
     setIsDialogOpen(true);
   };
 
@@ -201,6 +174,19 @@ export default function CommsMenu() {
     }, 2000);
   };
 
+  const handleDeleteMessage = async (messageId: string) => {
+    if (!messageId || loggedInUser !== 'ADMIN') return;
+    
+    try {
+      playSound('deny');
+      // Message deletion removed - Firebase dependency removed
+      setIsDialogOpen(false);
+      setSelectedMessage(null);
+    } catch (error) {
+      console.error('Error deleting message:', error);
+    }
+  };
+
   return (
     <div className={`main-menu ${invertColors ? 'invert' : ''}`}>
       <div className="header-container">
@@ -219,38 +205,6 @@ export default function CommsMenu() {
       <div className="separator">========</div>
       
       <div className="comms-sections">
-        {/* General Messages Section */}
-        <div className="comms-section">
-          <h2 className="section-title"><GlitchText>GENERAL</GlitchText></h2>
-          <div className="messages-container">
-            <div className="messages-header">
-              <div className="header-sender">
-                <GlitchText>SENDER</GlitchText>
-              </div>
-              <div className="header-subject">
-                <GlitchText>SUBJECT</GlitchText>
-              </div>
-            </div>
-            {generalMessages.map((message, index) => (
-              <button
-            key={index}
-                className="message-button menu-item"
-            onMouseEnter={() => playSound('click')}
-                onClick={() => handleMessageClick(message)}
-              >
-                <div className="message-preview">
-                  <div className="preview-sender">
-                    <GlitchText>{message.sender}</GlitchText>
-                  </div>
-                  <div className="preview-subject">
-                    <GlitchText>{message.subject}</GlitchText>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* Personal Messages Section - Only shown if user is logged in */}
         {loggedInUser && (
           <div className="comms-section">
@@ -269,7 +223,7 @@ export default function CommsMenu() {
               {personalMessages.length > 0 ? (
                 personalMessages.map((message, index) => (
                   <button
-                    key={index}
+                    key={message.id || index}
                     className="message-button menu-item"
                     onMouseEnter={() => playSound('click')}
                     onClick={() => handleMessageClick(message)}
@@ -292,6 +246,8 @@ export default function CommsMenu() {
             </div>
           </div>
         )}
+
+        {/* Admin Message Panel - Removed (Firebase dependency) */}
 
         <a
           href="/main"
@@ -327,6 +283,14 @@ export default function CommsMenu() {
                   </div>
                 )}
               </div>
+              {loggedInUser === 'ADMIN' && selectedMessage.id && (
+                <button 
+                  className="delete-button" 
+                  onClick={() => handleDeleteMessage(selectedMessage.id || '')}
+                >
+                  <GlitchText>DELETE MESSAGE</GlitchText>
+                </button>
+              )}
             </div>
             <div className="message-body">
               {selectedMessage.image && (
@@ -345,7 +309,7 @@ export default function CommsMenu() {
               )}
               <div className="message-text">
                 {selectedMessage.hasMalware ? (
-                  selectedMessage.content.split('[TotallyNotAMalwareLink.exe]').map((part, index, array) => (
+                  selectedMessage.content.split(/\[?TotallyNotAMalwareLink\.exe\]?/i).map((part, index, array) => (
                     <React.Fragment key={index}>
                       <GlitchText>{part}</GlitchText>
                       {index < array.length - 1 && (
@@ -493,7 +457,7 @@ export default function CommsMenu() {
         }
         .message-preview {
           display: grid;
-          grid-template-columns: 200px 1fr;
+          grid-template-columns: minmax(150px, 200px) 1fr;
           width: 100%;
           gap: 0;
           position: relative;
@@ -501,7 +465,7 @@ export default function CommsMenu() {
         .message-preview::after {
           content: '';
           position: absolute;
-          left: 200px;
+          left: minmax(150px, 200px);
           top: -0.5rem;
           bottom: -0.5rem;
           width: 1px;
@@ -510,10 +474,19 @@ export default function CommsMenu() {
         }
         .preview-sender {
           padding-right: 1rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          min-width: 150px;
+          max-width: 200px;
         }
         .preview-subject {
           padding-left: 1rem;
           opacity: 0.8;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          min-width: 0;
         }
         .no-messages {
           color: var(--menu-text);
@@ -547,11 +520,16 @@ export default function CommsMenu() {
           text-shadow: var(--text-glow);
           font-size: 1.8rem;
           margin: 2rem;
+          padding-top: 4rem;
         }
         .message-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
           margin-bottom: 2rem;
           padding-bottom: 1rem;
           border-bottom: 1px solid var(--menu-text);
+          padding-right: 2rem;
         }
         .message-info {
           margin-bottom: 0.5rem;
@@ -596,6 +574,7 @@ export default function CommsMenu() {
           transition: all 0.2s ease;
           font-size: 1.8rem;
           text-shadow: var(--text-glow);
+          z-index: 1;
         }
         .dialog-close:hover {
           color: var(--background);
@@ -728,6 +707,18 @@ export default function CommsMenu() {
         .invert {
           filter: invert(1);
           transition: filter 0.1s ease;
+        }
+        .delete-button {
+          background: rgba(255, 0, 0, 0.2);
+          border: 1px solid rgba(255, 0, 0, 0.5);
+          color: var(--foreground);
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          margin-left: 1rem;
+        }
+        .delete-button:hover {
+          background: rgba(255, 0, 0, 0.4);
         }
       `}</style>
 

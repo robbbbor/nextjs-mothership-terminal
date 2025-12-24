@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import InfectedText from '../InfectedText/InfectedText';
 import { useAudio } from '@/hooks/useAudio';
+import { useRouter } from 'next/navigation';
+import { useInfection } from '@/contexts/InfectionContext';
 
 interface LoginDialogProps {
   type: 'crew' | 'admin';
@@ -16,8 +18,10 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
   const [message, setMessage] = useState('');
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const { playSound } = useAudio();
+  const router = useRouter();
+  const { isInfected } = useInfection();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsAuthenticating(true);
     setMessage('AUTHENTICATING...');
@@ -30,9 +34,19 @@ export default function LoginDialog({ type, onSuccess, onCancel }: LoginDialogPr
       if (username === validCreds.username && password === validCreds.password) {
         setMessage('ACCESS GRANTED');
         playSound('grant');
-        setTimeout(() => {
-          onSuccess();
-        }, 1500);
+        
+        if (type === 'admin' && username === 'ASHLI') {
+          if (isInfected) {
+            console.log('Infection active, redirecting to Ashli page...');
+            router.push('/ashli');
+          } else {
+            onSuccess();
+          }
+        } else {
+          setTimeout(() => {
+            onSuccess();
+          }, 1500);
+        }
       } else {
         setMessage('ACCESS DENIED');
         playSound('deny');

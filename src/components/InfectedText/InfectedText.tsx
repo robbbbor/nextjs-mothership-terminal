@@ -7,9 +7,17 @@ interface InfectedTextProps {
   originalText: string;
   infectedText: string;
   className?: string;
+  speedMultiplier?: number; // Multiplier for corruption speed (default: 1.0)
+  corruptionRate?: number; // Number of characters to corrupt per pass (default: 2)
 }
 
-export default function InfectedText({ originalText, infectedText, className = '' }: InfectedTextProps) {
+export default function InfectedText({ 
+  originalText, 
+  infectedText, 
+  className = '',
+  speedMultiplier = 1.0,
+  corruptionRate = 2
+}: InfectedTextProps) {
   const { isInfected } = useInfection();
   const [glitchPhase, setGlitchPhase] = useState(0);
   const [displayText, setDisplayText] = useState(originalText);
@@ -30,17 +38,29 @@ export default function InfectedText({ originalText, infectedText, className = '
     const checkScanLineProximity = () => {
       const element = elementRef.current;
       const scanLine = document.querySelector('.scan-line') as HTMLElement;
+      const infectionScanLine = document.querySelector('.infection-scan-line') as HTMLElement;
       
-      if (!element || !scanLine) return;
+      if (!element || (!scanLine && !infectionScanLine)) return;
 
       const elementRect = element.getBoundingClientRect();
-      const scanLineRect = scanLine.getBoundingClientRect();
-      
       const elementMidpoint = elementRect.top + elementRect.height / 2;
-      const scanLineMidpoint = scanLineRect.top + scanLineRect.height / 2;
       
       const distanceThreshold = 40;
-      const isNear = Math.abs(scanLineMidpoint - elementMidpoint) < distanceThreshold;
+      let isNear = false;
+
+      // Check regular scan line
+      if (scanLine) {
+        const scanLineRect = scanLine.getBoundingClientRect();
+        const scanLineMidpoint = scanLineRect.top + scanLineRect.height / 2;
+        isNear = isNear || Math.abs(scanLineMidpoint - elementMidpoint) < distanceThreshold;
+      }
+
+      // Check infection scan line
+      if (infectionScanLine) {
+        const infectionScanLineRect = infectionScanLine.getBoundingClientRect();
+        const infectionScanLineMidpoint = infectionScanLineRect.top + infectionScanLineRect.height / 2;
+        isNear = isNear || Math.abs(infectionScanLineMidpoint - elementMidpoint) < distanceThreshold;
+      }
       
       // Only trigger if we weren't near before and enough time has passed
       if (isNear && !isNearScanLine && Date.now() - lastGlitchTime.current > 2000) {
@@ -78,20 +98,26 @@ export default function InfectedText({ originalText, infectedText, className = '
     const startGlitchSequence = () => {
       setGlitchPhase(1);
       
-      // Phase 1: Initial glitch (200ms)
+      // Phase 1: Initial glitch (200ms / speedMultiplier)
+      const phase1Interval = Math.max(10, 100 / speedMultiplier);
+      const phase1Duration = Math.max(50, 200 / speedMultiplier);
+      
       glitchInterval = setInterval(() => {
         setDisplayText(Math.random() > 0.5 ? originalText : infectedText);
-      }, 100);
+      }, phase1Interval);
 
-      // Phase 2: Rapid glitch (100ms)
+      // Phase 2: Rapid glitch (100ms / speedMultiplier)
+      const phase2Interval = Math.max(10, 50 / speedMultiplier);
+      const phase2Duration = Math.max(25, 100 / speedMultiplier);
+      
       phaseTimeout = setTimeout(() => {
         setGlitchPhase(2);
         clearInterval(glitchInterval);
         glitchInterval = setInterval(() => {
           setDisplayText(Math.random() > 0.3 ? infectedText : originalText);
-        }, 50);
+        }, phase2Interval);
 
-        // Final phase: Return to mixed text with two more characters corrupted
+        // Final phase: Return to mixed text with corruptionRate characters corrupted
         setTimeout(() => {
           clearInterval(glitchInterval);
           
@@ -117,10 +143,14 @@ export default function InfectedText({ originalText, infectedText, className = '
             newCorruptedPositions.add(firstUncorruptedPos);
           }
           
-          // Corrupt a random position if available
-          if (availablePositions.length > 0) {
-            const randomIndex = Math.floor(Math.random() * availablePositions.length);
-            newCorruptedPositions.add(availablePositions[randomIndex]);
+          // Corrupt additional random positions based on corruptionRate
+          const positionsToCorrupt = Math.min(corruptionRate - 1, availablePositions.length);
+          const shuffledPositions = [...availablePositions].sort(() => Math.random() - 0.5);
+          
+          for (let i = 0; i < positionsToCorrupt; i++) {
+            if (shuffledPositions[i] !== undefined) {
+              newCorruptedPositions.add(shuffledPositions[i]);
+            }
           }
           
           // Update corrupted positions
@@ -133,8 +163,8 @@ export default function InfectedText({ originalText, infectedText, className = '
           });
           setDisplayText(newText.join(''));
           setGlitchPhase(0);
-        }, 100);
-      }, 200);
+        }, phase2Duration);
+      }, phase1Duration);
     };
 
     startGlitchSequence();
@@ -143,7 +173,7 @@ export default function InfectedText({ originalText, infectedText, className = '
       clearInterval(glitchInterval);
       clearTimeout(phaseTimeout);
     };
-  }, [isInfected, isNearScanLine, originalText, infectedText, corruptedPositions]);
+  }, [isInfected, isNearScanLine, originalText, infectedText, corruptedPositions, speedMultiplier, corruptionRate]);
 
   // Split text into corrupted and uncorrupted parts for rendering
   const renderText = () => {

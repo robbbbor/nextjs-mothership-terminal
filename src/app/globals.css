@@ -1,6 +1,5 @@
-/* Add VT323 font */
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 @theme {
   --font-sans: var(--font-geist-sans);
@@ -405,6 +404,48 @@ main::before {
   pointer-events: none;
   z-index: 5;
   mix-blend-mode: screen;
+}
+
+.infection-scan-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 0, 0, 0.4),
+    rgba(255, 0, 0, 0.7),
+    rgba(255, 0, 0, 0.4),
+    transparent
+  );
+  animation: infectionScanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 5;
+  mix-blend-mode: screen;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.infection-scan-line.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes infectionScanline {
+  0% {
+    transform: translateY(100vh);
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0.1;
+  }
 }
 
 /* Evil AI Glitch Effect - First appearance (200ms) */

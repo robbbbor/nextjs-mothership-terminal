@@ -4,7 +4,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useInfection } from '@/contexts/InfectionContext';
 import { useGlitch } from '@/contexts/GlitchContext';
 
-export default function TerminalInterface() {
+interface TerminalInterfaceProps {
+  onCustomCommand?: (command: string) => boolean; // Returns true if command was handled
+}
+
+export default function TerminalInterface({ onCustomCommand }: TerminalInterfaceProps = {}) {
   const { isInfected, startInfection } = useInfection();
   const { isGlitchActive, startGlitch, stopGlitch } = useGlitch();
   const [terminalInput, setTerminalInput] = useState('');
@@ -32,6 +36,12 @@ export default function TerminalInterface() {
     if (e.key === 'Enter') {
       const command = terminalInput.trim().toLowerCase();
       let response: string[] = [];
+
+      // Check for custom command handler first
+      if (onCustomCommand && onCustomCommand(command)) {
+        setTerminalInput('');
+        return;
+      }
 
       // Handle the glitch command
       if (command === 'run glitch.exe') {

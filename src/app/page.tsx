@@ -1,9 +1,15 @@
-import LoginScreen from '@/components/LoginScreen/LoginScreen';
+'use client';
 
-export default function Home() {
-  return (
-    <main>
-      <LoginScreen />
-    </main>
-  );
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function HomePage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to terminal page on load
+    router.push('/terminal');
+  }, [router]);
+
+  return null;
 }
