@@ -26,7 +26,7 @@ export default function HackingGame() {
   const { playSound } = useAudio();
   const [codeBlocks, setCodeBlocks] = useState<CodeBlock[]>([]);
   const [selectedBlock, setSelectedBlock] = useState<number | null>(null);
-  const [gameComplete, setGameComplete] = useState(false);
+  const [gameComplete] = useState(false); // Kept for compatibility but not actively used
   const [timeLeft, setTimeLeft] = useState(10);
   const [currentPhase, setCurrentPhase] = useState<GamePhase>('matching');
   const [scrollingLines, setScrollingLines] = useState<string[]>([]);
@@ -76,11 +76,12 @@ export default function HackingGame() {
   useEffect(() => {
     const initialBlocks = Array(5).fill(null).map((_, index) => generateCodeBlock(index));
     setCodeBlocks(initialBlocks);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Timer countdown
   useEffect(() => {
-    if (timeLeft > 0 && !gameComplete && currentPhase === 'matching') {
+    if (timeLeft > 0 && currentPhase === 'matching') {
       const timer = setInterval(() => {
         setTimeLeft(prev => prev - 1);
       }, 1000);
@@ -93,7 +94,7 @@ export default function HackingGame() {
       setSelectedBlock(null);
       playSound('click');
     }
-  }, [timeLeft, gameComplete, currentPhase, playSound]);
+  }, [timeLeft, currentPhase, playSound]);
 
   // Handle scrolling phase
   useEffect(() => {
@@ -283,7 +284,7 @@ export default function HackingGame() {
     return (
       <div className="hacking-game scrolling">
         <div className="scrolling-header">
-          <GlitchText>TO INITIATE OVERRIDE, SELECT "ACCESS OVERRIDE 3-1-7-2"</GlitchText>
+          <GlitchText>TO INITIATE OVERRIDE, SELECT &quot;ACCESS OVERRIDE 3-1-7-2&quot;</GlitchText>
         </div>
         <div className="scrolling-container" ref={scrollContainerRef}>
           {scrollingLines.map((line, index) => (

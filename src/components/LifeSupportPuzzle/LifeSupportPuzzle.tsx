@@ -226,10 +226,10 @@ export default function LifeSupportPuzzle() {
       // Add cascading extreme effects for any gravity change
       setTimeout(() => {
         // Extreme boost to other gases
-        let extraOtherGases = Math.min(20, newOtherGases * 1.5); // 50% boost instead of 20%
-        let remainingGases = 100 - extraOtherGases;
-        let extraOxygen = Math.max(5, remainingGases * (newOxygen / (newOxygen + newNitrogen)));
-        let extraNitrogen = 100 - extraOtherGases - extraOxygen;
+        const extraOtherGases = Math.min(20, newOtherGases * 1.5); // 50% boost instead of 20%
+        const remainingGases = 100 - extraOtherGases;
+        const extraOxygen = Math.max(5, remainingGases * (newOxygen / (newOxygen + newNitrogen)));
+        const extraNitrogen = 100 - extraOtherGases - extraOxygen;
         
         setOtherGases(extraOtherGases);
         setOxygen(extraOxygen);
@@ -237,10 +237,10 @@ export default function LifeSupportPuzzle() {
         
         // Add another extreme boost after a short delay
         setTimeout(() => {
-          let finalOtherGases = Math.min(20, extraOtherGases * 1.3);
-          let finalRemainingGases = 100 - finalOtherGases;
-          let finalOxygen = Math.max(5, finalRemainingGases * (extraOxygen / (extraOxygen + extraNitrogen)));
-          let finalNitrogen = 100 - finalOtherGases - finalOxygen;
+          const finalOtherGases = Math.min(20, extraOtherGases * 1.3);
+          const finalRemainingGases = 100 - finalOtherGases;
+          const finalOxygen = Math.max(5, finalRemainingGases * (extraOxygen / (extraOxygen + extraNitrogen)));
+          const finalNitrogen = 100 - finalOtherGases - finalOxygen;
           
           setOtherGases(finalOtherGases);
           setOxygen(finalOxygen);
@@ -428,6 +428,7 @@ export default function LifeSupportPuzzle() {
     if (!gameWon && !showInstructions) {
       checkRanges(); // Only update warnings, don't check win condition
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [oxygen, nitrogen, otherGases, pressure, temperature, gravity]);
 
   return (

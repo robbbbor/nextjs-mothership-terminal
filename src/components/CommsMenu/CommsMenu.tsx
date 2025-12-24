@@ -34,7 +34,7 @@ export default function CommsMenu() {
   const [invertColors, setInvertColors] = useState(false);
   const [installProgress, setInstallProgress] = useState(0);
   const [showPopupAds, setShowPopupAds] = useState<number[]>([]);
-  const [realTimeMessages, setRealTimeMessages] = useState<CommsMessage[]>([]);
+  const [realTimeMessages] = useState<CommsMessage[]>([]);
   const [audioElements] = useState(() => {
     const basePath = process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal' : '';
     return {

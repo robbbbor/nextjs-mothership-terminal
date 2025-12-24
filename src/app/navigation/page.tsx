@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import GlitchText from '@/components/GlitchText/GlitchText';
-import TerminalInterface from '@/components/Terminal/TerminalInterface';
 import { useAudio } from '@/hooks/useAudio';
 
 const basePath = process.env.NODE_ENV === 'production' ? '/nextjs-mothership-terminal' : '';
@@ -51,7 +50,7 @@ export default function NavigationPage() {
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
-  const [shipPositions, setShipPositions] = useState<ShipPositions>({
+  const [shipPositions] = useState<ShipPositions>({
     '12': { x: 50, y: 50, isOutsideMap: false },
     '20': { x: 50, y: 50, isOutsideMap: false },
     '50': { x: 50, y: 50, isOutsideMap: false }

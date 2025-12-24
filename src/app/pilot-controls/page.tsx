@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import GlitchText from '@/components/GlitchText/GlitchText';
 import { useAudio } from '@/hooks/useAudio';
 import { useRouter } from 'next/navigation';
@@ -44,7 +44,6 @@ export default function PilotControls() {
   const [understood, setUnderstood] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
   const [level, setLevel] = useState(1);
-  const [hasPlayedBefore, setHasPlayedBefore] = useState(false);
   const levelRef = useRef(1);
   
   // Sync level ref with state
@@ -53,7 +52,7 @@ export default function PilotControls() {
   }, [level]);
   
   // State for rendering only
-  const [ship, setShip] = useState<Ship>({ x: CELL_WIDTH / 2, y: CELL_HEIGHT * (GRID_ROWS - 1) + CELL_HEIGHT / 2, size: 20 });
+  const [, setShip] = useState<Ship>({ x: CELL_WIDTH / 2, y: CELL_HEIGHT * (GRID_ROWS - 1) + CELL_HEIGHT / 2, size: 20 });
   const [waypoints, setWaypoints] = useState<Waypoint[]>([]);
   const [currentPath, setCurrentPath] = useState<string[]>([]);
   const [asteroids, setAsteroids] = useState<Asteroid[]>([]);
@@ -68,7 +67,6 @@ export default function PilotControls() {
   const gameStateRef = useRef({ gameStarted: false, gameWon: false, gameLost: false });
   const lastAsteroidSpawnRef = useRef(0);
   const lastTimeUpdateRef = useRef(Date.now());
-  const lastMoveTimeRef = useRef<{ [key: string]: number }>({});
   const keysProcessedRef = useRef<Set<string>>(new Set());
 
   // Generate waypoints in a path pattern
@@ -145,7 +143,6 @@ export default function PilotControls() {
   const startGame = (skipInstructions = false, levelToStart: number | null = null) => {
     playSound('click');
     setShowInstructions(false);
-    setHasPlayedBefore(true);
     
     // Use provided level or current level
     const currentLevel = levelToStart !== null ? levelToStart : levelRef.current;
@@ -298,7 +295,8 @@ export default function PilotControls() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
-      keysProcessedRef.current.clear();
+      const keysProcessed = keysProcessedRef.current;
+      keysProcessed.clear();
     };
   }, [gameStarted, playSound]);
 
@@ -315,7 +313,6 @@ export default function PilotControls() {
 
     const gameLoop = () => {
       const now = Date.now();
-      const deltaTime = now - lastFrameTime;
       lastFrameTime = now;
 
       // Update game state ref
@@ -492,6 +489,7 @@ export default function PilotControls() {
         cancelAnimationFrame(animationFrameId);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameStarted, gameWon, gameLost, playSound]);
 
   const resetGame = () => {

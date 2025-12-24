@@ -238,7 +238,7 @@ export default function AshliPage() {
     <>
       <div className="main-menu">
         <h1 className="menu-title">
-          <GlitchText>Ashli's Terminal</GlitchText>
+          <GlitchText>Ashli&apos;s Terminal</GlitchText>
         </h1>
         <div className="separator">========</div>
         <nav>

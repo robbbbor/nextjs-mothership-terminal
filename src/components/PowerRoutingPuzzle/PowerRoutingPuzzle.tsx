@@ -46,7 +46,6 @@ interface PowerKeyLocation {
 export default function PowerRoutingPuzzle() {
   const { playSound } = useAudio();
   const [nodes, setNodes] = useState<Node[]>([]);
-  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [currentPath, setCurrentPath] = useState<string[]>(['reactor-core']);
   const [currentPower, setCurrentPower] = useState(100);
   const [gameWon, setGameWon] = useState(false);
@@ -56,7 +55,6 @@ export default function PowerRoutingPuzzle() {
     { nodeId: 'stabilizer-2', collected: false },
   ]);
   const [showInstructions, setShowInstructions] = useState(true);
-  const [showDebug, setShowDebug] = useState(false);
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
   const [infoMessage, setInfoMessage] = useState<string | null>(null);
   const [showWinOptions, setShowWinOptions] = useState(false);
@@ -650,7 +648,7 @@ export default function PowerRoutingPuzzle() {
             className="manual-button"
             onClick={() => setShowManual(true)}
           >
-            <GlitchText>USER'S MANUAL</GlitchText>
+            <GlitchText>USER&apos;S MANUAL</GlitchText>
           </button>
         </div>
       </div>
@@ -658,7 +656,7 @@ export default function PowerRoutingPuzzle() {
       {showManual && (
         <div className="manual-overlay">
           <div className="manual-content">
-            <h2><GlitchText>POWER ROUTING SYSTEM - USER'S MANUAL</GlitchText></h2>
+            <h2><GlitchText>POWER ROUTING SYSTEM - USER&apos;S MANUAL</GlitchText></h2>
             
             <div className="manual-section">
               <h3><GlitchText>CONNECTION TYPES</GlitchText></h3>
