@@ -1118,14 +1118,26 @@ export default function LifeSupportPuzzle() {
           border: 2px solid #44ff44;
           padding: 2rem;
           max-width: 600px;
+          max-height: 90vh;
+          overflow-y: auto;
           text-align: center;
           color: #44ff44;
+          display: flex;
+          flex-direction: column;
         }
         
         .instructions-text {
           margin: 1.5rem 0;
           line-height: 1.6;
           text-align: left;
+          flex: 1;
+          overflow-y: auto;
+          min-height: 0;
+        }
+
+        .instructions-content .start-button {
+          flex-shrink: 0;
+          margin-top: auto;
         }
         
         .parameter-ranges {
@@ -1184,6 +1196,20 @@ export default function LifeSupportPuzzle() {
         }
         
         @media (max-width: 768px) {
+          .instructions-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            padding: 1.5rem;
+          }
+
+          .instructions-text {
+            font-size: 0.9rem;
+          }
+
+          .parameter-ranges {
+            grid-template-columns: 1fr;
+          }
+
           .control-panel {
             flex-direction: column;
           }
