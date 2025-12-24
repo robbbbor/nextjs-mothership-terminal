@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import GlitchText from '@/components/GlitchText/GlitchText';
 import { useAudio } from '@/hooks/useAudio';
 
@@ -44,6 +45,7 @@ interface PowerKeyLocation {
 }
 
 export default function PowerRoutingPuzzle() {
+  const router = useRouter();
   const { playSound } = useAudio();
   const [nodes, setNodes] = useState<Node[]>([]);
   const [currentPath, setCurrentPath] = useState<string[]>(['reactor-core']);
@@ -467,7 +469,7 @@ export default function PowerRoutingPuzzle() {
                 <button 
                   className="win-button proceed-button"
                   onClick={() => {
-                    window.location.href = targetSystem === 'pilot-controls' ? '/pilot-controls' : '/life-support';
+                    router.push(targetSystem === 'pilot-controls' ? '/pilot-controls' : '/life-support');
                   }}
                 >
                   <GlitchText>YES</GlitchText>

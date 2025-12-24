@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import GlitchText from '@/components/GlitchText/GlitchText';
 import { useAudio } from '@/hooks/useAudio';
 import { markPuzzleComplete, areBothPuzzlesComplete } from '@/utils/puzzleCompletion';
@@ -26,6 +27,7 @@ const INITIAL_VALUES = {
 };
 
 export default function LifeSupportPuzzle() {
+  const router = useRouter();
   const { playSound } = useAudio();
   
   // State for all control values
@@ -525,10 +527,10 @@ export default function LifeSupportPuzzle() {
               onClick={() => {
                 // Check if both puzzles are complete
                 if (areBothPuzzlesComplete()) {
-                  window.location.href = '/final-terminal';
+                  router.push('/final-terminal');
                 } else {
                   // Navigate back to systems overview with power routing puzzle
-                  window.location.href = '/systems-overview';
+                  router.push('/systems-overview');
                 }
               }}
             >
