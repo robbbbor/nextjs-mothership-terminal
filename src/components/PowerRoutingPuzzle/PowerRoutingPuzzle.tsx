@@ -1233,17 +1233,29 @@ export default function PowerRoutingPuzzle() {
           border: 2px solid #00ff00;
           padding: 2rem;
           max-width: 600px;
+          max-height: 90vh;
+          overflow-y: auto;
           text-align: center;
           z-index: 101;
         }
 
         .instructions-content {
           border-color: #ff4444;
+          display: flex;
+          flex-direction: column;
         }
 
         .instructions-text {
           margin: 1.5rem 0;
           line-height: 1.6;
+          flex: 1;
+          overflow-y: auto;
+          min-height: 0;
+        }
+
+        .instructions-content .start-button {
+          flex-shrink: 0;
+          margin-top: auto;
         }
 
         .start-button {
@@ -1414,6 +1426,16 @@ export default function PowerRoutingPuzzle() {
         }
 
         @media (max-width: 768px) {
+          .instructions-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            padding: 1.5rem;
+          }
+
+          .instructions-text {
+            font-size: 0.9rem;
+          }
+
           .manual-content {
             padding: 1rem;
             font-size: 0.9rem;
