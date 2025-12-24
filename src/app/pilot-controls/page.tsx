@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import GlitchText from '@/components/GlitchText/GlitchText';
 import { useAudio } from '@/hooks/useAudio';
 import { useRouter } from 'next/navigation';
@@ -140,7 +140,7 @@ export default function PilotControls() {
   };
 
   // Initialize game
-  const startGame = (skipInstructions = false, levelToStart: number | null = null) => {
+  const startGame = useCallback((_skipInstructions = false, levelToStart: number | null = null) => {
     playSound('click');
     setShowInstructions(false);
     
@@ -194,7 +194,7 @@ export default function PilotControls() {
     setGameWon(false);
     setGameLost(false);
     setTimeLeft(timeLimit);
-  };
+  }, [playSound]);
 
   // Handle keyboard - process moves immediately on keypress
   useEffect(() => {
@@ -295,8 +295,8 @@ export default function PilotControls() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
-      const keysProcessed = keysProcessedRef.current;
-      keysProcessed.clear();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      keysProcessedRef.current.clear();
     };
   }, [gameStarted, playSound]);
 
@@ -309,11 +309,9 @@ export default function PilotControls() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let lastFrameTime = Date.now();
 
     const gameLoop = () => {
       const now = Date.now();
-      lastFrameTime = now;
 
       // Update game state ref
       gameStateRef.current.gameStarted = gameStarted;
@@ -489,8 +487,7 @@ export default function PilotControls() {
         cancelAnimationFrame(animationFrameId);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gameStarted, gameWon, gameLost, playSound]);
+  }, [gameStarted, gameWon, gameLost, playSound, startGame]);
 
   const resetGame = () => {
     playSound('click');

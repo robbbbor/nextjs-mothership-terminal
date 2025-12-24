@@ -94,6 +94,7 @@ export default function HackingGame() {
       setSelectedBlock(null);
       playSound('click');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft, currentPhase, playSound]);
 
   // Handle scrolling phase
