@@ -140,7 +140,7 @@ export default function PilotControls() {
   };
 
   // Initialize game
-  const startGame = useCallback((_skipInstructions = false, levelToStart: number | null = null) => {
+  const startGame = useCallback((levelToStart: number | null = null) => {
     playSound('click');
     setShowInstructions(false);
     
@@ -271,7 +271,7 @@ export default function PilotControls() {
                     // Small delay before showing level complete message
                     setTimeout(() => {
                       levelRef.current = 2;
-                      startGame(true, 2);
+                      startGame(2);
                     }, 1500);
                   } else {
                     // Level 2 completed - mark pilot controls puzzle as complete
@@ -298,6 +298,7 @@ export default function PilotControls() {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       keysProcessedRef.current.clear();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameStarted, playSound]);
 
   // Main game loop
@@ -379,6 +380,7 @@ export default function PilotControls() {
           });
         
         // Update asteroids state if changed
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         if (asteroidsRef.current.length !== asteroids.length) {
           setAsteroids(asteroidsRef.current);
         }
@@ -487,6 +489,7 @@ export default function PilotControls() {
         cancelAnimationFrame(animationFrameId);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameStarted, gameWon, gameLost, playSound, startGame]);
 
   const resetGame = () => {
@@ -500,7 +503,7 @@ export default function PilotControls() {
     keysPressedRef.current.clear();
     // Restart immediately without instructions
     setTimeout(() => {
-      startGame(true);
+      startGame();
     }, 100);
   };
 
@@ -559,7 +562,7 @@ export default function PilotControls() {
               <p className="warning">Avoid the asteroids! Collision will result in failure.</p>
               <p>Time limit: 45 seconds</p>
             </div>
-            <button className="start-button" onClick={() => startGame(false)}>
+            <button className="start-button" onClick={() => startGame()}>
               <GlitchText>BEGIN OVERRIDE</GlitchText>
             </button>
           </div>
